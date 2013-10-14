@@ -5,24 +5,23 @@
 package Controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Zanella
+ * @author Rodrigo Zanella Ribeiro
+ * @since 12/10/2013
+ * 
+ * Classe controladora
  */
-@WebServlet(name = "ControllerTest", urlPatterns = {"/ControllerTest"})
-public class ControllerTest extends HttpServlet {
-    int count = 0;
+public abstract class Controlador extends HttpServlet {
+
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -35,46 +34,30 @@ public class ControllerTest extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-               out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ControllerTest</title>");            
-            out.println("</head>");
-            out.println("<body>");
-        try {
-            count++;
-            Method m1;
-            String result = new String();
-            try {
-                m1 = this.getClass().getDeclaredMethod("lol", new Class<?>[] {});
-                String lol = null;
-                result = (String) m1.invoke(this, new Object[] {});
-            } catch (NoSuchMethodException ex) {
-                Logger.getLogger(ControllerTest.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
-                Logger.getLogger(ControllerTest.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(ControllerTest.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(ControllerTest.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
-                Logger.getLogger(ControllerTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            /* TODO output your page here. You may use following sample code. */
+            String nomeAcaoUsuario = request.getParameter("evento");
+            Class controlador = this.getClass();
             
-            out.println("<h1> esta aqui: "+result+"<h1>");
-            out.println("<h1>Servlet ControllerTest at " + count + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
-        }
+            try {
+                Method acaoUsuario = controlador.getDeclaredMethod(nomeAcaoUsuario, new Class<?>[] {});
+                acaoUsuario.invoke(this, new Object[] {});
+            } catch (NoSuchMethodException ex) {
+                //redirecionar depois para a página de erro
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SecurityException ex) {
+                //redirecionar depois para a página de erro
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                //redirecionar depois para a página de erro
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                //redirecionar depois para a página de erro
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                //redirecionar depois para a página de erro
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
-    public String lol(){
-        return "se fode aee manezao";
-    }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
@@ -115,4 +98,5 @@ public class ControllerTest extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
 }
