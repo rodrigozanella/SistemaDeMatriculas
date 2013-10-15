@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * Classe controladora das ações de um usuário professor
  */
-public abstract class ControladorProfessor extends ControladorUsuario {
+public abstract class ControladorProf extends ControladorUsuario {
     /**
     * Métodos do controlador
     */
@@ -27,8 +27,10 @@ public abstract class ControladorProfessor extends ControladorUsuario {
      * @since 13/10/2013
      * 
      * Método para visualizar turmas de um determinado professor
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void visualizarTurmas(){
+    public void visualizarTurmas(HttpServletRequest request, HttpServletResponse response){
         
     }
 }

@@ -5,6 +5,7 @@
 package Controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
@@ -38,8 +39,8 @@ public abstract class Controlador extends HttpServlet {
             Class controlador = this.getClass();
             
             try {
-                Method acaoUsuario = controlador.getDeclaredMethod(nomeAcaoUsuario, new Class<?>[] {});
-                acaoUsuario.invoke(this, new Object[] {});
+                Method acaoUsuario = controlador.getDeclaredMethod(nomeAcaoUsuario, HttpServletRequest.class, HttpServletResponse.class);
+                acaoUsuario.invoke(this, request, response);
             } catch (NoSuchMethodException ex) {
                 //redirecionar depois para a página de erro
                 Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);

@@ -10,7 +10,27 @@
     </servlet>
     <servlet>
         <servlet-name>ControladorProfessor</servlet-name>
-        <servlet-class>Controller.ControladorProfessor</servlet-class>
+        <servlet-class>Controller.ControladorProf</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorAlunoFerias</servlet-name>
+        <servlet-class>Controller.Ferias.ControladorAlunoFerias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorProfFerias</servlet-name>
+        <servlet-class>Controller.Ferias.ControladorProfFerias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorAdmLetivo</servlet-name>
+        <servlet-class>Controller.Letivo.ControladorAdmLetivo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorAlunoLetivo</servlet-name>
+        <servlet-class>Controller.Letivo.ControladorAlunoLetivo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorProfLetivo</servlet-name>
+        <servlet-class>Controller.Letivo.ControladorProfLetivo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
@@ -35,6 +55,26 @@
     <servlet-mapping>
         <servlet-name>ControladorProfessor</servlet-name>
         <url-pattern>/ControladorProfessor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorAlunoFerias</servlet-name>
+        <url-pattern>/ControladorAlunoFerias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorProfFerias</servlet-name>
+        <url-pattern>/ControladorProfFerias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorAdmLetivo</servlet-name>
+        <url-pattern>/ControladorAdmLetivo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorAlunoLetivo</servlet-name>
+        <url-pattern>/ControladorAlunoLetivo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorProfLetivo</servlet-name>
+        <url-pattern>/ControladorProfLetivo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

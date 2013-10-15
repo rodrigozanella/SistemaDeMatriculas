@@ -27,8 +27,10 @@ public abstract class ControladorAluno extends ControladorUsuario {
      * @since 12/10/2013
      * 
      * Método para visualizar as possibilidades de matrícula
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void possibilidadeMatricula(){
+    public void possibilidadeMatricula(HttpServletRequest request, HttpServletResponse response){
         
     }
     
@@ -37,8 +39,10 @@ public abstract class ControladorAluno extends ControladorUsuario {
      * @since 12/10/2013
      * 
      * Método para imprimir histórico escolar
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void imprimirHistorico(){
+    public void imprimirHistorico(HttpServletRequest request, HttpServletResponse response){
         
     }
     
@@ -47,8 +51,10 @@ public abstract class ControladorAluno extends ControladorUsuario {
      * @since 12/10/2013
      * 
      * Método para visualizar o resultado de encomenda
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void resultadoEncomenda(){
+    public void resultadoEncomenda(HttpServletRequest request, HttpServletResponse response){
         
     }
 }

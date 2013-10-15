@@ -6,6 +6,8 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * Classe controladora das ações de um usuário administrador
  */
-public abstract class ControladorAdm extends ControladorUsuario {
+public class ControladorAdm extends ControladorUsuario {
     /**
      * Métodos do controlador
      */
@@ -29,7 +31,7 @@ public abstract class ControladorAdm extends ControladorUsuario {
      * 
      * Método para cadastrar uma turma
      */
-    public void cadastrarTurma(){
+    public void cadastrarTurma(HttpServletRequest request, HttpServletResponse response){
         
     }
     
@@ -38,8 +40,10 @@ public abstract class ControladorAdm extends ControladorUsuario {
      * @since 12/10/2013
      * 
      * Método para cadastrar um usuario
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void cadastrarUsuario(){
+    public void cadastrarUsuario(HttpServletRequest request, HttpServletResponse response){
         
     }
     
@@ -48,8 +52,10 @@ public abstract class ControladorAdm extends ControladorUsuario {
      * @since 12/10/2013
      * 
      * Método para cadastrar uma disciplina
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void cadastrarDisciplina(){
+    public void cadastrarDisciplina(HttpServletRequest request, HttpServletResponse response){
         
     }
     
@@ -58,8 +64,10 @@ public abstract class ControladorAdm extends ControladorUsuario {
      * @since 12/10/2013
      * 
      * Método para expulsar um usuário
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void expulsarUsuario(){
+    public void expulsarUsuario(HttpServletRequest request, HttpServletResponse response){
         
     }
     /**
@@ -67,8 +75,10 @@ public abstract class ControladorAdm extends ControladorUsuario {
      * @since 12/10/2013
      * 
      * Método para a visualizar histórico de operações do administrador
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void historicoOperacoes(){
+    public void historicoOperacoes(HttpServletRequest request, HttpServletResponse response){
         
     }
     
@@ -77,8 +87,11 @@ public abstract class ControladorAdm extends ControladorUsuario {
      * @since 12/10/2013
      * 
      * Método para a visualizar informações sobre alguma disciplina
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void autorizaConceito(){
+    public void autorizaConceito(HttpServletRequest request, HttpServletResponse response){
         
     }
+    
 }

@@ -27,8 +27,10 @@ public class ControladorUsuario extends Controlador {
      * @since 12/10/2013
      * 
      * Método para a visualização de uma árvore curricular de algum curso
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void arvoreCurricular(){
+    public void arvoreCurricular(HttpServletRequest request, HttpServletResponse response){
         
     }
     
@@ -37,8 +39,10 @@ public class ControladorUsuario extends Controlador {
      * @since 12/10/2013
      * 
      * Método para a visualizar informações sobre alguma disciplina
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void infoDisciplinas(){
+    public void infoDisciplinas(HttpServletRequest request, HttpServletResponse response){
         
     }
     /**
@@ -46,8 +50,10 @@ public class ControladorUsuario extends Controlador {
      * @since 12/10/2013
      * 
      * Método para a visualizar informações sobre algum professor
+     * @param request Dados da requisição ao servlet
+     * @param response Dados da resposta do servlet
      */
-    public void infoProfessores(){
+    public void infoProfessores(HttpServletRequest request, HttpServletResponse response){
         
     }
 }
