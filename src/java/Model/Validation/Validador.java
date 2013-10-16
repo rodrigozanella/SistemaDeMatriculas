@@ -4,6 +4,12 @@
  */
 package Model.Validation;
 
+import Model.Persistence.OperadorBD;
+import Model.Logic.Usuario;
+import Model.Logic.Aluno;
+import Model.Logic.Disciplina;
+import Model.Logic.Turma;
+
 /**
  *
  * @author Tiago
@@ -13,15 +19,22 @@ package Model.Validation;
  */
 public class Validador {
     
-    public void insereRegistroUsuario(Model.Logic.Usuario novoUsuario) throws Exception{
+    public void insereRegistroUsuario(Usuario novoUsuario) throws Exception{
         
     }
     
-    public void insereRegistroDisciplina(Model.Logic.Disciplina novaDisciplina) throws Exception{
+    public void insereRegistroDisciplina(Disciplina novaDisciplina) throws Exception{
         
     }
     
-    public void insereRegistroTurma(Model.Logic.Turma novaTurma) throws Exception{
+    public void insereRegistroTurma(Turma novaTurma) throws Exception{
         
+    }
+    
+    public Aluno getAluno(String nomeDeUsuario, String senha) throws Exception{
+        if(senha.length() > 10){
+            throw new Exception();
+        }
+        return OperadorBD.getAluno(nomeDeUsuario, senha);
     }
 }
