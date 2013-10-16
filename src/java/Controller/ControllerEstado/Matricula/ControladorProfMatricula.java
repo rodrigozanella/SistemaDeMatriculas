@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Letivo;
+package Controller.ControllerEstado.Matricula;
 
-import Controller.ControladorProf;
+import Controller.ControllerEstado.ControladorProf;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,6 +16,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Zanella
  */
-public class ControladorProfLetivo extends ControladorProf {
+public class ControladorProfMatricula extends ControladorProf {
 
 }

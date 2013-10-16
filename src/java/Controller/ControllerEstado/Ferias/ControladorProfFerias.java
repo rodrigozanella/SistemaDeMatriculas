@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Ferias;
+package Controller.ControllerEstado.Ferias;
 
-import Controller.ControladorProf;
+import Controller.ControllerEstado.ControladorProf;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

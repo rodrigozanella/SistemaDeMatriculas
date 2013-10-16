@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package Controller.ControllerEstado;
 
 import java.io.IOException;
 import java.io.PrintWriter;

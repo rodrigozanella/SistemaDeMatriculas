@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller.Letivo;
+package Controller.ControllerEstado.Letivo;
 
-import Controller.ControladorAdm;
+import Controller.ControllerEstado.ControladorAdm;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
