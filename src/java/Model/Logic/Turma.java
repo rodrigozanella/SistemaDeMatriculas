@@ -4,7 +4,6 @@
  */
 package Model.Logic;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -14,14 +13,9 @@ public class Turma {
     private Disciplina disciplina;
     private char codigo; //'A', 'B', etc...
     private String semestre; //no formato "20xx/x"
-    private ArrayList<Integer> alunosMatriculados; //contém número de matrícula de todos os alunos matrículados
     private String horario; //no formato "13:30"
     private String nomeProfessor;
     private int numeroDeVagas;
-    
-    public void matriculaAluno(int numeroDeMatricula) {
-        alunosMatriculados.add(numeroDeMatricula);
-    }
 
     public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
@@ -45,10 +39,6 @@ public class Turma {
 
     public void setNumeroDeVagas(int numeroDeVagas) {
         this.numeroDeVagas = numeroDeVagas;
-    }
-    
-    public ArrayList<Integer> getAlunosMatriculados() {
-        return alunosMatriculados;
     }
 
     public Disciplina getDisciplina() {
