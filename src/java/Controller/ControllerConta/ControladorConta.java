@@ -30,17 +30,7 @@ public class ControladorConta extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            
-            //verifica se usuário está no banco de dados
-            try{
-                if(!OperadorBD.existeAluno(request.getParameter("name"), request.getParameter("password"))){
-                    throw new IOException();//se aluno não está no bd lança excessão
-                }
-            } catch(Exception e){
-                throw new IOException();
-            }
-            
+            throws ServletException, IOException {                        
             //redirecionar para alguma classe do
             RequestDispatcher dispAluno = request.getRequestDispatcher("/ControladorAluno");
             dispAluno.forward(request,response);

@@ -4,6 +4,7 @@
  */
 package Controller.ControllerEstado;
 
+import Model.Persistence.OperadorBD;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -62,8 +63,20 @@ public class ControladorUsuario extends Controlador {
     
      public void login(HttpServletRequest request, HttpServletResponse response){
         try {
-            //buscar as informações de usuario
-            response.sendRedirect("indexAluno.jsp");
+            try{
+                String nomeUsuario = request.getParameter("name");
+                String senhaUsuario = request.getParameter("password");
+                if(!OperadorBD.existeAluno(nomeUsuario, senhaUsuario)){
+                    response.sendRedirect("login.jsp");
+                }
+                else{
+                   //buscar as informações de usuario
+                    response.sendRedirect("indexAluno.jsp"); 
+                }
+            } catch(Exception e){
+                response.sendRedirect("login.jsp");
+                throw new IOException();
+            }
         } catch (IOException ex) {
             Logger.getLogger(ControladorUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
