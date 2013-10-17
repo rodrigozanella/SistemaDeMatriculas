@@ -59,7 +59,6 @@ CREATE TABLE `disciplina` (
   `nome` varchar(100) NOT NULL,
   `ehEletiva` bit(1) NOT NULL,
   `numCreditos` int(11) NOT NULL,
-  `numCreditosMin` int(11) NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -70,7 +69,7 @@ CREATE TABLE `disciplina` (
 
 LOCK TABLES `disciplina` WRITE;
 /*!40000 ALTER TABLE `disciplina` DISABLE KEYS */;
-INSERT INTO `disciplina` VALUES ('INF01023','Arquitetura e Desempenho de Banco de Dados','',4,0),('INF01032','Empreendimento em Informática','\0',4,88),('INF01120','Técnicas de Construção de Programas','\0',4,0),('INF01124','Classificação e Pesquisa de Dados','\0',4,0),('INF01142','Sistemas Operacionais I N','\0',4,0),('INF01145','Fundamentos de Banco de Dados','\0',4,0),('INF01147','Compiladores','\0',4,0),('INF01209','Fundamentos de Tolerância a Falhas','\0',4,0),('INF05516','Semântica Formal N','\0',4,0);
+INSERT INTO `disciplina` VALUES ('INF01023','Arquitetura e Desempenho de Banco de Dados','',4),('INF01032','Empreendimento em Informática','\0',4),('INF01120','Técnicas de Construção de Programas','\0',4),('INF01124','Classificação e Pesquisa de Dados','\0',4),('INF01142','Sistemas Operacionais I N','\0',4),('INF01145','Fundamentos de Banco de Dados','\0',4),('INF01147','Compiladores','\0',4),('INF01209','Fundamentos de Tolerância a Falhas','\0',4),('INF05516','Semântica Formal N','\0',4);
 /*!40000 ALTER TABLE `disciplina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +96,7 @@ CREATE TABLE `pre_requisitos` (
 
 LOCK TABLES `pre_requisitos` WRITE;
 /*!40000 ALTER TABLE `pre_requisitos` DISABLE KEYS */;
-INSERT INTO `pre_requisitos` VALUES ('INF01145','INF01124'),('INF01209','INF01142'),('INF01147','INF05516');
+INSERT INTO `pre_requisitos` VALUES ('INF01145','INF01124'),('INF01209','INF01142'),('INF01023','INF01145'),('INF01147','INF05516');
 /*!40000 ALTER TABLE `pre_requisitos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,7 +184,7 @@ CREATE TABLE `turmas_cursadas` (
 
 LOCK TABLES `turmas_cursadas` WRITE;
 /*!40000 ALTER TABLE `turmas_cursadas` DISABLE KEYS */;
-INSERT INTO `turmas_cursadas` VALUES ('010.325.689-02',5,'A'),('010.325.689-02',14,'A'),('010.325.689-02',27,'C'),('025.180.450-56',10,'B'),('025.180.450-56',42,'A'),('100.252.666-99',30,'C'),('100.252.666-99',35,'C'),('100.252.666-99',39,'B');
+INSERT INTO `turmas_cursadas` VALUES ('010.325.689-02',5,'A'),('010.325.689-02',14,'A'),('010.325.689-02',27,'C'),('010.325.689-02',31,'B'),('010.325.689-02',39,'B'),('025.180.450-56',10,'B'),('025.180.450-56',38,'A');
 /*!40000 ALTER TABLE `turmas_cursadas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -198,4 +197,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-16 23:20:37
+-- Dump completed on 2013-10-17  5:00:07
