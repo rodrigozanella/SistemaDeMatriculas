@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Rodrigo Zanella Ribeiro
@@ -71,7 +72,10 @@ public class ControladorUsuario extends Controlador {
                 }
                 else{
                    //buscar as informações de usuario
-                    response.sendRedirect("indexAluno.jsp"); 
+                    response.sendRedirect("indexAluno.jsp");
+                    HttpSession session = request.getSession();
+                    session.setAttribute("usuario_autenticado", nomeUsuario);
+                    session.setAttribute("id_usuario_autenticado", senhaUsuario);
                 }
             } catch(Exception e){
                 response.sendRedirect("login.jsp");

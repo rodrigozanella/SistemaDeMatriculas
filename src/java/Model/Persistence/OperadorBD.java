@@ -218,6 +218,7 @@ public class OperadorBD {
     }
     
     /*
+<<<<<<< HEAD
      * Converte o código da disciplina para o seu nome.
      */
     public static String getNomeDisciplina(String codigoDisciplina) throws Exception{
@@ -247,5 +248,4 @@ public class OperadorBD {
     public static String getEstadoSistema(){
         return "Matricula";
     } 
-    
 }
