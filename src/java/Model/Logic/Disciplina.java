@@ -4,7 +4,6 @@
  */
 package Model.Logic;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -14,11 +13,16 @@ public class Disciplina {
     private String nome;
     private String codigo; //o código é alfanumérico
     private int numeroDeCreditos;
-    private int semestreRecomendado; //número do semestre no qual a disciplina é recomendada (estranho isso, pois podem haver mais cursos)
     private boolean eletiva; //indica se a disciplina é eletiva ou não
     private int numeroDeCreditosMinimos; //indica o número de créditos necessários para cursar esta disciplina
-    private ArrayList<String> preRequisitos; //codigo das disciplinas pré-requisitos
 
+    public Disciplina(String codigo, String nome, boolean eletiva, int numCreditos){
+        this.nome = nome;
+        this.codigo = codigo;
+        this.eletiva = eletiva;
+        this.numeroDeCreditos = numCreditos;
+    }
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -31,20 +35,12 @@ public class Disciplina {
         this.numeroDeCreditos = numeroDeCreditos;
     }
 
-    public void setSemestreRecomendado(int semestreRecomendado) {
-        this.semestreRecomendado = semestreRecomendado;
-    }
-
     public void setEletiva(boolean eletiva) {
         this.eletiva = eletiva;
     }
 
     public void setNumeroDeCreditosMinimos(int numeroDeCreditosMinimos) {
         this.numeroDeCreditosMinimos = numeroDeCreditosMinimos;
-    }
-
-    public void setPreRequisitos(ArrayList<String> preRequisitos) {
-        this.preRequisitos = preRequisitos;
     }
 
     public String getNome() {
@@ -59,19 +55,11 @@ public class Disciplina {
         return numeroDeCreditos;
     }
 
-    public int getSemestreRecomendado() {
-        return semestreRecomendado;
-    }
-
     public boolean isEletiva() {
         return eletiva;
     }
 
     public int getNumeroDeCreditosMinimos() {
         return numeroDeCreditosMinimos;
-    }
-
-    public ArrayList<String> getPreRequisitos() {
-        return preRequisitos;
     }
 }

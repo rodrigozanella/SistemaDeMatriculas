@@ -12,20 +12,15 @@ import java.util.ArrayList;
  */
 public class Professor extends Usuario{
     private String areaDeInteresse;
-    private String nomeDeUsuario;
-    private String senha; //a senha tem as mesmas restricoes que as senhas dos alunos
     private ArrayList<Turma> turmasLecionadas; //turmas nas quais o professor lecionou
-
-    public void setAreaDeInteresse(String areaDeInteresse) {
+    
+    public Professor(String nome, String email, String cpf, String nomeUsuario, String senha, String areaDeInteresse){
+        super(nome, email, cpf, nomeUsuario, senha);
         this.areaDeInteresse = areaDeInteresse;
     }
 
-    public void setNomeDeUsuario(String nomeDeUsuario) {
-        this.nomeDeUsuario = nomeDeUsuario;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setAreaDeInteresse(String areaDeInteresse) {
+        this.areaDeInteresse = areaDeInteresse;
     }
 
     public void adicionaTurmaLecionada(Turma turma) {
@@ -34,14 +29,6 @@ public class Professor extends Usuario{
 
     public String getAreaDeInteresse() {
         return areaDeInteresse;
-    }
-
-    public String getNomeDeUsuario() {
-        return nomeDeUsuario;
-    }
-
-    public String getSenha() {
-        return senha;
     }
 
     public ArrayList<Turma> getTurmasLecionadas() {

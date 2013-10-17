@@ -15,6 +15,32 @@ public class Usuario {
     private Date dataDeNascimento;
     private String email;
     private String cpf;
+    private String nomeDeUsuario;
+    private String senha;
+    
+    public Usuario(String nome, String email, String cpf, String nomeUsuario, String senha){
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.nomeDeUsuario = nomeUsuario;
+        this.senha = senha;
+    }
+
+    public String getNomeDeUsuario() {
+        return nomeDeUsuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setNomeDeUsuario(String nomeDeUsuario) {
+        this.nomeDeUsuario = nomeDeUsuario;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
     public void setNome(String nome) {
         this.nome = nome;

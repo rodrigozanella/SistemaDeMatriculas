@@ -4,6 +4,10 @@
  */
 package Model.Logic;
 
+import Model.Persistence.OperadorBD;
+import java.util.ArrayList;
+import java.util.Date;
+
 
 /**
  *
@@ -24,8 +28,51 @@ public class Aluno extends Usuario{
     private int pontuacaoVestibular; //entre 0 e 100
     private String semestreDeIngresso; //no formato "20xx/x"
     private int numeroDeMatricula;
-    private String senha;
     private HistoricoEscolar historico;
+    
+    public Aluno(String nome, String email, String cpf, String nomeUsuario, String senha,
+            int pontuacaoVestibular){
+        super(nome, email, cpf, nomeUsuario, senha);
+        this.pontuacaoVestibular = pontuacaoVestibular;
+    }
+    
+    public ArrayList<Turma> getPossibilidadesDeMatricula(String semestreAtual) throws Exception{
+        ArrayList<String> possibilidadesDisciplinas = new ArrayList<String>();
+        ArrayList<Turma> possibilidadesTurmas = new ArrayList<Turma>();
+        
+        //Algoritmo:
+        //B <- vazio
+        //C <- Disciplinas cursadas
+        //D <- Disciplinas não cursadas
+        //Para cada disciplina d de D
+        //  E <- Pré-requisitos de d
+        //  Se todas disciplinas em E estão em C então
+        //      insere d em B
+        //  Senão
+        //      pula para a próxima disciplina
+        //B contém as possibilidades de matrícula
+        
+        try{
+            ArrayList<String> disciplinasCursadas = OperadorBD.obtemDisciplinasCursadas(this);
+            ArrayList<String> disciplinasNaoCursadas = OperadorBD.obtemDisciplinasNaoCursadas(this);
+            for(String disciplinaNaoCursada : disciplinasNaoCursadas){
+                ArrayList<String> preRequisitos = OperadorBD.obtemPreRequisitos(disciplinaNaoCursada);
+                if(disciplinasCursadas.containsAll(preRequisitos)){
+                    possibilidadesDisciplinas.add(disciplinaNaoCursada);
+                }
+            }
+            
+            for(String possibilidadeDisciplina : possibilidadesDisciplinas){
+                possibilidadesTurmas.addAll(OperadorBD.obtemTurmasDeDisciplina(possibilidadeDisciplina, semestreAtual));
+            }
+            
+        } catch(Exception e){
+            throw new Exception();
+        }
+        
+        
+        return possibilidadesTurmas;
+    }
 
     public void setTipoDeIngresso(TipoDeIngresso tipoDeIngresso) {
         this.tipoDeIngresso = tipoDeIngresso;
@@ -41,10 +88,6 @@ public class Aluno extends Usuario{
 
     public void setNumeroDeMatricula(int numeroDeMatricula) {
         this.numeroDeMatricula = numeroDeMatricula;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public void setHistorico(HistoricoEscolar historico) {
@@ -65,10 +108,6 @@ public class Aluno extends Usuario{
 
     public int getNumeroDeMatricula() {
         return numeroDeMatricula;
-    }
-
-    public String getSenha() {
-        return senha;
     }
 
     public HistoricoEscolar getHistorico() {
