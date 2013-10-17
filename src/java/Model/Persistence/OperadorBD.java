@@ -138,4 +138,11 @@ public class OperadorBD {
         
         return false;
     }
+    
+    /*
+    * Retorna o estado do sistema
+    */
+    public static String getEstadoSistema(){
+        return "Matricula";
+    } 
 }
