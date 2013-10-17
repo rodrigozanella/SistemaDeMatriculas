@@ -4,14 +4,19 @@
  */
 package Controller.ControllerEstado;
 
+import Model.Logic.Aluno;
+import Model.Logic.Turma;
+import Model.Persistence.OperadorBD;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Rodrigo Zanella Ribeiro
@@ -33,13 +38,15 @@ public class ControladorAluno extends ControladorUsuario {
      * @param response Dados da resposta do servlet
      */
     public void possibilidadeMatricula(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
         try {
-            PrintWriter pw = response.getWriter();
-            pw.printf("Possibilidade de matricula");
-        } catch (IOException ex) {
+            Aluno umAluno = OperadorBD.obtemAluno(session.getAttribute("nome").toString(), session.getAttribute("senha").toString());
+            List<Turma> umaPossib = umAluno.getPossibilidadesDeMatricula("2013/1");
+            getServletContext().setAttribute("lista", umaPossib);
+            response.sendRedirect("possibilidadesMatricula.jsp");
+        } catch (Exception ex) {
             Logger.getLogger(ControladorAluno.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
     /**

@@ -7,6 +7,7 @@ package Model.Logic;
 import Model.Persistence.OperadorBD;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -29,11 +30,20 @@ public class Aluno extends Usuario{
     private String semestreDeIngresso; //no formato "20xx/x"
     private int numeroDeMatricula;
     private HistoricoEscolar historico;
-    
+    private static List<Turma> possibilidadesMatricula;
+
     public Aluno(String nome, String email, String cpf, String nomeUsuario, String senha,
             int pontuacaoVestibular){
         super(nome, email, cpf, nomeUsuario, senha);
         this.pontuacaoVestibular = pontuacaoVestibular;
+    }
+    
+    public List<Turma> getPossibilidadesMatricula() {
+        return possibilidadesMatricula;
+    }
+
+    public void setPossibilidadesMatricula(List<Turma> possibilidadesMatricula) {
+        this.possibilidadesMatricula = possibilidadesMatricula;
     }
     
     public ArrayList<Turma> getPossibilidadesDeMatricula(String semestreAtual) throws Exception{

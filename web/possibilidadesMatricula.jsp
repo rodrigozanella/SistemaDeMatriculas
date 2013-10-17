@@ -4,6 +4,10 @@
     Author     : Zanella
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="Model.Logic.Turma"%>
+<%@page import="java.util.List"%>
+<%@page import="Model.Logic.Aluno"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +19,11 @@
         <form action="ControladorContas">
             <input type="hidden" value="encomenda" name="evento" id="evento">
             <%
-       
+                List<Turma> lista = (List<Turma>) application.getAttribute("lista");
+                Iterator<Turma> itLista = lista.iterator();
+                while(itLista.hasNext()){
+                    out.println(itLista.next().getCodigoDisciplina());
+                }
             %>
             <input type="submit" name="ok" VALUE="Encomendar Matrícula">
         </form>
