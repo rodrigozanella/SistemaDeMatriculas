@@ -18,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Controller.ControllerEstado.ControladorUsuario;
+import Model.Logic.HistoricoEscolar;
+
 /**
  * @author Rodrigo Zanella Ribeiro
  * @since 12/10/2013
@@ -37,11 +40,12 @@ public class ControladorAluno extends ControladorUsuario {
      * @param request Dados da requisição ao servlet
      * @param response Dados da resposta do servlet
      */
-    public void possibilidadeMatricula(HttpServletRequest request, HttpServletResponse response){
+    public void possibilidadeMatricula(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         try {
-            Aluno umAluno = OperadorBD.obtemAluno(session.getAttribute("nome").toString(), session.getAttribute("senha").toString());
-            List<Turma> umaPossib = umAluno.getPossibilidadesDeMatricula("2013/1");
+            Aluno umAluno = OperadorBD.obtemAluno(ControladorUsuario.nomeUsuarioLogado, ControladorUsuario.senhaUsuarioLogado);
+            //Aluno umAluno = OperadorBD.obtemAluno(session.getAttribute("nome").toString(), session.getAttribute("senha").toString());
+            List<Turma> umaPossib = umAluno.getPossibilidadesDeMatricula("2013/2");
             getServletContext().setAttribute("lista", umaPossib);
             response.sendRedirect("possibilidadesMatricula.jsp");
         } catch (Exception ex) {
@@ -58,7 +62,14 @@ public class ControladorAluno extends ControladorUsuario {
      * @param response Dados da resposta do servlet
      */
     public void imprimirHistorico(HttpServletRequest request, HttpServletResponse response){
-        
+        try {
+            Aluno umAluno = OperadorBD.obtemAluno(ControladorUsuario.nomeUsuarioLogado, ControladorUsuario.senhaUsuarioLogado);
+            HistoricoEscolar historico = umAluno.getHistorico();
+            getServletContext().setAttribute("historico", historico);
+            response.sendRedirect("historicoEscolar.jsp");
+        } catch (Exception ex) {
+            Logger.getLogger(ControladorAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**

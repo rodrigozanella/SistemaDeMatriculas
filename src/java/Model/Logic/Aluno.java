@@ -6,7 +6,6 @@ package Model.Logic;
 
 import Model.Persistence.OperadorBD;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -29,13 +28,10 @@ public class Aluno extends Usuario{
     private int pontuacaoVestibular; //entre 0 e 100
     private String semestreDeIngresso; //no formato "20xx/x"
     private int numeroDeMatricula;
-    private HistoricoEscolar historico;
     private static List<Turma> possibilidadesMatricula;
 
-    public Aluno(String nome, String email, String cpf, String nomeUsuario, String senha,
-            int pontuacaoVestibular){
-        super(nome, email, cpf, nomeUsuario, senha);
-        this.pontuacaoVestibular = pontuacaoVestibular;
+    public Aluno(String nome, String cpf, String nomeUsuario, String senha){
+        super(nome, cpf, nomeUsuario, senha);
     }
     
     public List<Turma> getPossibilidadesMatricula() {
@@ -83,6 +79,17 @@ public class Aluno extends Usuario{
         
         return possibilidadesTurmas;
     }
+    
+    public HistoricoEscolar getHistorico() throws Exception{
+        HistoricoEscolar historico;
+        try{
+            historico = OperadorBD.obtemHistóricoEscolar(this);
+        } catch(Exception e){
+            throw new Exception();
+        }
+        
+        return historico;
+    }
 
     public void setTipoDeIngresso(TipoDeIngresso tipoDeIngresso) {
         this.tipoDeIngresso = tipoDeIngresso;
@@ -100,10 +107,6 @@ public class Aluno extends Usuario{
         this.numeroDeMatricula = numeroDeMatricula;
     }
 
-    public void setHistorico(HistoricoEscolar historico) {
-        this.historico = historico;
-    }
-
     public TipoDeIngresso getTipoDeIngresso() {
         return tipoDeIngresso;
     }
@@ -118,9 +121,5 @@ public class Aluno extends Usuario{
 
     public int getNumeroDeMatricula() {
         return numeroDeMatricula;
-    }
-
-    public HistoricoEscolar getHistorico() {
-        return historico;
     }
 }

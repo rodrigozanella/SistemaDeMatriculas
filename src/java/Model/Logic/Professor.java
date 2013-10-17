@@ -14,8 +14,8 @@ public class Professor extends Usuario{
     private String areaDeInteresse;
     private ArrayList<Turma> turmasLecionadas; //turmas nas quais o professor lecionou
     
-    public Professor(String nome, String email, String cpf, String nomeUsuario, String senha, String areaDeInteresse){
-        super(nome, email, cpf, nomeUsuario, senha);
+    public Professor(String nome, String cpf, String nomeUsuario, String senha, String areaDeInteresse){
+        super(nome, cpf, nomeUsuario, senha);
         this.areaDeInteresse = areaDeInteresse;
     }
 

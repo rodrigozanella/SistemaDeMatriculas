@@ -18,9 +18,8 @@ public class Usuario {
     private String nomeDeUsuario;
     private String senha;
     
-    public Usuario(String nome, String email, String cpf, String nomeUsuario, String senha){
+    public Usuario(String nome, String cpf, String nomeUsuario, String senha){
         this.nome = nome;
-        this.email = email;
         this.cpf = cpf;
         this.nomeDeUsuario = nomeUsuario;
         this.senha = senha;

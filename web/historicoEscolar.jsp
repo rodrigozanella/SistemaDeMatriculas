@@ -5,9 +5,8 @@
 --%>
 
 <%@page import="Model.Persistence.OperadorBD"%>
-<%@page import="java.util.Iterator"%>
 <%@page import="Model.Logic.Turma"%>
-<%@page import="java.util.List"%>
+<%@page import="Model.Logic.HistoricoEscolar"%>
 <%@page import="Model.Logic.Aluno"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,14 +26,14 @@
     <body>
         <h1>Sistema de Matrículas do INF</h1>
         <hr>
-        <h3>Encomenda de matricula</h3>
+        <h3>Historico Escolar</h3>
         <div style="text-align: left">
         <form action="ControladorContas">
             <input type="hidden" value="encomenda" name="evento" id="evento">
             <%
-                List<Turma> lista = (List<Turma>) application.getAttribute("lista");
-                Iterator<Turma> itLista = lista.iterator();
-                for(Turma turma : lista){
+                HistoricoEscolar historico = (HistoricoEscolar) application.getAttribute("historico");
+                int counter = 0;
+                for(Turma turma : historico.getTurmasAnteriores()){
                     out.println("<p>");
                     out.print(turma.getCodigoDisciplina()+" - ");
                     out.print(OperadorBD.getNomeDisciplina(turma.getCodigoDisciplina())+" - ");
@@ -43,10 +42,10 @@
                     out.print("Semestre: "+turma.getSemestre()+" - ");
                     out.print("Professor: "+OperadorBD.getProfessor(turma.getCpfProfessor()));
                     out.println("</p>");
-                    out.print("Lance: " + "<input type=" + "text" + " name=" + "lance" + " maxlength=" + "20" + " size=" + "20" + " />");
+                    out.print("Conceito: "+historico.getConceitosObtidos().get(counter));
+                    counter++;
                 }
             %>
-            <input type="submit" name="ok" VALUE="Encomendar Matrícula">
         </form>
         </div>>
     </body>

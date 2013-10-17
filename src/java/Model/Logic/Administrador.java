@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class Administrador extends Usuario {        
     private ArrayList<OperacaoAdm> historicoDeOperacoes;
 
-    public Administrador(String nome, String email, String cpf, String nomeUsuario, String senha){
-        super(nome, email, cpf, nomeUsuario, senha);
+    public Administrador(String nome, String cpf, String nomeUsuario, String senha){
+        super(nome, cpf, nomeUsuario, senha);
     }
     
     public void adicionaOperacao(OperacaoAdm operacao) {

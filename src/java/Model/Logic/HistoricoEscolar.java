@@ -4,6 +4,7 @@
  */
 package Model.Logic;
 
+import java.util.ArrayList;
 import java.util.Dictionary;
 
 /**
@@ -11,14 +12,23 @@ import java.util.Dictionary;
  * @author Tiago
  */
 public class HistoricoEscolar {
-    private Dictionary<Turma, Character> disciplinasCursadas; //Mapeamento de turma para conceito
+    private ArrayList<Turma> turmasAnteriores;
+    private ArrayList<Character> conceitosObtidos;
 
-    public void adicionaDisciplinaCursada(Turma turma, char conceito) {
-        disciplinasCursadas.put(turma, conceito);
+    public void setTurmasAnteriores(ArrayList<Turma> turmasAnteriores) {
+        this.turmasAnteriores = turmasAnteriores;
     }
 
-    public Dictionary<Turma, Character> getDisciplinasCursadas() {
-        return disciplinasCursadas;
+    public void setConceitosObtidos(ArrayList<Character> conceitosObtidos) {
+        this.conceitosObtidos = conceitosObtidos;
+    }
+
+    public ArrayList<Turma> getTurmasAnteriores() {
+        return turmasAnteriores;
+    }
+
+    public ArrayList<Character> getConceitosObtidos() {
+        return conceitosObtidos;
     }
     
     public double calculaMedia() {

@@ -23,6 +23,8 @@ import javax.servlet.http.HttpSession;
  * Classe controladora das ações de um usuário qualquer
  */
 public class ControladorUsuario extends Controlador {
+    public static String nomeUsuarioLogado;
+    public static String senhaUsuarioLogado;
     /**
      * Métodos do controlador
      */
@@ -76,6 +78,8 @@ public class ControladorUsuario extends Controlador {
                     HttpSession session = request.getSession();
                     session.setAttribute("usuario_autenticado", nomeUsuario);
                     session.setAttribute("id_usuario_autenticado", senhaUsuario);
+                    nomeUsuarioLogado = nomeUsuario;
+                    senhaUsuarioLogado = senhaUsuario;
                 }
             } catch(Exception e){
                 response.sendRedirect("login.jsp");

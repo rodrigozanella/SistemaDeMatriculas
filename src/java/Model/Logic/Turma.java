@@ -14,14 +14,16 @@ public class Turma {
     private char codigo; //'A', 'B', etc...
     private String semestre; //no formato "20xx/x"
     private String horario; //no formato "13:30"
-    private String nomeProfessor;
+    private String cpfProfessor;
     private int numeroDeVagas;
 
-    public Turma(String codigoDisciplina, char codigo, String semestre, int vagas){
-        this.codigoDisciplina = codigoDisciplina;
+    public Turma(char codigo, String codigoDisciplina, String horario, String semestre, int vagas, String cpfProfessor){
         this.codigo = codigo;
+        this.codigoDisciplina = codigoDisciplina;
+        this.horario = horario;
         this.semestre = semestre;
         this.numeroDeVagas = vagas;
+        this.cpfProfessor = cpfProfessor;
     }
     
     public void setCodigoDisciplina(String codigoDisciplina) {
@@ -40,8 +42,8 @@ public class Turma {
         this.horario = horario;
     }
 
-    public void setNomeProfessor(String nomeProfessor) {
-        this.nomeProfessor = nomeProfessor;
+    public void setCpfProfessor(String cpfProfessor) {
+        this.cpfProfessor = cpfProfessor;
     }
 
     public void setNumeroDeVagas(int numeroDeVagas) {
@@ -64,8 +66,8 @@ public class Turma {
         return horario;
     }
 
-    public String getNomeProfessor() {
-        return nomeProfessor;
+    public String getCpfProfessor() {
+        return cpfProfessor;
     }
 
     public int getNumeroDeVagas() {

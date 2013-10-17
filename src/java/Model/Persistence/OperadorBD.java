@@ -5,6 +5,7 @@
 package Model.Persistence;
 
 import Model.Logic.Aluno;
+import Model.Logic.HistoricoEscolar;
 import Model.Logic.Turma;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,7 +74,7 @@ public class OperadorBD {
         try{
             conectaBD();
             st = con.createStatement();
-            String query = "SELECT * FROM aluno WHERE nome = '"+nomeDeUsuario+"' AND senha = '"+senha+"'";
+            String query = "SELECT * FROM aluno WHERE nomeUsuario = '"+nomeDeUsuario+"' AND senha = '"+senha+"'";
             rs = st.executeQuery(query);
             if(!rs.next()){//se não encontrou, retorna falso
                 return false;
@@ -94,12 +97,12 @@ public class OperadorBD {
         try{
             conectaBD();
             st = con.createStatement();
-            String query = "SELECT * FROM aluno WHERE nome = '"+nomeDeUsuario+"' AND senha = '"+senha+"'";
+            String query = "SELECT * FROM aluno WHERE nomeUsuario = '"+nomeDeUsuario+"' AND senha = '"+senha+"'";
             rs = st.executeQuery(query);
             if(!rs.next()){
                 throw new Exception();
             } else {
-                aluno = new Aluno(rs.getString(2), rs.getString(6), rs.getString(1), rs.getString(3), rs.getString(4), rs.getInt(5));
+                aluno = new Aluno(rs.getString(2), rs.getString(1), rs.getString(3), rs.getString(4));
             }
         } catch(Exception ex){
             Logger lgr = Logger.getLogger(OperadorBD.class.getName());
@@ -135,6 +138,35 @@ public class OperadorBD {
         }
 
         return preRequisitos;
+    }
+    
+    public static HistoricoEscolar obtemHistóricoEscolar(Aluno aluno) throws Exception{
+        HistoricoEscolar historico = new HistoricoEscolar();
+        ArrayList<Turma> turmas = new ArrayList<Turma>();
+        ArrayList<Character> conceitos = new ArrayList<Character>();
+        
+        try{
+            conectaBD();
+            st = con.createStatement();
+            String query = "SELECT conceito, turma.codigo, turma.codigoDisciplina, turma.horario, turma.semestre, turma.numVagas, turma.cpfProfessor FROM turma, turmas_cursadas WHERE cpfAluno = '"+aluno.getCpf()+"' AND turma.idTurma = turmas_cursadas.idTurma";
+            rs = st.executeQuery(query);
+            do{
+                if(!rs.next()) break;
+                conceitos.add(rs.getString(1).charAt(0));
+                turmas.add(new Turma(rs.getString(2).charAt(0), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
+            }while(true);
+        } catch(Exception ex){
+            Logger lgr = Logger.getLogger(OperadorBD.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new Exception();
+        } finally {
+            desconectaBD();
+        }
+        
+        historico.setConceitosObtidos(conceitos);
+        historico.setTurmasAnteriores(turmas);
+
+        return historico;
     }
     
      /*
@@ -200,11 +232,11 @@ public class OperadorBD {
         try{
             conectaBD();
             st = con.createStatement();
-            String query = "SELECT * FROM turma WHERE codgoDisciplina = '"+codigoDisciplina+"' AND semestre = '"+semestre+"'";
+            String query = "SELECT * FROM turma WHERE codigoDisciplina = '"+codigoDisciplina+"' AND semestre = '"+semestre+"'";
             rs = st.executeQuery(query);
             do{
                 if(!rs.next()) break;
-                possibilidadesDeTurmas.add(new Turma(rs.getString(3), rs.getString(2).charAt(0), rs.getString(5), rs.getInt(6)));
+                possibilidadesDeTurmas.add(new Turma(rs.getString(2).charAt(0), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7)));
             }while(true);
         } catch(Exception ex){
             Logger lgr = Logger.getLogger(OperadorBD.class.getName());
@@ -226,7 +258,7 @@ public class OperadorBD {
         try{
             conectaBD();
             st = con.createStatement();
-            String query = "SELECT nome FROM disciplina WHERE codgoDisciplina = '"+codigoDisciplina+"'";
+            String query = "SELECT nome FROM disciplina WHERE codigo = '"+codigoDisciplina+"'";
             rs = st.executeQuery(query);
             if(rs.next()){
                 nome = rs.getString(1);
@@ -240,6 +272,27 @@ public class OperadorBD {
         }
 
         return nome;      
+    }
+    
+    public static String getProfessor(String cpfProfessor) throws Exception{
+        String nome = "";
+        try{
+            conectaBD();
+            st = con.createStatement();
+            String query = "SELECT nome FROM professor WHERE cpf = '"+cpfProfessor+"'";
+            rs = st.executeQuery(query);
+            if(rs.next()){
+                nome = rs.getString(1);
+            }
+        } catch(Exception ex){
+            Logger lgr = Logger.getLogger(OperadorBD.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new Exception();
+        } finally {
+            desconectaBD();
+        }
+
+        return nome;  
     }
     
     /*
