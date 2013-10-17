@@ -104,4 +104,34 @@ public abstract class Controlador extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
+    public void verificaEstado(HttpServletRequest request, HttpServletResponse response){
+        String estado = "Matricula";
+        String className = this.getServletName();
+        className = className + "." + estado;
+        boolean invocado = false;        
+        Class novaClasse;
+        try {
+            novaClasse = Class.forName(className);
+        while(novaClasse!=null && !invocado){
+            try {
+                Method acaoUsuario =novaClasse.getDeclaredMethod("processRequest", HttpServletRequest.class, HttpServletResponse.class);
+                acaoUsuario.invoke(this, request, response);
+                invocado = true;
+            } catch (NoSuchMethodException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SecurityException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalArgumentException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InvocationTargetException ex) {
+                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        }
+        catch (ClassNotFoundException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
