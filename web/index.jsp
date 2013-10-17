@@ -12,6 +12,7 @@
         <title>Sistema de Matrícula</title>
 		<style media="screen" type="text/css">
 			body {padding:40px; text-align: center}
+			body {padding:70px; text-align: center}
 			hr {margin-bottom: 40px}
 			a {text-decoration:none; font-size:30px; color: #1D29D1}
 			a:hover{color:#1E0A6E}
