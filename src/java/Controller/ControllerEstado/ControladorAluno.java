@@ -6,6 +6,8 @@ package Controller.ControllerEstado;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +33,12 @@ public class ControladorAluno extends ControladorUsuario {
      * @param response Dados da resposta do servlet
      */
     public void possibilidadeMatricula(HttpServletRequest request, HttpServletResponse response){
+        try {
+            PrintWriter pw = response.getWriter();
+            pw.printf("Possibilidade de matricula");
+        } catch (IOException ex) {
+            Logger.getLogger(ControladorAluno.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
@@ -57,4 +65,5 @@ public class ControladorAluno extends ControladorUsuario {
     public void resultadoEncomenda(HttpServletRequest request, HttpServletResponse response){
         
     }
+    
 }

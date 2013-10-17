@@ -12,10 +12,11 @@
         <title>Login Page</title>
     </head>
     <body>
-        <form action="/ControladorUsuario">
+        <form action="ControladorConta" method="post">
             Username: <input type="text" name="name" id="name"></br>
             Password: <input type="password" name="password" id="password">
-            <input type="hiden" id="evento" name="evento" value="login">
+            <input type="hidden" id="evento" name="evento" value="login"><br>
+            <input type="submit" name="ok" VALUE="OK">
         </form>
     </body>
 </html>

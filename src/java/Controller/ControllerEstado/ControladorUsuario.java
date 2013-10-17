@@ -6,6 +6,9 @@ package Controller.ControllerEstado;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -55,5 +58,14 @@ public class ControladorUsuario extends Controlador {
      */
     public void infoProfessores(HttpServletRequest request, HttpServletResponse response){
         
+    }
+    
+     public void login(HttpServletRequest request, HttpServletResponse response){
+        try {
+            //buscar as informações de usuario
+            response.sendRedirect("indexAluno.jsp");
+        } catch (IOException ex) {
+            Logger.getLogger(ControladorUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

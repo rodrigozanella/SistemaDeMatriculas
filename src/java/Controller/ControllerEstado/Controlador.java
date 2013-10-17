@@ -37,25 +37,29 @@ public abstract class Controlador extends HttpServlet {
             throws ServletException, IOException {
             String nomeAcaoUsuario = request.getParameter("evento");
             Class controlador = this.getClass();
-            
-            try {
-                Method acaoUsuario = controlador.getDeclaredMethod(nomeAcaoUsuario, HttpServletRequest.class, HttpServletResponse.class);
-                acaoUsuario.invoke(this, request, response);
-            } catch (NoSuchMethodException ex) {
-                //redirecionar depois para a página de erro
-                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
-                //redirecionar depois para a página de erro
-                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                //redirecionar depois para a página de erro
-                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                //redirecionar depois para a página de erro
-                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
-                //redirecionar depois para a página de erro
-                Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+            boolean invocado = false;
+            while(controlador!=null && !invocado){
+                try {
+                    Method acaoUsuario = controlador.getDeclaredMethod(nomeAcaoUsuario, HttpServletRequest.class, HttpServletResponse.class);
+                    acaoUsuario.invoke(this, request, response);
+                    invocado = true;
+                } catch (NoSuchMethodException ex) {
+                    //redirecionar depois para a página de erro
+                    controlador = controlador.getSuperclass();
+                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SecurityException ex) {
+                    //redirecionar depois para a página de erro
+                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    //redirecionar depois para a página de erro
+                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalArgumentException ex) {
+                    //redirecionar depois para a página de erro
+                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvocationTargetException ex) {
+                    //redirecionar depois para a página de erro
+                    Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
     }
 
