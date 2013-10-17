@@ -12,6 +12,8 @@
         <title>Sistema de Matrícula</title>
     </head>
     <body>
+        <h1>Sistema de Matrículas do INF</h1>
+        <hr>
         <a href="login.jsp">Login</a>
     </body>
 </html>

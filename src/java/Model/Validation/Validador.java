@@ -91,16 +91,4 @@ public class Validador {
         
         OperadorBD.insereRegistroTurma(novaTurma);
     }
-    
-    /*
-     * Para obter um aluno:
-     * A senha deve possuir mais que 10 caracteres
-     */
-    public Aluno getAluno(String nomeDeUsuario, String senha) throws Exception{
-        if(senha.length() < 10){
-            throw new Exception();
-        }
-        
-        return OperadorBD.getAluno(nomeDeUsuario, senha);
-    }
 }
