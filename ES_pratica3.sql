@@ -18,6 +18,34 @@ USE `es_pratica3`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `administrador`
+--
+
+DROP TABLE IF EXISTS `administrador`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `administrador` (
+  `cpf` varchar(45) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `nomeUsuario` varchar(45) NOT NULL,
+  `senha` varchar(45) NOT NULL,
+  `dataNascimento` date DEFAULT NULL,
+  PRIMARY KEY (`cpf`),
+  UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `administrador`
+--
+
+LOCK TABLES `administrador` WRITE;
+/*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
+/*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `aluno`
 --
 
@@ -30,8 +58,13 @@ CREATE TABLE `aluno` (
   `nomeUsuario` varchar(45) NOT NULL,
   `senha` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
+  `dataNascimento` date DEFAULT NULL,
+  `matricula` int(8) DEFAULT NULL,
+  `semestreIngresso` char(6) DEFAULT NULL,
+  `metodoIngresso` varchar(45) DEFAULT NULL,
+  `pontuacaoVestibular` int(11) DEFAULT NULL,
+  `situacao` varchar(45) DEFAULT NULL,
   `pontuacao` int(11) NOT NULL,
-  `alunocol` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`cpf`),
   UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -43,8 +76,42 @@ CREATE TABLE `aluno` (
 
 LOCK TABLES `aluno` WRITE;
 /*!40000 ALTER TABLE `aluno` DISABLE KEYS */;
-INSERT INTO `aluno` VALUES ('010.325.689-02','Rofrigo Zanella','rzanella','a45de2','rodrigo@exemplo.com',500,NULL),('025.180.450-56','Henrique Dambros','hdambros','d54s6','hvdambros@gmail.com',450,NULL),('100.252.666-99','Paulo dos Santos','psantos','456gt78','paulo@uol.com',300,NULL);
+INSERT INTO `aluno` VALUES ('010.325.689-02','Rofrigo Zanella','rzanella','a45de2','rodrigo@exemplo.com',NULL,NULL,NULL,NULL,NULL,NULL,500),('025.180.450-56','Henrique Dambros','hdambros','d54s6','hvdambros@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,450),('100.252.666-99','Paulo dos Santos','psantos','456gt78','paulo@uol.com',NULL,NULL,NULL,NULL,NULL,NULL,300);
 /*!40000 ALTER TABLE `aluno` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `correcao_conceito`
+--
+
+DROP TABLE IF EXISTS `correcao_conceito`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `correcao_conceito` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cpfProfessor` varchar(45) NOT NULL,
+  `cpfAluno` varchar(45) NOT NULL,
+  `idTurma` int(11) NOT NULL,
+  `novoConceito` char(2) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cpfProfessor_idx` (`cpfProfessor`),
+  KEY `cpfAluno_idx` (`cpfAluno`),
+  KEY `cpfProfessor_idx2` (`cpfProfessor`),
+  KEY `cpfProfessor_idx3` (`cpfProfessor`),
+  KEY `idTurma_idx` (`idTurma`),
+  CONSTRAINT `idTurma4` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `cpfAluno4` FOREIGN KEY (`cpfAluno`) REFERENCES `aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `cpfProfessor5` FOREIGN KEY (`cpfProfessor`) REFERENCES `professor` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `correcao_conceito`
+--
+
+LOCK TABLES `correcao_conceito` WRITE;
+/*!40000 ALTER TABLE `correcao_conceito` DISABLE KEYS */;
+/*!40000 ALTER TABLE `correcao_conceito` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -74,30 +141,85 @@ INSERT INTO `disciplina` VALUES ('INF01023','Arquitetura e Desempenho de Banco d
 UNLOCK TABLES;
 
 --
--- Table structure for table `pre_requisitos`
+-- Table structure for table `lance`
 --
 
-DROP TABLE IF EXISTS `pre_requisitos`;
+DROP TABLE IF EXISTS `lance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pre_requisitos` (
-  `codigoDisciplina` varchar(45) NOT NULL,
-  `codigoDisciplinaRequisito` varchar(45) NOT NULL,
-  PRIMARY KEY (`codigoDisciplina`,`codigoDisciplinaRequisito`),
-  KEY `codigoDisciplinaRequisito_idx` (`codigoDisciplinaRequisito`),
-  CONSTRAINT `codigoDisciplina2` FOREIGN KEY (`codigoDisciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `codigoDisciplinaRequisito` FOREIGN KEY (`codigoDisciplinaRequisito`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+CREATE TABLE `lance` (
+  `idTurma` int(11) NOT NULL,
+  `cpfAluno` varchar(45) NOT NULL,
+  `valor` int(11) NOT NULL,
+  `atendida` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`idTurma`,`cpfAluno`),
+  KEY `cpfAluno_idx` (`cpfAluno`),
+  CONSTRAINT `cpfAluno2` FOREIGN KEY (`cpfAluno`) REFERENCES `aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `idTurma3` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pre_requisitos`
+-- Dumping data for table `lance`
 --
 
-LOCK TABLES `pre_requisitos` WRITE;
-/*!40000 ALTER TABLE `pre_requisitos` DISABLE KEYS */;
-INSERT INTO `pre_requisitos` VALUES ('INF01145','INF01124'),('INF01209','INF01142'),('INF01023','INF01145'),('INF01147','INF05516');
-/*!40000 ALTER TABLE `pre_requisitos` ENABLE KEYS */;
+LOCK TABLES `lance` WRITE;
+/*!40000 ALTER TABLE `lance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `operacao_administrador`
+--
+
+DROP TABLE IF EXISTS `operacao_administrador`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `operacao_administrador` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cpfAdministrador` varchar(45) NOT NULL,
+  `dataHora` datetime NOT NULL,
+  `operacao` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cpfAdministrador_idx` (`cpfAdministrador`),
+  CONSTRAINT `cpfAdministrador` FOREIGN KEY (`cpfAdministrador`) REFERENCES `administrador` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `operacao_administrador`
+--
+
+LOCK TABLES `operacao_administrador` WRITE;
+/*!40000 ALTER TABLE `operacao_administrador` DISABLE KEYS */;
+/*!40000 ALTER TABLE `operacao_administrador` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pre_requisito`
+--
+
+DROP TABLE IF EXISTS `pre_requisito`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pre_requisito` (
+  `codigoDisciplina` varchar(45) NOT NULL,
+  `codigoDisciplinaRequisito` varchar(45) NOT NULL,
+  PRIMARY KEY (`codigoDisciplina`,`codigoDisciplinaRequisito`),
+  KEY `codigoDisciplinaRequisito_idx` (`codigoDisciplinaRequisito`),
+  CONSTRAINT `disciplinaRequisito_codigo` FOREIGN KEY (`codigoDisciplinaRequisito`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `disciplina_codigo` FOREIGN KEY (`codigoDisciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pre_requisito`
+--
+
+LOCK TABLES `pre_requisito` WRITE;
+/*!40000 ALTER TABLE `pre_requisito` DISABLE KEYS */;
+INSERT INTO `pre_requisito` VALUES ('INF01145','INF01124'),('INF01209','INF01142'),('INF01023','INF01145'),('INF01147','INF05516');
+/*!40000 ALTER TABLE `pre_requisito` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -113,7 +235,10 @@ CREATE TABLE `professor` (
   `email` varchar(45) NOT NULL,
   `nomeUsuario` varchar(45) NOT NULL,
   `senha` varchar(45) NOT NULL,
-  PRIMARY KEY (`cpf`)
+  `dataNascimento` date DEFAULT NULL,
+  `areaInteresse` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`cpf`),
+  UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,8 +248,30 @@ CREATE TABLE `professor` (
 
 LOCK TABLES `professor` WRITE;
 /*!40000 ALTER TABLE `professor` DISABLE KEYS */;
-INSERT INTO `professor` VALUES ('001.002.003-04','Marcelo Pimenta','mpimenta@inf.ufrgs.br','mpimenta','k29fj8'),('003.669.876-26','Manuel Oliveira','moliveira@inf.ufrgs.br','moliveira','a23d92'),('025.301.254-56','Mariana Luderitz Kolberg','mlkolberg@inf.ufrgs.br','mlkolberg','l91h11'),('032.256.215-89','Taisy Silva Weber','tsweber@inf.ufrgs.br','tsweber','js2h3'),('123.456.789-10','Sérgio Cechin','scechin@inf.ufrgs.br','scechin','j2s023'),('125.254.698-00','Lucas Schnorr','lschnorr@inf.ufrgs.br','lschnorr','r18d83'),('154.258.548-12','Cirano Iochpe','ciochpe@inf.ufrgs.br','cioshpe','h29dh9'),('501.254.328-98','Luciana Porcher Nedel','lpnedel@inf.ufrgs.br','lpnedel','j28dh9');
+INSERT INTO `professor` VALUES ('001.002.003-04','Marcelo Pimenta','mpimenta@inf.ufrgs.br','mpimenta','k29fj8',NULL,NULL),('003.669.876-26','Manuel Oliveira','moliveira@inf.ufrgs.br','moliveira','a23d92',NULL,NULL),('025.301.254-56','Mariana Luderitz Kolberg','mlkolberg@inf.ufrgs.br','mlkolberg','l91h11',NULL,NULL),('032.256.215-89','Taisy Silva Weber','tsweber@inf.ufrgs.br','tsweber','js2h3',NULL,NULL),('123.456.789-10','Sérgio Cechin','scechin@inf.ufrgs.br','scechin','j2s023',NULL,NULL),('125.254.698-00','Lucas Schnorr','lschnorr@inf.ufrgs.br','lschnorr','r18d83',NULL,NULL),('154.258.548-12','Cirano Iochpe','ciochpe@inf.ufrgs.br','cioshpe','h29dh9',NULL,NULL),('501.254.328-98','Luciana Porcher Nedel','lpnedel@inf.ufrgs.br','lpnedel','j28dh9',NULL,NULL);
 /*!40000 ALTER TABLE `professor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sistema`
+--
+
+DROP TABLE IF EXISTS `sistema`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sistema` (
+  `estado` varchar(45) NOT NULL,
+  `semestre` varchar(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sistema`
+--
+
+LOCK TABLES `sistema` WRITE;
+/*!40000 ALTER TABLE `sistema` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sistema` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -135,14 +282,15 @@ DROP TABLE IF EXISTS `turma`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `turma` (
-  `idturma` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` char(1) NOT NULL,
   `codigoDisciplina` varchar(45) NOT NULL,
-  `horario` varchar(45) NOT NULL,
-  `semestre` varchar(45) NOT NULL,
+  `horario` char(5) NOT NULL,
+  `diasSemana` varchar(45) DEFAULT NULL,
+  `semestre` char(6) NOT NULL,
   `numvagas` int(11) NOT NULL,
   `cpfProfessor` varchar(45) NOT NULL,
-  PRIMARY KEY (`idturma`),
+  PRIMARY KEY (`id`),
   KEY `codigoDisciplina_idx` (`codigoDisciplina`),
   KEY `cpfProfessor_idx` (`cpfProfessor`),
   CONSTRAINT `codigoDisciplina` FOREIGN KEY (`codigoDisciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -156,36 +304,36 @@ CREATE TABLE `turma` (
 
 LOCK TABLES `turma` WRITE;
 /*!40000 ALTER TABLE `turma` DISABLE KEYS */;
-INSERT INTO `turma` VALUES (1,'A','INF01124','10:30','2013/2',40,'003.669.876-26'),(2,'B','INF01124','8:30','2013/2',25,'003.669.876-26'),(3,'A','INF01124','13:30','2013/1',30,'003.669.876-26'),(4,'A','INF01124','10:30','2012/2',30,'003.669.876-26'),(5,'A','INF01124','13:30','2012/1',25,'003.669.876-26'),(6,'A','INF05516','10:30','2013/2',25,'025.301.254-56'),(7,'B','INF05516','8:30','2013/2',20,'025.301.254-56'),(8,'A','INF05516','8:30','2013/1',20,'025.301.254-56'),(9,'B','INF05516','13:30','2013/1',20,'025.301.254-56'),(10,'A','INF05516','13:30','2012/2',20,'025.301.254-56'),(11,'A','INF05516','10:30','2012/1',30,'025.301.254-56'),(12,'A','INF01209','8:30','2013/2',15,'032.256.215-89'),(13,'C','INF01209','15:30','2013/2',10,'032.256.215-89'),(14,'D','INF01209','17:30','2013/1',5,'032.256.215-89'),(15,'B','INF01209','10:30','2012/2',15,'032.256.215-89'),(16,'A','INF01209','15:30','2012/1',5,'032.256.215-89'),(17,'E','INF01209','19:30','2011/2',50,'032.256.215-89'),(18,'A','INF01147','13:30','2013/2',20,'125.254.698-00'),(19,'D','INF01147','10:30','2013/2',15,'125.254.698-00'),(20,'C','INF01147','8:30','2013/1',20,'125.254.698-00'),(21,'B','INF01147','10:30','2013/1',15,'125.254.698-00'),(22,'A','INF01147','13:30','2012/2',30,'125.254.698-00'),(23,'B','INF01147','8:30','2012/1',15,'125.254.698-00'),(24,'A','INF01145','13:30','2013/2',30,'154.258.548-12'),(25,'C','INF01145','10:30','2013/2',20,'154.258.548-12'),(26,'C','INF01145','8:30','2013/1',15,'154.258.548-12'),(27,'A','INF01145','13:30','2012/2',20,'154.258.548-12'),(28,'A','INF01142','13:30','2013/2',35,'123.456.789-10'),(29,'B','INF01142','10:30','2013/2',30,'123.456.789-10'),(30,'A','INF01142','10:30','2013/1',40,'123.456.789-10'),(31,'C','INF01142','8:30','2012/2',15,'123.456.789-10'),(32,'A','INF01120','15:30','2013/2',30,'001.002.003-04'),(33,'B','INF01120','13:30','2013/2',15,'001.002.003-04'),(34,'A','INF01120','8:30','2013/1',20,'001.002.003-04'),(35,'F','INF01120','10:30','2012/2',5,'001.002.003-04'),(36,'U','INF01032','8:30','2013/2',15,'501.254.328-98'),(37,'G','INF01032','13:30','2013/1',5,'501.254.328-98'),(38,'U','INF01032','15:30','2012/2',10,'501.254.328-98'),(39,'U','INF01032','13:30','2012/1',20,'501.254.328-98'),(40,'U','INF01023','15:30','2013/2',20,'154.258.548-12'),(41,'F','INF01023','13:30','2013/1',15,'154.258.548-12'),(42,'U','INF01023','8:30','2012/2',25,'154.258.548-12'),(43,'U','INF01023','15:30','2011/2',15,'154.258.548-12');
+INSERT INTO `turma` VALUES (1,'A','INF01124','10:30',NULL,'2013/2',40,'003.669.876-26'),(2,'B','INF01124','8:30',NULL,'2013/2',25,'003.669.876-26'),(3,'A','INF01124','13:30',NULL,'2013/1',30,'003.669.876-26'),(4,'A','INF01124','10:30',NULL,'2012/2',30,'003.669.876-26'),(5,'A','INF01124','13:30',NULL,'2012/1',25,'003.669.876-26'),(6,'A','INF05516','10:30',NULL,'2013/2',25,'025.301.254-56'),(7,'B','INF05516','8:30',NULL,'2013/2',20,'025.301.254-56'),(8,'A','INF05516','8:30',NULL,'2013/1',20,'025.301.254-56'),(9,'B','INF05516','13:30',NULL,'2013/1',20,'025.301.254-56'),(10,'A','INF05516','13:30',NULL,'2012/2',20,'025.301.254-56'),(11,'A','INF05516','10:30',NULL,'2012/1',30,'025.301.254-56'),(12,'A','INF01209','8:30',NULL,'2013/2',15,'032.256.215-89'),(13,'C','INF01209','15:30',NULL,'2013/2',10,'032.256.215-89'),(14,'D','INF01209','17:30',NULL,'2013/1',5,'032.256.215-89'),(15,'B','INF01209','10:30',NULL,'2012/2',15,'032.256.215-89'),(16,'A','INF01209','15:30',NULL,'2012/1',5,'032.256.215-89'),(17,'E','INF01209','19:30',NULL,'2011/2',50,'032.256.215-89'),(18,'A','INF01147','13:30',NULL,'2013/2',20,'125.254.698-00'),(19,'D','INF01147','10:30',NULL,'2013/2',15,'125.254.698-00'),(20,'C','INF01147','8:30',NULL,'2013/1',20,'125.254.698-00'),(21,'B','INF01147','10:30',NULL,'2013/1',15,'125.254.698-00'),(22,'A','INF01147','13:30',NULL,'2012/2',30,'125.254.698-00'),(23,'B','INF01147','8:30',NULL,'2012/1',15,'125.254.698-00'),(24,'A','INF01145','13:30',NULL,'2013/2',30,'154.258.548-12'),(25,'C','INF01145','10:30',NULL,'2013/2',20,'154.258.548-12'),(26,'C','INF01145','8:30',NULL,'2013/1',15,'154.258.548-12'),(27,'A','INF01145','13:30',NULL,'2012/2',20,'154.258.548-12'),(28,'A','INF01142','13:30',NULL,'2013/2',35,'123.456.789-10'),(29,'B','INF01142','10:30',NULL,'2013/2',30,'123.456.789-10'),(30,'A','INF01142','10:30',NULL,'2013/1',40,'123.456.789-10'),(31,'C','INF01142','8:30',NULL,'2012/2',15,'123.456.789-10'),(32,'A','INF01120','15:30',NULL,'2013/2',30,'001.002.003-04'),(33,'B','INF01120','13:30',NULL,'2013/2',15,'001.002.003-04'),(34,'A','INF01120','8:30',NULL,'2013/1',20,'001.002.003-04'),(35,'F','INF01120','10:30',NULL,'2012/2',5,'001.002.003-04'),(36,'U','INF01032','8:30',NULL,'2013/2',15,'501.254.328-98'),(37,'G','INF01032','13:30',NULL,'2013/1',5,'501.254.328-98'),(38,'U','INF01032','15:30',NULL,'2012/2',10,'501.254.328-98'),(39,'U','INF01032','13:30',NULL,'2012/1',20,'501.254.328-98'),(40,'U','INF01023','15:30',NULL,'2013/2',20,'154.258.548-12'),(41,'F','INF01023','13:30',NULL,'2013/1',15,'154.258.548-12'),(42,'U','INF01023','8:30',NULL,'2012/2',25,'154.258.548-12'),(43,'U','INF01023','15:30',NULL,'2011/2',15,'154.258.548-12');
 /*!40000 ALTER TABLE `turma` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `turmas_cursadas`
+-- Table structure for table `turma_cursada`
 --
 
-DROP TABLE IF EXISTS `turmas_cursadas`;
+DROP TABLE IF EXISTS `turma_cursada`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `turmas_cursadas` (
+CREATE TABLE `turma_cursada` (
   `cpfAluno` varchar(45) NOT NULL,
   `idTurma` int(11) NOT NULL,
-  `conceito` char(1) DEFAULT NULL,
+  `conceito` char(2) DEFAULT NULL,
   PRIMARY KEY (`cpfAluno`,`idTurma`),
   KEY `idTurma_idx` (`idTurma`),
   CONSTRAINT `cpfAluno` FOREIGN KEY (`cpfAluno`) REFERENCES `aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `idTurma` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`idturma`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `idTurma` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `turmas_cursadas`
+-- Dumping data for table `turma_cursada`
 --
 
-LOCK TABLES `turmas_cursadas` WRITE;
-/*!40000 ALTER TABLE `turmas_cursadas` DISABLE KEYS */;
-INSERT INTO `turmas_cursadas` VALUES ('010.325.689-02',5,'A'),('010.325.689-02',14,'A'),('010.325.689-02',27,'C'),('010.325.689-02',31,'B'),('010.325.689-02',39,'B'),('025.180.450-56',10,'B'),('025.180.450-56',38,'A');
-/*!40000 ALTER TABLE `turmas_cursadas` ENABLE KEYS */;
+LOCK TABLES `turma_cursada` WRITE;
+/*!40000 ALTER TABLE `turma_cursada` DISABLE KEYS */;
+INSERT INTO `turma_cursada` VALUES ('010.325.689-02',5,'A'),('010.325.689-02',14,'A'),('010.325.689-02',27,'C'),('010.325.689-02',31,'B'),('010.325.689-02',39,'B'),('025.180.450-56',10,'B'),('025.180.450-56',38,'A');
+/*!40000 ALTER TABLE `turma_cursada` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -197,4 +345,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-17  5:00:07
+-- Dump completed on 2013-11-06 16:08:21
