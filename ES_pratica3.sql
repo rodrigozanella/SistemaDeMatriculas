@@ -29,10 +29,11 @@ CREATE TABLE `administrador` (
   `nome` varchar(100) NOT NULL,
   `email` varchar(45) NOT NULL,
   `nomeUsuario` varchar(45) NOT NULL,
-  `senha` varchar(45) NOT NULL,
   `dataNascimento` date DEFAULT NULL,
   PRIMARY KEY (`cpf`),
-  UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`)
+  UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`),
+  UNIQUE KEY `cpf_UNIQUE` (`cpf`),
+  CONSTRAINT `nomeUsuario3` FOREIGN KEY (`nomeUsuario`) REFERENCES `usuario` (`nomeUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -56,7 +57,6 @@ CREATE TABLE `aluno` (
   `cpf` varchar(45) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `nomeUsuario` varchar(45) NOT NULL,
-  `senha` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `dataNascimento` date DEFAULT NULL,
   `matricula` int(8) DEFAULT NULL,
@@ -66,7 +66,9 @@ CREATE TABLE `aluno` (
   `situacao` varchar(45) DEFAULT NULL,
   `pontuacao` int(11) NOT NULL,
   PRIMARY KEY (`cpf`),
-  UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`)
+  UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`),
+  UNIQUE KEY `cpf_UNIQUE` (`cpf`),
+  CONSTRAINT `nomeUsuario` FOREIGN KEY (`nomeUsuario`) REFERENCES `usuario` (`nomeUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -76,7 +78,7 @@ CREATE TABLE `aluno` (
 
 LOCK TABLES `aluno` WRITE;
 /*!40000 ALTER TABLE `aluno` DISABLE KEYS */;
-INSERT INTO `aluno` VALUES ('010.325.689-02','Rofrigo Zanella','rzanella','a45de2','rodrigo@exemplo.com',NULL,NULL,NULL,NULL,NULL,NULL,500),('025.180.450-56','Henrique Dambros','hdambros','d54s6','hvdambros@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,450),('100.252.666-99','Paulo dos Santos','psantos','456gt78','paulo@uol.com',NULL,NULL,NULL,NULL,NULL,NULL,300);
+INSERT INTO `aluno` VALUES ('010.325.689-02','Rofrigo Zanella','rzanella','rodrigo@exemplo.com',NULL,NULL,NULL,NULL,NULL,NULL,500),('025.180.450-56','Henrique Dambros','hdambros','hvdambros@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,450),('100.252.666-99','Paulo dos Santos','psantos','paulo@uol.com',NULL,NULL,NULL,NULL,NULL,NULL,300);
 /*!40000 ALTER TABLE `aluno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,14 +96,15 @@ CREATE TABLE `correcao_conceito` (
   `idTurma` int(11) NOT NULL,
   `novoConceito` char(2) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `cpfProfessor_idx` (`cpfProfessor`),
   KEY `cpfAluno_idx` (`cpfAluno`),
   KEY `cpfProfessor_idx2` (`cpfProfessor`),
   KEY `cpfProfessor_idx3` (`cpfProfessor`),
   KEY `idTurma_idx` (`idTurma`),
-  CONSTRAINT `idTurma4` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `cpfAluno4` FOREIGN KEY (`cpfAluno`) REFERENCES `aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `cpfProfessor5` FOREIGN KEY (`cpfProfessor`) REFERENCES `professor` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `cpfProfessor5` FOREIGN KEY (`cpfProfessor`) REFERENCES `professor` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `idTurma4` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,7 +129,8 @@ CREATE TABLE `disciplina` (
   `nome` varchar(100) NOT NULL,
   `ehEletiva` bit(1) NOT NULL,
   `numCreditos` int(11) NOT NULL,
-  PRIMARY KEY (`codigo`)
+  PRIMARY KEY (`codigo`),
+  UNIQUE KEY `codigo_UNIQUE` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -153,6 +157,8 @@ CREATE TABLE `lance` (
   `valor` int(11) NOT NULL,
   `atendida` bit(1) DEFAULT NULL,
   PRIMARY KEY (`idTurma`,`cpfAluno`),
+  UNIQUE KEY `idTurma_UNIQUE` (`idTurma`),
+  UNIQUE KEY `cpfAluno_UNIQUE` (`cpfAluno`),
   KEY `cpfAluno_idx` (`cpfAluno`),
   CONSTRAINT `cpfAluno2` FOREIGN KEY (`cpfAluno`) REFERENCES `aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idTurma3` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -181,6 +187,8 @@ CREATE TABLE `operacao_administrador` (
   `dataHora` datetime NOT NULL,
   `operacao` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `cpfAdministrador_UNIQUE` (`cpfAdministrador`),
   KEY `cpfAdministrador_idx` (`cpfAdministrador`),
   CONSTRAINT `cpfAdministrador` FOREIGN KEY (`cpfAdministrador`) REFERENCES `administrador` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -206,6 +214,8 @@ CREATE TABLE `pre_requisito` (
   `codigoDisciplina` varchar(45) NOT NULL,
   `codigoDisciplinaRequisito` varchar(45) NOT NULL,
   PRIMARY KEY (`codigoDisciplina`,`codigoDisciplinaRequisito`),
+  UNIQUE KEY `codigoDisciplina_UNIQUE` (`codigoDisciplina`),
+  UNIQUE KEY `codigoDisciplinaRequisito_UNIQUE` (`codigoDisciplinaRequisito`),
   KEY `codigoDisciplinaRequisito_idx` (`codigoDisciplinaRequisito`),
   CONSTRAINT `disciplinaRequisito_codigo` FOREIGN KEY (`codigoDisciplinaRequisito`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `disciplina_codigo` FOREIGN KEY (`codigoDisciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -218,7 +228,7 @@ CREATE TABLE `pre_requisito` (
 
 LOCK TABLES `pre_requisito` WRITE;
 /*!40000 ALTER TABLE `pre_requisito` DISABLE KEYS */;
-INSERT INTO `pre_requisito` VALUES ('INF01145','INF01124'),('INF01209','INF01142'),('INF01023','INF01145'),('INF01147','INF05516');
+INSERT INTO `pre_requisito` VALUES ('INF01023','INF01145'),('INF01145','INF01124'),('INF01147','INF05516'),('INF01209','INF01142');
 /*!40000 ALTER TABLE `pre_requisito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,11 +244,12 @@ CREATE TABLE `professor` (
   `nome` varchar(100) NOT NULL,
   `email` varchar(45) NOT NULL,
   `nomeUsuario` varchar(45) NOT NULL,
-  `senha` varchar(45) NOT NULL,
   `dataNascimento` date DEFAULT NULL,
   `areaInteresse` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`cpf`),
-  UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`)
+  UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`),
+  UNIQUE KEY `cpf_UNIQUE` (`cpf`),
+  CONSTRAINT `nomeUsuario2` FOREIGN KEY (`nomeUsuario`) REFERENCES `usuario` (`nomeUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -248,7 +259,7 @@ CREATE TABLE `professor` (
 
 LOCK TABLES `professor` WRITE;
 /*!40000 ALTER TABLE `professor` DISABLE KEYS */;
-INSERT INTO `professor` VALUES ('001.002.003-04','Marcelo Pimenta','mpimenta@inf.ufrgs.br','mpimenta','k29fj8',NULL,NULL),('003.669.876-26','Manuel Oliveira','moliveira@inf.ufrgs.br','moliveira','a23d92',NULL,NULL),('025.301.254-56','Mariana Luderitz Kolberg','mlkolberg@inf.ufrgs.br','mlkolberg','l91h11',NULL,NULL),('032.256.215-89','Taisy Silva Weber','tsweber@inf.ufrgs.br','tsweber','js2h3',NULL,NULL),('123.456.789-10','Sérgio Cechin','scechin@inf.ufrgs.br','scechin','j2s023',NULL,NULL),('125.254.698-00','Lucas Schnorr','lschnorr@inf.ufrgs.br','lschnorr','r18d83',NULL,NULL),('154.258.548-12','Cirano Iochpe','ciochpe@inf.ufrgs.br','cioshpe','h29dh9',NULL,NULL),('501.254.328-98','Luciana Porcher Nedel','lpnedel@inf.ufrgs.br','lpnedel','j28dh9',NULL,NULL);
+INSERT INTO `professor` VALUES ('001.002.003-04','Marcelo Pimenta','mpimenta@inf.ufrgs.br','mpimenta',NULL,NULL),('003.669.876-26','Manuel Oliveira','moliveira@inf.ufrgs.br','moliveira',NULL,NULL),('025.301.254-56','Mariana Luderitz Kolberg','mlkolberg@inf.ufrgs.br','mlkolberg',NULL,NULL),('032.256.215-89','Taisy Silva Weber','tsweber@inf.ufrgs.br','tsweber',NULL,NULL),('123.456.789-10','Sérgio Cechin','scechin@inf.ufrgs.br','scechin',NULL,NULL),('125.254.698-00','Lucas Schnorr','lschnorr@inf.ufrgs.br','lschnorr',NULL,NULL),('154.258.548-12','Cirano Iochpe','ciochpe@inf.ufrgs.br','cioshpe',NULL,NULL),('501.254.328-98','Luciana Porcher Nedel','lpnedel@inf.ufrgs.br','lpnedel',NULL,NULL);
 /*!40000 ALTER TABLE `professor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,6 +302,7 @@ CREATE TABLE `turma` (
   `numvagas` int(11) NOT NULL,
   `cpfProfessor` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `codigoDisciplina_idx` (`codigoDisciplina`),
   KEY `cpfProfessor_idx` (`cpfProfessor`),
   CONSTRAINT `codigoDisciplina` FOREIGN KEY (`codigoDisciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -335,6 +347,32 @@ LOCK TABLES `turma_cursada` WRITE;
 INSERT INTO `turma_cursada` VALUES ('010.325.689-02',5,'A'),('010.325.689-02',14,'A'),('010.325.689-02',27,'C'),('010.325.689-02',31,'B'),('010.325.689-02',39,'B'),('025.180.450-56',10,'B'),('025.180.450-56',38,'A');
 /*!40000 ALTER TABLE `turma_cursada` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario` (
+  `nomeUsuario` varchar(45) NOT NULL,
+  `senha` varchar(45) NOT NULL,
+  `tipo` varchar(45) NOT NULL,
+  PRIMARY KEY (`nomeUsuario`),
+  UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES ('cioshpe','1234','professor'),('hdambros','1234','aluno'),('lpnedel','1234','professor'),('lschnorr','1234','professor'),('mlkolberg','1234','professor'),('moliveira','1234','professor'),('mpimenta','1234','professor'),('psantos','1234','aluno'),('rzanella','1234','aluno'),('scechin','1234','professor'),('tsweber','1234','professor');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -345,4 +383,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-06 16:08:21
+-- Dump completed on 2013-11-13 20:28:54
