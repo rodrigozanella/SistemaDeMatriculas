@@ -37,7 +37,7 @@ public class OperadorBD {
 	try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             //preencham com as informações de vocês aqui
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/es_pratica3","root","aaaa");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/es_pratica3","root","12021993");
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(OperadorBD.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);

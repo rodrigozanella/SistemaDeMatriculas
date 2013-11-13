@@ -21,7 +21,7 @@
     <body>
         <h1>Sistema de Matrículas do INF</h1>
         <hr>
-        <form action="ControladorConta" method="post">
+        <form action="ControladorContext" method="post">
             Username: <input type="text" size="14" name="name" id="name"></br>
             Password: <input type="password" size="15" name="password" id="password">
             <input type="hidden" id="evento" name="evento" value="login"><br>

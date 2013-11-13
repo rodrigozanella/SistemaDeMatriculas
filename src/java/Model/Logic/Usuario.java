@@ -17,6 +17,7 @@ public class Usuario {
     private String cpf;
     private String nomeDeUsuario;
     private String senha;
+    private String role;
     
     public Usuario(String nome, String cpf, String nomeUsuario, String senha){
         this.nome = nome;
@@ -25,6 +26,10 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public String getRole(){
+        return role;
+    }
+    
     public String getNomeDeUsuario() {
         return nomeDeUsuario;
     }
@@ -33,6 +38,10 @@ public class Usuario {
         return senha;
     }
 
+    public void setRole(String newRole){
+        role = newRole;
+    }
+    
     public void setNomeDeUsuario(String nomeDeUsuario) {
         this.nomeDeUsuario = nomeDeUsuario;
     }

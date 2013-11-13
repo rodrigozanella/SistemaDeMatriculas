@@ -36,6 +36,50 @@
         <servlet-name>ControladorConta</servlet-name>
         <servlet-class>Controller.ControllerConta.ControladorConta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FeriasEstado</servlet-name>
+        <servlet-class>Controller.ControllerEstado.FeriasEstado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LetivoEstado</servlet-name>
+        <servlet-class>Controller.ControllerEstado.LetivoEstado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MatriculaEstado</servlet-name>
+        <servlet-class>Controller.ControllerEstado.MatriculaEstado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Estado</servlet-name>
+        <servlet-class>Controller.Estado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Comando</servlet-name>
+        <servlet-class>Controller.Command.Comando</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AlunoEstado</servlet-name>
+        <servlet-class>Controller.ControllerConta.AlunoEstado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminEstado</servlet-name>
+        <servlet-class>Controller.ControllerConta.AdminEstado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfEstado</servlet-name>
+        <servlet-class>Controller.ControllerConta.ProfEstado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsuarioEstado</servlet-name>
+        <servlet-class>Controller.ControllerConta.UsuarioEstado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginComando</servlet-name>
+        <servlet-class>Controller.Command.LoginComando</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PossibilidadeMatriculaComando</servlet-name>
+        <servlet-class>Controller.Command.PossibilidadeMatriculaComando</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
         <url-pattern>/Controlador</url-pattern>
@@ -83,6 +127,50 @@
     <servlet-mapping>
         <servlet-name>ControladorConta</servlet-name>
         <url-pattern>/ControladorConta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeriasEstado</servlet-name>
+        <url-pattern>/FeriasEstado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LetivoEstado</servlet-name>
+        <url-pattern>/LetivoEstado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MatriculaEstado</servlet-name>
+        <url-pattern>/MatriculaEstado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Estado</servlet-name>
+        <url-pattern>/Estado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Comando</servlet-name>
+        <url-pattern>/Comando</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AlunoEstado</servlet-name>
+        <url-pattern>/AlunoEstado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminEstado</servlet-name>
+        <url-pattern>/AdminEstado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfEstado</servlet-name>
+        <url-pattern>/ProfEstado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioEstado</servlet-name>
+        <url-pattern>/UsuarioEstado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginComando</servlet-name>
+        <url-pattern>/LoginComando</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PossibilidadeMatriculaComando</servlet-name>
+        <url-pattern>/PossibilidadeMatriculaComando</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

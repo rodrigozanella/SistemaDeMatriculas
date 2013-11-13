@@ -32,6 +32,7 @@ public class Aluno extends Usuario{
 
     public Aluno(String nome, String cpf, String nomeUsuario, String senha){
         super(nome, cpf, nomeUsuario, senha);
+        this.setRole("aluno");
     }
     
     public List<Turma> getPossibilidadesMatricula() {
