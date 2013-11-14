@@ -5,8 +5,9 @@
 package Controller.ControllerConta;
 
 /**
- *
- * @author Zanella
+ * ProfEstado
+ * Representa o estado, quando o usuário está logado como professor
+ * @author Rodrigo Zanella Ribeiro
  */
 public class ProfEstado extends UsuarioEstado{ 
     public ProfEstado(){

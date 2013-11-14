@@ -1,15 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller.ControllerConta;
 
-import Controller.Estado;
-import Controller.Command.Comando;
-import java.util.Map;
 /**
- *
- * @author Zanella
+ * AlunoEstado
+ * Representa o estado, quando o usuário está logado como aluno
+ * @author Rodrigo Zanella Ribeiro
  */
 public class AlunoEstado extends UsuarioEstado {
 

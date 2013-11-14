@@ -299,6 +299,18 @@ public class OperadorBD {
     * Retorna o estado do sistema
     */
     public static String getEstadoSistema(){
-        return "Matricula";
+        String result = null;
+        try {
+            conectaBD();
+            String query = "SELECT estado FROM sistema";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            if(rs.next()){
+                result = rs.getString(1);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(OperadorBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     } 
 }

@@ -1,17 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller.ControllerEstado;
 
 import Controller.Estado;
 import Controller.Command.Comando;
 import Controller.Command.LoginComando;
 import java.util.HashMap;
-import java.util.Map;
+
 /**
- *
- * @author Zanella
+ * FeriasEstado
+ * Representa o estado, quando o sistema está em estado de férias
+ * @author Rodrigo Zanella Ribeiro
  */
 public class FeriasEstado implements Estado {
     private HashMap<String,Comando> comandos;

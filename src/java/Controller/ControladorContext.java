@@ -12,6 +12,7 @@ import Controller.ControllerConta.UsuarioEstado;
 import Controller.ControllerEstado.FeriasEstado;
 import Controller.ControllerEstado.LetivoEstado;
 import Controller.ControllerEstado.MatriculaEstado;
+import Model.Persistence.OperadorBD;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,14 +25,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Zanella
+ * ControladorContex
+ * Classe controladora que gerencia os estados de tipo de usuário e 
+ * os estados do sistema, além de controlar as requisições dos usuários
+ * @author Rodrigo Zanella Ribeiro
  */
 @WebServlet(name = "ControladorContext", urlPatterns = {"/ControladorContext"})
 public class ControladorContext extends HttpServlet {
     private Estado estadoSistema;
     private Estado estadoUsuario;
     private HashMap<String,Comando> comandosInt;
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -42,6 +46,7 @@ public class ControladorContext extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         this.getSistemaEstado();
@@ -56,9 +61,16 @@ public class ControladorContext extends HttpServlet {
         }     
     }
     
-     protected void getSistemaEstado(){
+    /**
+     * getSistemaEstado
+     * Captura o estado que o sistema esta
+     * @param null
+     * @author Rodrigo Zanella Ribeiro
+     */
+    
+    protected void getSistemaEstado(){
         //instanciar um estado do estado do sistema
-        String nomeEstadoSistema = "matricula"; // @todo: Fazer método que retorna o estado do sistema
+        String nomeEstadoSistema = OperadorBD.getEstadoSistema();
         
         if(nomeEstadoSistema.equals("matricula")){
             estadoSistema = new MatriculaEstado();
@@ -70,6 +82,13 @@ public class ControladorContext extends HttpServlet {
             estadoSistema = new FeriasEstado();
         }
     }
+    
+    /**
+     * getUsuarioEstado
+     * Captura estado que representa o usuário do sistema
+     * @author Rodrigo Zanella Ribeiro
+     * @param request Servlet Request, necessário para ver se o usuário está logado
+     */
     
     protected void getUsuarioEstado(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -87,6 +106,13 @@ public class ControladorContext extends HttpServlet {
             }
         }
     }
+    
+    /**
+     * getComandosEstado
+     * Calcula a intersecção entre os comandos do estado do sistema e do estado
+     * do usuário
+     * @author Rodrigo Zanella Ribeiro
+     */
     
     protected void getComandosEstado(){
         comandosInt = new HashMap<String,Comando>();
@@ -106,6 +132,15 @@ public class ControladorContext extends HttpServlet {
             comandosInt.put(atKey, comandosEstado.get(atKey));
         }
     }
+    
+    /**
+     * getComando
+     * Seleciona um comando, referente à requisição do usuário
+     * @param request Servlet Request, necessário para saber qual a requisição
+     * do usuário
+     * @return O comando de acordo com a requisição do usuário
+     * @author Rodrigo Zanella Ribeiro
+     */
     
     protected Comando getComando(HttpServletRequest request){
         String nomeEvento = (String) request.getParameter("evento");

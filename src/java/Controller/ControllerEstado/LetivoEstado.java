@@ -1,17 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller.ControllerEstado;
 
 import Controller.Estado;
 import Controller.Command.Comando;
 import Controller.Command.LoginComando;
 import java.util.HashMap;
+
 /**
- *
- * @author Zanella
+ * LetivoEstado
+ * Representa o estado, quando o sistema está em estado letivo
+ * @author Rodrigo Zanella Ribeiro
  */
+
 public class LetivoEstado implements Estado {
     private HashMap<String,Comando> comandos;
     
