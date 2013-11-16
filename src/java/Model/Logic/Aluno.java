@@ -33,18 +33,18 @@ public class Aluno extends Usuario{
     private int pontuacaoVestibular; //entre 0 e 100
     private String semestreDeIngresso; //no formato "20xx/x"
     private int numeroDeMatricula;
-    private static List<Turma> possibilidadesMatricula;
+    private static Set<Turma> possibilidadesMatricula;
 
     public Aluno(String nome, String cpf, String nomeUsuario, String senha){
         super(nome, cpf, nomeUsuario, senha);
         this.setRole("aluno");
     }
     
-    public List<Turma> getPossibilidadesMatricula() {
+    public Set<Turma> getPossibilidadesMatricula() {
         return possibilidadesMatricula;
     }
 
-    public void setPossibilidadesMatricula(List<Turma> possibilidadesMatricula) {
+    public void setPossibilidadesMatricula(Set<Turma> possibilidadesMatricula) {
         this.possibilidadesMatricula = possibilidadesMatricula;
     }
     

@@ -18,7 +18,7 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
     public Disciplina getDisciplina(String id) {
         Disciplina novaDisciplina = null;
         try {
-            String query = "SELECT * FROM disciplina WHERE id ='"+id+"'";
+            String query = "SELECT * FROM disciplina WHERE codigo ='"+id+"'";
             st = con.createStatement();
             rs = st.executeQuery(query);
             while(rs.next()){
@@ -36,7 +36,7 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
         Set<Disciplina> preRequisitos = new HashSet<Disciplina>();
         try {
             st = con.createStatement();
-            String query = "SELECT codigoDisciplinaRequisito FROM pre_requisitos WHERE codigoDisciplina = '"+disciplina.getCodigo()+"'";
+            String query = "SELECT codigoDisciplinaRequisito FROM pre_requisito WHERE codigoDisciplina = '"+disciplina.getCodigo()+"'";
             rs = st.executeQuery(query);
             FactoryDAO novoFactory = new FactoryDAO();
             DisciplinaDAO disciplinaDAO = novoFactory.criarDisciplinaDAO();

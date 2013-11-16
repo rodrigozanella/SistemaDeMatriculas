@@ -23,9 +23,9 @@
        <h1>Sistema de Matrículas do INF</h1>
        <h3>Portal do Aluno</h3>
        <hr>
-       <a href='ControladorConta?evento=possibilidadeMatricula'><p>Ver possibilidades de matrícula</p></a>
+       <a href='ControladorContext?evento=possibilidadeMatricula'><p>Ver possibilidades de matrícula</p></a>
        <a><p>Visualizar resultado da encomenda</p></a>
        <a><p>Visualizar comprovante de matrícula</p></a>
-       <a href='ControladorConta?evento=imprimirHistorico'><p>Visualizar histórico escolar</p></a>
+       <a href='ControladorContext?evento=imprimirHistorico'><p>Visualizar histórico escolar</p></a>
     </body>
 </html>

@@ -1,5 +1,7 @@
 package Controller.ControllerConta;
 
+import Controller.Command.PossibilidadeMatriculaComando;
+
 /**
  * AlunoEstado
  * Representa o estado, quando o usuário está logado como aluno
@@ -10,6 +12,7 @@ public class AlunoEstado extends UsuarioEstado {
     public AlunoEstado(){
         super();
         //gerar comandos possíveis
+        comandos.put("possibilidadeMatricula", new PossibilidadeMatriculaComando());
     }
 
 }

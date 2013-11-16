@@ -4,10 +4,12 @@
     Author     : Rodrigo Zanella Ribeiro
 --%>
 
-<%@page import="Model.Persistence.OperadorBD"%>
+<%@page import="Model.Logic.Disciplina"%>
+<%@page import="Model.Persistence.DisciplinaDAO"%>
+<%@page import="Model.Persistence.FactoryDAO"%>
+<%@page import="java.util.Set"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="Model.Logic.Turma"%>
-<%@page import="java.util.List"%>
 <%@page import="Model.Logic.Aluno"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,22 +34,28 @@
         <form action="ControladorContas">
             <input type="hidden" value="encomenda" name="evento" id="evento">
             <%
-                List<Turma> lista = (List<Turma>) application.getAttribute("lista");
+                Aluno aluno = (Aluno) session.getAttribute("usuario");
+                Set<Turma> lista = aluno.getPossibilidadesMatricula();
+                FactoryDAO novaFactory = new FactoryDAO();
+                DisciplinaDAO disciplinaDAO = novaFactory.criarDisciplinaDAO();
+                
                 Iterator<Turma> itLista = lista.iterator();
                 for(Turma turma : lista){
                     out.println("<p>");
                     out.print(turma.getCodigoDisciplina()+" - ");
-                    out.print(OperadorBD.getNomeDisciplina(turma.getCodigoDisciplina())+" - ");
+                    
+                    Disciplina disciplina =disciplinaDAO.getDisciplina(turma.getCodigoDisciplina());
+                    out.print(disciplina.getNome()+" - ");
                     out.print("Turma "+turma.getCodigo()+" - ");
                     out.print("Horário: "+turma.getHorario()+" - ");
                     out.print("Semestre: "+turma.getSemestre()+" - ");
-                    out.print("Professor: "+OperadorBD.getProfessor(turma.getCpfProfessor()));
+                    //out.print("Professor: "+OperadorBD.getProfessor(turma.getCpfProfessor()));
                     out.println("</p>");
                     out.print("Lance: " + "<input type=" + "text" + " name=" + "lance" + " maxlength=" + "20" + " size=" + "20" + " />");
                 }
             %>
             <input type="submit" name="ok" VALUE="Encomendar Matrícula">
         </form>
-        </div>>
+        </div>
     </body>
 </html>

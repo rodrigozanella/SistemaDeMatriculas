@@ -11,7 +11,7 @@ import java.util.HashMap;
  * @author Rodrigo Zanella Ribeiro
  */
 public class UsuarioEstado implements Estado {
-    private HashMap<String,Comando> comandos;
+    protected HashMap<String,Comando> comandos;
     
     public UsuarioEstado(){
         //gerar comandos possíveis

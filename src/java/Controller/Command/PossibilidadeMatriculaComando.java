@@ -1,10 +1,13 @@
 package Controller.Command;
 
 import Model.Logic.Aluno;
+import Model.Logic.Turma;
 import Model.Persistence.FactoryDAO;
 import Model.Persistence.SistemaDAO;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,8 +27,13 @@ public class PossibilidadeMatriculaComando implements Comando {
             String semestre = novoSistemaDAO.getSemestre();
             
             Aluno aluno =(Aluno) session.getAttribute("usuario");
-            aluno.getPossibilidadesDeMatricula(semestre);
+            Set<Turma> possibilidades = aluno.getPossibilidadesDeMatricula(semestre);
+            aluno.setPossibilidadesMatricula(possibilidades);
             
+            session.setAttribute("usuario", aluno);
+            
+            RequestDispatcher reqDis= request.getRequestDispatcher("possibilidadesMatricula.jsp");       
+            reqDis.forward(request,response);
         } catch (Exception ex) {
             Logger.getLogger(PossibilidadeMatriculaComando.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -50,10 +50,11 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
                 st = con.createStatement();
                 rs = st.executeQuery(query);
                 if(rs.next()){
-                    return new Aluno(rs.getString("nome"), 
+                    Aluno novoAluno = new Aluno(rs.getString("nome"), 
                             rs.getString("cpf"), 
                             rs.getString("nomeUsuario"), 
                             password);
+                    return novoAluno;
                 }
             }
             if(tipo.equalsIgnoreCase("administrador")){

@@ -22,7 +22,7 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
             st = con.createStatement();
             rs = st.executeQuery(query);
             while(rs.next()){
-                novaTurma = new Turma(rs.getInt("id"), rs.getString("codigo"), 
+                novaTurma = new Turma(rs.getInt("id"), rs.getString("codigoDisciplina"), 
                         rs.getString("horario"), rs.getString("semestre"), 
                         rs.getInt("numvagas"), rs.getString("cpfProfessor"));
             }
@@ -50,7 +50,7 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
             String query = "SELECT * FROM turma WHERE codigoDisciplina = '"+codDisciplina+"' AND semestre = '"+semestre+"'";
             rs = st.executeQuery(query);
             while(rs.next()){
-                Turma novaTurma = new Turma(rs.getInt("id"), rs.getString("codigo"), 
+                Turma novaTurma = new Turma(rs.getInt("id"), rs.getString("codigoDisciplina"), 
                         rs.getString("horario"), rs.getString("semestre"), 
                         rs.getInt("numvagas"), rs.getString("cpfProfessor"));
                 turmasSemestre.add(novaTurma);

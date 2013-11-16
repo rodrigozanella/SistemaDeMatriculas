@@ -3,6 +3,7 @@ package Controller.ControllerEstado;
 import Controller.Estado;
 import Controller.Command.Comando;
 import Controller.Command.LoginComando;
+import Controller.Command.PossibilidadeMatriculaComando;
 import java.util.HashMap;
 
 /**
@@ -17,6 +18,7 @@ public class FeriasEstado implements Estado {
         //gerar comandos possíveis
         comandos = new HashMap<String,Comando>();
         comandos.put("login", new LoginComando());
+        comandos.put("possibilidadeMatricula", new PossibilidadeMatriculaComando());
     }
     
     @Override
