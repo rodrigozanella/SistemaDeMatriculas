@@ -80,6 +80,58 @@
         <servlet-name>PossibilidadeMatriculaComando</servlet-name>
         <servlet-class>Controller.Command.PossibilidadeMatriculaComando</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UsuarioDAO</servlet-name>
+        <servlet-class>Model.Persistence.UsuarioDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JDBCUsuarioDAO</servlet-name>
+        <servlet-class>Model.Persistence.JDBCUsuarioDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FactoryDAO</servlet-name>
+        <servlet-class>Model.Persistence.FactoryDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SistemaDAO</servlet-name>
+        <servlet-class>Model.Persistence.SistemaDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JDBCSistemaDAO</servlet-name>
+        <servlet-class>Model.Persistence.JDBCSistemaDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JDBCDAO</servlet-name>
+        <servlet-class>Model.Persistence.JDBCDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoricoEscolarElemento</servlet-name>
+        <servlet-class>Model.Logic.HistoricoEscolarElemento</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoricoDAO</servlet-name>
+        <servlet-class>Model.Persistence.HistoricoDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JDBCHistoricoDAO</servlet-name>
+        <servlet-class>Model.Persistence.JDBCHistoricoDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TurmaDAO</servlet-name>
+        <servlet-class>Model.Persistence.TurmaDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JDBCTurmaDAO</servlet-name>
+        <servlet-class>Model.Persistence.JDBCTurmaDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DisciplinaDAO</servlet-name>
+        <servlet-class>Model.Persistence.DisciplinaDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JDBCDisciplinaDAO</servlet-name>
+        <servlet-class>Model.Persistence.JDBCDisciplinaDAO</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
         <url-pattern>/Controlador</url-pattern>
@@ -171,6 +223,58 @@
     <servlet-mapping>
         <servlet-name>PossibilidadeMatriculaComando</servlet-name>
         <url-pattern>/PossibilidadeMatriculaComando</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioDAO</servlet-name>
+        <url-pattern>/UsuarioDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JDBCUsuarioDAO</servlet-name>
+        <url-pattern>/JDBCUsuarioDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FactoryDAO</servlet-name>
+        <url-pattern>/FactoryDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SistemaDAO</servlet-name>
+        <url-pattern>/SistemaDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JDBCSistemaDAO</servlet-name>
+        <url-pattern>/JDBCSistemaDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JDBCDAO</servlet-name>
+        <url-pattern>/JDBCDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoricoEscolarElemento</servlet-name>
+        <url-pattern>/HistoricoEscolarElemento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoricoDAO</servlet-name>
+        <url-pattern>/HistoricoDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JDBCHistoricoDAO</servlet-name>
+        <url-pattern>/JDBCHistoricoDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TurmaDAO</servlet-name>
+        <url-pattern>/TurmaDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JDBCTurmaDAO</servlet-name>
+        <url-pattern>/JDBCTurmaDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisciplinaDAO</servlet-name>
+        <url-pattern>/DisciplinaDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JDBCDisciplinaDAO</servlet-name>
+        <url-pattern>/JDBCDisciplinaDAO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

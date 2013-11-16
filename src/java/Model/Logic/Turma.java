@@ -11,13 +11,13 @@ package Model.Logic;
  */
 public class Turma {
     private String codigoDisciplina;
-    private char codigo; //'A', 'B', etc...
+    private int codigo; //'A', 'B', etc...
     private String semestre; //no formato "20xx/x"
     private String horario; //no formato "13:30"
     private String cpfProfessor;
     private int numeroDeVagas;
 
-    public Turma(char codigo, String codigoDisciplina, String horario, String semestre, int vagas, String cpfProfessor){
+    public Turma(int codigo, String codigoDisciplina, String horario, String semestre, int vagas, String cpfProfessor){
         this.codigo = codigo;
         this.codigoDisciplina = codigoDisciplina;
         this.horario = horario;
@@ -54,7 +54,7 @@ public class Turma {
         return codigoDisciplina;
     }
 
-    public char getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 

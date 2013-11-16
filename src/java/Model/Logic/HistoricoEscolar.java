@@ -12,23 +12,22 @@ import java.util.Dictionary;
  * @author Tiago
  */
 public class HistoricoEscolar {
+    private ArrayList<HistoricoEscolarElemento> elementos;
     private ArrayList<Turma> turmasAnteriores;
     private ArrayList<Character> conceitosObtidos;
-
-    public void setTurmasAnteriores(ArrayList<Turma> turmasAnteriores) {
-        this.turmasAnteriores = turmasAnteriores;
+    
+    public HistoricoEscolar(){
+        elementos = new ArrayList<HistoricoEscolarElemento>();
     }
 
-    public void setConceitosObtidos(ArrayList<Character> conceitosObtidos) {
-        this.conceitosObtidos = conceitosObtidos;
+    public void addElemento(Turma novaTurma, char novoConceito){
+        HistoricoEscolarElemento novoElemento = new HistoricoEscolarElemento(
+                novaTurma, novoConceito);
+        elementos.add(novoElemento);
     }
-
-    public ArrayList<Turma> getTurmasAnteriores() {
-        return turmasAnteriores;
-    }
-
-    public ArrayList<Character> getConceitosObtidos() {
-        return conceitosObtidos;
+    
+    public ArrayList<HistoricoEscolarElemento> getHistorico(){
+        return elementos;
     }
     
     public double calculaMedia() {

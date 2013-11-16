@@ -1,7 +1,7 @@
 <%-- 
     Document   : possibilidadesMatricula
     Created on : 17/10/2013, 03:32:54
-    Author     : Zanella
+    Author     : Rodrigo Zanella Ribeiro
 --%>
 
 <%@page import="Model.Persistence.OperadorBD"%>

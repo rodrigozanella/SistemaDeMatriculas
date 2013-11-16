@@ -15,6 +15,7 @@ public class Administrador extends Usuario {
 
     public Administrador(String nome, String cpf, String nomeUsuario, String senha){
         super(nome, cpf, nomeUsuario, senha);
+        this.setRole("administrador");
     }
     
     public void adicionaOperacao(OperacaoAdm operacao) {

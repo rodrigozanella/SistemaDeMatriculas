@@ -4,9 +4,14 @@
  */
 package Model.Logic;
 
-import Model.Persistence.OperadorBD;
-import java.util.ArrayList;
+import Model.Persistence.DisciplinaDAO;
+import Model.Persistence.FactoryDAO;
+import Model.Persistence.HistoricoDAO;
+import Model.Persistence.TurmaDAO;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -43,52 +48,49 @@ public class Aluno extends Usuario{
         this.possibilidadesMatricula = possibilidadesMatricula;
     }
     
-    public ArrayList<Turma> getPossibilidadesDeMatricula(String semestreAtual) throws Exception{
-        ArrayList<String> possibilidadesDisciplinas = new ArrayList<String>();
-        ArrayList<Turma> possibilidadesTurmas = new ArrayList<Turma>();
-        
-        //Algoritmo:
-        //B <- vazio
-        //C <- Disciplinas cursadas
-        //D <- Disciplinas não cursadas
-        //Para cada disciplina d de D
-        //  E <- Pré-requisitos de d
-        //  Se todas disciplinas em E estão em C então
-        //      insere d em B
-        //  Senão
-        //      pula para a próxima disciplina
-        //B contém as possibilidades de matrícula
-        
-        try{
-            ArrayList<String> disciplinasCursadas = OperadorBD.obtemDisciplinasCursadas(this);
-            ArrayList<String> disciplinasNaoCursadas = OperadorBD.obtemDisciplinasNaoCursadas(this);
-            for(String disciplinaNaoCursada : disciplinasNaoCursadas){
-                ArrayList<String> preRequisitos = OperadorBD.obtemPreRequisitos(disciplinaNaoCursada);
-                if(disciplinasCursadas.containsAll(preRequisitos)){
-                    possibilidadesDisciplinas.add(disciplinaNaoCursada);
+    public Set<Turma> getPossibilidadesDeMatricula(String semestreAtual){
+        Set<Disciplina> possibilidadesDisciplinas = new HashSet<Disciplina>();
+        Set<Turma> possibilidadesTurmas = new HashSet<Turma>();
+        FactoryDAO novoFactory = new FactoryDAO();
+        HistoricoDAO historicoDAO = novoFactory.criarHistoricoDAO();
+        DisciplinaDAO disciplinaDAO = novoFactory.criarDisciplinaDAO();
+          
+        Set<Disciplina> disciplinasCursadas = historicoDAO.getDisciplinasCursadas(this);
+        Set<Disciplina> disciplinasNaoCursadas = historicoDAO.getDisciplinasNaoCursadas(this);
+        for(Disciplina disciplinaNaoCursada : disciplinasNaoCursadas){
+            Set<Disciplina> preRequisitos = disciplinaDAO.getPreRequisitos(disciplinaNaoCursada);
+            boolean nAchou = true;
+            for(Disciplina preRequisito : preRequisitos){
+                String codigo = preRequisito.getCodigo();
+                nAchou = true;
+                Iterator<Disciplina> itDiscCurs = disciplinasCursadas.iterator();
+                while(nAchou && itDiscCurs.hasNext()){
+                if(itDiscCurs.next().getCodigo().equalsIgnoreCase(codigo)){
+                    nAchou = false;
+                    break;
                 }
-            }
-            
-            for(String possibilidadeDisciplina : possibilidadesDisciplinas){
-                possibilidadesTurmas.addAll(OperadorBD.obtemTurmasDeDisciplina(possibilidadeDisciplina, semestreAtual));
-            }
-            
-        } catch(Exception e){
-            throw new Exception();
+                }
+                if(nAchou){
+                    break;
+                }
+           }
+           if(!nAchou){
+               possibilidadesDisciplinas.add(disciplinaNaoCursada);
+           }
         }
-        
-        
+        TurmaDAO turmaDAO = novoFactory.criarTurmaDAO();
+        Iterator<Disciplina> itPossibilidades = possibilidadesDisciplinas.iterator();
+        while(itPossibilidades.hasNext()){
+            possibilidadesTurmas.addAll(turmaDAO.getTurmasSemestre(itPossibilidades.next().getCodigo(), semestreAtual));
+        }
         return possibilidadesTurmas;
     }
     
-    public HistoricoEscolar getHistorico() throws Exception{
+    public HistoricoEscolar getHistorico(){
         HistoricoEscolar historico;
-        try{
-            historico = OperadorBD.obtemHistóricoEscolar(this);
-        } catch(Exception e){
-            throw new Exception();
-        }
-        
+        FactoryDAO novaFactoryDAO = new FactoryDAO();
+        HistoricoDAO novoHistoricoDAO = novaFactoryDAO.criarHistoricoDAO();
+        historico = novoHistoricoDAO.getHistorico(this);
         return historico;
     }
 

@@ -17,6 +17,7 @@ public class Professor extends Usuario{
     public Professor(String nome, String cpf, String nomeUsuario, String senha, String areaDeInteresse){
         super(nome, cpf, nomeUsuario, senha);
         this.areaDeInteresse = areaDeInteresse;
+        this.setRole("professor");
     }
 
     public void setAreaDeInteresse(String areaDeInteresse) {

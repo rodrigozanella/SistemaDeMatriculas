@@ -12,7 +12,9 @@ import Controller.ControllerConta.UsuarioEstado;
 import Controller.ControllerEstado.FeriasEstado;
 import Controller.ControllerEstado.LetivoEstado;
 import Controller.ControllerEstado.MatriculaEstado;
-import Model.Persistence.OperadorBD;
+import Model.Logic.Usuario;
+import Model.Persistence.FactoryDAO;
+import Model.Persistence.SistemaDAO;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -70,7 +72,9 @@ public class ControladorContext extends HttpServlet {
     
     protected void getSistemaEstado(){
         //instanciar um estado do estado do sistema
-        String nomeEstadoSistema = OperadorBD.getEstadoSistema();
+        FactoryDAO novaFactory = new FactoryDAO();
+        SistemaDAO novoSistemaDAO = novaFactory.criarSistemaDAO();
+        String nomeEstadoSistema = novoSistemaDAO.getEstado();
         
         if(nomeEstadoSistema.equals("matricula")){
             estadoSistema = new MatriculaEstado();
@@ -92,7 +96,15 @@ public class ControladorContext extends HttpServlet {
     
     protected void getUsuarioEstado(HttpServletRequest request){
         HttpSession session = request.getSession();
-        String role =(String) session.getAttribute("role");
+        Usuario user =(Usuario) session.getAttribute("usuario");
+        String role;
+        
+        if(user!=null){
+             role = user.getRole();
+        }
+        else{
+            role=null;
+        }
         estadoUsuario = new UsuarioEstado();
         if(role!=null){
             if(role.equals("aluno")){
@@ -104,6 +116,9 @@ public class ControladorContext extends HttpServlet {
             if(role.equals("administrador")){
                 estadoUsuario = new AdminEstado();
             }
+        }
+        else{
+            estadoUsuario = new UsuarioEstado();
         }
     }
     

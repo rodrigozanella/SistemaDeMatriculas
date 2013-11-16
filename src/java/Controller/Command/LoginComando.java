@@ -1,6 +1,9 @@
 
 package Controller.Command;
 
+import Model.Logic.Usuario;
+import Model.Persistence.FactoryDAO;
+import Model.Persistence.UsuarioDAO;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,23 +22,26 @@ import javax.servlet.http.HttpSession;
 public class LoginComando implements Comando {
     @Override
     public void executar(HttpServletRequest request, HttpServletResponse response){
-        String name = request.getParameter("name");
-        String pass = request.getParameter("password");
-        
-        /*
-         * VERIFICAR USUARIO E SENHA, RETORNANDO O TIPO DE USUARIO
-         */
-        
-        //CRIAR UMA INSTANCIA DE ALUNO NA SESSION AINDA N CRIEI, PRECISO DA RECUPERAÇÃO AINDA
-        
-        String tipo = "aluno";
-        HttpSession newSession = request.getSession();
-        newSession.setAttribute("role", tipo);
-        //redirecionar para algum index
-        try {
+        try{
+            String name = request.getParameter("name");
+            String pass = request.getParameter("password");
+            
+            FactoryDAO novoFactoryDAO = new FactoryDAO();
+            UsuarioDAO novoUsuarioDAO = novoFactoryDAO.criarUsuarioDAO();
+            
+            Usuario newUser = novoUsuarioDAO.getUsuario(name, pass);
+            
+            if(newUser==null){
+                RequestDispatcher reqDis= request.getRequestDispatcher("index.jsp");
+                reqDis.forward(request,response);
+            }
+            String tipo = newUser.getRole();
+
+            HttpSession newSession = request.getSession();
+            newSession.setAttribute("usuario", newUser);
             if(tipo.equalsIgnoreCase("aluno")){
-                 RequestDispatcher reqDis= request.getRequestDispatcher("indexAluno.jsp");      
-                 reqDis.forward(request,response);       
+                    RequestDispatcher reqDis= request.getRequestDispatcher("indexAluno.jsp");       
+                    reqDis.forward(request,response);
             }
             if(tipo.equalsIgnoreCase("administrador")){
 
@@ -45,10 +51,11 @@ public class LoginComando implements Comando {
             }
             RequestDispatcher reqDis= request.getRequestDispatcher("index.jsp");      
             reqDis.forward(request,response);
-        } catch (IOException ex) {    
-            Logger.getLogger(LoginComando.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ServletException ex) {
-            Logger.getLogger(LoginComando.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+       } catch (ServletException ex) {
+        Logger.getLogger(LoginComando.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (IOException ex) {
+        Logger.getLogger(LoginComando.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 }
