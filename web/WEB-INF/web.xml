@@ -33,10 +33,6 @@
         <servlet-class>Controller.ControllerEstado.Letivo.ControladorProfLetivo</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ControladorConta</servlet-name>
-        <servlet-class>Controller.ControllerConta.ControladorConta</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>FeriasEstado</servlet-name>
         <servlet-class>Controller.ControllerEstado.FeriasEstado</servlet-class>
     </servlet>
@@ -175,10 +171,6 @@
     <servlet-mapping>
         <servlet-name>ControladorProfLetivo</servlet-name>
         <url-pattern>/ControladorProfLetivo</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ControladorConta</servlet-name>
-        <url-pattern>/ControladorConta</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FeriasEstado</servlet-name>

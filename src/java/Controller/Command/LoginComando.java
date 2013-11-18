@@ -31,23 +31,10 @@ public class LoginComando implements Comando {
             
             Usuario newUser = novoUsuarioDAO.getUsuario(name, pass);
             
-            if(newUser==null){
-                RequestDispatcher reqDis= request.getRequestDispatcher("index.jsp");
-                reqDis.forward(request,response);
-            }
-            String tipo = newUser.getRole();
-
-            HttpSession newSession = request.getSession();
-            newSession.setAttribute("usuario", newUser);
-            if(tipo.equalsIgnoreCase("aluno")){
-                    RequestDispatcher reqDis= request.getRequestDispatcher("indexAluno.jsp");       
-                    reqDis.forward(request,response);
-            }
-            if(tipo.equalsIgnoreCase("administrador")){
-
-            }
-            if(tipo.equalsIgnoreCase("professor")){
-
+            if(newUser!=null){   
+                String tipo = newUser.getRole();
+                HttpSession newSession = request.getSession();
+                newSession.setAttribute("usuario", newUser);
             }
             RequestDispatcher reqDis= request.getRequestDispatcher("index.jsp");      
             reqDis.forward(request,response);

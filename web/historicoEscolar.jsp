@@ -4,6 +4,9 @@
     Author     : Zanella
 --%>
 
+<%@page import="Model.Persistence.DisciplinaDAO"%>
+<%@page import="Model.Persistence.FactoryDAO"%>
+<%@page import="Model.Logic.HistoricoEscolarElemento"%>
 <%@page import="Model.Persistence.OperadorBD"%>
 <%@page import="Model.Logic.Turma"%>
 <%@page import="Model.Logic.HistoricoEscolar"%>
@@ -32,19 +35,20 @@
             <input type="hidden" value="encomenda" name="evento" id="evento">
             <%
                 HistoricoEscolar historico = (HistoricoEscolar) application.getAttribute("historico");
-                int counter = 0;
-                for(Turma turma : historico.getTurmasAnteriores()){
+                for(HistoricoEscolarElemento elemento : historico.getHistorico()){
                     out.println("<p>");
-                    out.print(turma.getCodigoDisciplina()+" - ");
-                    out.print(OperadorBD.getNomeDisciplina(turma.getCodigoDisciplina())+" - ");
-                    out.print("Turma "+turma.getCodigo()+" - ");
-                    out.print("Horário: "+turma.getHorario()+" - ");
-                    out.print("Semestre: "+turma.getSemestre()+" - ");
-                    out.print("Professor: "+OperadorBD.getProfessor(turma.getCpfProfessor()));
+                    out.print(elemento.getTurma().getCodigoDisciplina()+" - ");
+                    FactoryDAO novoFactory = new FactoryDAO();
+                    DisciplinaDAO disciplinaDAO = novoFactory.criarDisciplinaDAO();
+                    out.print(disciplinaDAO.getDisciplina(elemento.getTurma().getCodigoDisciplina()).getNome());
+                    out.print("Turma "+elemento.getTurma().getCodigo()+" - ");
+                    out.print("Horário: "+elemento.getTurma().getHorario()+" - ");
+                    out.print("Semestre: "+elemento.getTurma().getSemestre()+" - ");
+                    out.print("Professor: "+OperadorBD.getProfessor(elemento.getTurma().getCpfProfessor()));
                     out.println("</p>");
-                    out.print("Conceito: "+historico.getConceitosObtidos().get(counter));
-                    counter++;
+                    out.print("Conceito: "+elemento.getConceito());
                 }
+                application.removeAttribute("historico");
             %>
         </form>
         </div>>

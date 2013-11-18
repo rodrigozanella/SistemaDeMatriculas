@@ -4,6 +4,7 @@
     Author     : Zanella
 --%>
 
+<%@page import="Model.Logic.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,29 @@
     </head>
     <body>
         <h1>Sistema de Matrículas do INF</h1>
-        <hr>
-        <a href="login.jsp">Login</a>
+        <%
+            Usuario umUsuario = (Usuario) session.getAttribute("usuario");
+            if(umUsuario == null){
+                out.println("<hr>");
+                out.println("<a href="+"login.jsp"+">Login</a>");
+            }
+            else{
+                String tipo = umUsuario.getRole();
+                if(tipo.equalsIgnoreCase("aluno")){
+                    out.println("<h3>Portal do Aluno</h3>");
+                    out.println("<hr>");
+                    out.println("<a href='ControladorContext?evento=possibilidadeMatricula'><p>Ver possibilidades de matrícula</p></a>");
+                    out.println("<a><p>Visualizar resultado da encomenda</p></a>");
+                    out.println("<a><p>Visualizar comprovante de matrícula</p></a>");
+                    out.println("<a href='ControladorContext?evento=imprimirHistorico'><p>Visualizar histórico escolar</p></a>");
+                }
+                if(tipo.equalsIgnoreCase("administrador")){
+
+                }
+                if(tipo.equalsIgnoreCase("professor")){
+
+                }
+            }
+        %>
     </body>
 </html>
