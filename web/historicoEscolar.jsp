@@ -1,13 +1,6 @@
-<%-- 
-    Document   : possibilidadesMatricula
-    Created on : 17/10/2013, 03:32:54
-    Author     : Zanella
---%>
-
 <%@page import="Model.Persistence.DisciplinaDAO"%>
 <%@page import="Model.Persistence.FactoryDAO"%>
 <%@page import="Model.Logic.HistoricoEscolarElemento"%>
-<%@page import="Model.Persistence.OperadorBD"%>
 <%@page import="Model.Logic.Turma"%>
 <%@page import="Model.Logic.HistoricoEscolar"%>
 <%@page import="Model.Logic.Aluno"%>
@@ -31,10 +24,10 @@
         <hr>
         <h3>Historico Escolar</h3>
         <div style="text-align: left">
-        <form action="ControladorContas">
+        <form action="ControladorContext">
             <input type="hidden" value="encomenda" name="evento" id="evento">
             <%
-                HistoricoEscolar historico = (HistoricoEscolar) application.getAttribute("historico");
+                HistoricoEscolar historico = (HistoricoEscolar) session.getAttribute("historico");
                 for(HistoricoEscolarElemento elemento : historico.getHistorico()){
                     out.println("<p>");
                     out.print(elemento.getTurma().getCodigoDisciplina()+" - ");
@@ -44,7 +37,8 @@
                     out.print("Turma "+elemento.getTurma().getCodigo()+" - ");
                     out.print("Horário: "+elemento.getTurma().getHorario()+" - ");
                     out.print("Semestre: "+elemento.getTurma().getSemestre()+" - ");
-                    out.print("Professor: "+OperadorBD.getProfessor(elemento.getTurma().getCpfProfessor()));
+                    UsuarioDAO usuarioDAO = novoFactory.criarUsuarioDAO();
+                    out.print("Professor: "+elemento.getTurma().getCpfProfessor().getProfessor(elemento.getTurma().getCpfProfessor()));
                     out.println("</p>");
                     out.print("Conceito: "+elemento.getConceito());
                 }

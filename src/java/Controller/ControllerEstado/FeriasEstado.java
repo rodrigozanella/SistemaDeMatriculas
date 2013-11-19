@@ -2,6 +2,7 @@ package Controller.ControllerEstado;
 
 import Controller.Estado;
 import Controller.Command.Comando;
+import Controller.Command.ImprimirHistoricoComando;
 import Controller.Command.LoginComando;
 import Controller.Command.PossibilidadeMatriculaComando;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class FeriasEstado implements Estado {
         comandos = new HashMap<String,Comando>();
         comandos.put("login", new LoginComando());
         comandos.put("possibilidadeMatricula", new PossibilidadeMatriculaComando());
+        comandos.put("imprimirHistorico", new ImprimirHistoricoComando());
     }
     
     @Override

@@ -97,5 +97,26 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
     public boolean adicionarUsuario(Usuario user){
         return true;
     }
+
+    @Override
+    public String getNomeUsuario(String cpf) {
+        String nome = "";
+        try {
+            String query = "(SELECT aluno.cpf, aluno.nome FROM aluno WHERE "
+                    + "cpf = '"+cpf+"') UNION (SELECT professor.cpf, professor.nome "
+                    + "FROM professor WHERE cpf = '"+cpf+"') UNION"
+                    + "(SELECT administrador.cpf, administrador.nome FROM administrador "
+                    + "WHERE cpf = '"+cpf+"')";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            
+            if(rs.next()){
+                nome=rs.getString("nome");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
 }
