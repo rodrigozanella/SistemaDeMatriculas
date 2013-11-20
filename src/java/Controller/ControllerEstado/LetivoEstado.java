@@ -1,5 +1,6 @@
 package Controller.ControllerEstado;
 
+import Controller.Command.CadastrarDisciplinaComando;
 import Controller.Command.CadastrarUsuarioComando;
 import Controller.Estado;
 import Controller.Command.Comando;
@@ -24,6 +25,7 @@ public class LetivoEstado implements Estado {
         comandos.put("possibilidadeMatricula", new PossibilidadeMatriculaComando());
         comandos.put("imprimirHistorico", new ImprimirHistoricoComando());
         comandos.put("cadastrarUsuario", new CadastrarUsuarioComando());
+        comandos.put("cadastrarDisciplina", new CadastrarDisciplinaComando());
     }
     
     @Override

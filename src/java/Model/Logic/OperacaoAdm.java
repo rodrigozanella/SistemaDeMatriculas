@@ -8,7 +8,6 @@ import java.util.Date;
 
 /**
  *
- * @author Tiago
  */
 public class OperacaoAdm {
     

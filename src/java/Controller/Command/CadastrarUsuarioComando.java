@@ -44,12 +44,14 @@ public class CadastrarUsuarioComando implements Comando{
                  if(validador.validaAluno(novoAluno)){
                     novoUsuarioDAO.adicionarUsuario(novoAluno);
                  }
+                 
              }else if(tipo.equalsIgnoreCase("professor")){
                  Professor novoProfessor = new Professor(nome, cpf, username, senha, areaDeInteresse);
                  novoProfessor.setEmail(email);
                  if(validador.validaProfessor(novoProfessor)){
                     novoUsuarioDAO.adicionarUsuario(novoProfessor);
                  }
+                 
              }else if(tipo.equalsIgnoreCase("administrador")){
                  Administrador novoAdministrador = new Administrador(nome, cpf, username, senha);
                  novoAdministrador.setEmail(email);

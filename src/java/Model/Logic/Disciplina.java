@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Model.Logic;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 
 /**
- *
+ * Disciplinas do INF.
  */
 public class Disciplina {
     private String nome;
@@ -16,20 +13,14 @@ public class Disciplina {
     private int numeroDeCreditos;
     private boolean eletiva;
     private int numeroDeCreditosMinimos;
-    private HashSet<String> preRequisitos;
+    private ArrayList<String> preRequisitos;
     
-    public Disciplina(String codigo, String nome, boolean eletiva, int numCreditos){
+    public Disciplina(String codigo, String nome, int numCreditos, boolean eletiva, int numCreditosMinimos, ArrayList<String> preRequisitos){
         this.nome = nome;
         this.codigo = codigo;
-        this.eletiva = eletiva;
         this.numeroDeCreditos = numCreditos;
-    }
-    
-    public HashSet<String> getPreRequisitos(){
-        return preRequisitos;
-    }
-    
-    public void setPreRequisitos(HashSet<String> preRequisitos){
+        this.eletiva = eletiva;
+        this.numeroDeCreditosMinimos = numCreditosMinimos;
         this.preRequisitos = preRequisitos;
     }
     
@@ -52,6 +43,10 @@ public class Disciplina {
     public void setNumeroDeCreditosMinimos(int numeroDeCreditosMinimos) {
         this.numeroDeCreditosMinimos = numeroDeCreditosMinimos;
     }
+    
+    public void setPreRequisitos(ArrayList<String> preRequisitos){
+        this.preRequisitos = preRequisitos;
+    }
 
     public String getNome() {
         return nome;
@@ -71,5 +66,9 @@ public class Disciplina {
 
     public int getNumeroDeCreditosMinimos() {
         return numeroDeCreditosMinimos;
+    }
+    
+     public ArrayList<String> getPreRequisitos(){
+        return preRequisitos;
     }
 }
