@@ -8,9 +8,14 @@ import Model.Logic.Administrador;
 import Model.Logic.Aluno;
 import Model.Logic.Disciplina;
 import Model.Logic.Professor;
+import Model.Logic.Turma;
 import Model.Logic.Usuario;
 import Model.Persistence.DisciplinaDAO;
 import Model.Persistence.FactoryDAO;
+import Model.Persistence.TurmaDAO;
+import Model.Persistence.UsuarioDAO;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Todas as operações sobre o banco de dados terão que passar por aqui.
@@ -25,15 +30,29 @@ public class Validador {
     public boolean validaAluno(Aluno aluno){
         if(!validaUsuario(aluno)) return false;
         
+        //a pontuacao do vestibular deve estar entre 0 e 100
         if(aluno.getPontuacaoVestibular() < 0 || aluno.getPontuacaoVestibular() > 100) return false;
+        
+        //o número de matrícula deve ser maior ou igual a zero
         if(aluno.getNumeroDeMatricula() < 0) return false;
         
         return true;
     }
     
     public boolean validaUsuario(Usuario usuario){
+        //nome de usário deve ter pelo menos 3 caracteres
+        if(usuario.getNomeDeUsuario().length() < 3) return false;
+        
+        //senha deve ter pelo menos 3 caracteres
         if(usuario.getSenha().length() < 3) return false;
         
+        //nome deve ter pelo menos 3 caracteres
+        if(usuario.getNome().length() < 3) return false;
+        
+        //verifica se o cpf casa com o padrão
+        if(!usuario.getCpf().matches("[0-9][0-9][0-9].[0-9][0-9][0-9].[0-9][0-9][0-9]-[0-9][0-9]"))
+            return false;
+            
         if(!usuario.getRole().equals("aluno")){
             if(!usuario.getRole().equals("professor")){
                 if (!usuario.getRole().equals("administrador")) return false;
@@ -79,6 +98,42 @@ public class Validador {
         
         //o número de créditos mínimos não deve ser negativo
         if(disciplina.getNumeroDeCreditosMinimos() < 0) return false;
+        
+        return true;
+    }
+    
+    /*
+     * Verifica se os dados de uma turma estão corretos.
+     */
+    public boolean validaTurma(Turma turma){
+        //o semestre deve estar no formato "20xx/x"
+        if(!turma.getSemestre().matches("20[0-9][0-9]/(1|2)")) return false;
+        
+        //o horario deve estar no formato "xx:xx"
+        if(!turma.getHorario().matches("[0-9][0-9]:[0-9][0-9]")) return false;
+        
+        //o número de vagas deve ser maior que zero
+        if(turma.getNumeroDeVagas() <= 0) return false;
+        
+        //verifica se o professor existe
+        FactoryDAO factoryDAO = new FactoryDAO();
+        UsuarioDAO usuarioDAO = factoryDAO.criarUsuarioDAO();
+        if(!usuarioDAO.ehProfessor(turma.getCpfProfessor())) return false;
+        
+        //verifica se a disciplina existe
+        DisciplinaDAO disciplinaDAO = factoryDAO.criarDisciplinaDAO();
+        if(!disciplinaDAO.existeCodigo(turma.getCodigoDisciplina())) return false;
+        
+        //verifica quantas turmas da disciplina existem no semestre
+        TurmaDAO turmaDAO = factoryDAO.criarTurmaDAO();
+        Set<Turma> turmas = turmaDAO.getTurmasSemestre(turma.getCodigoDisciplina(), turma.getSemestre());
+        if(turmas.size() == 21) return false;
+        if(turmas.size() == 0){
+            if(turma.getCodigo() != (int)'U') return false;
+        }
+        else{
+            if(turma.getCodigo() != ((int)'A' + turmas.size() - 1)) return false;
+        }
         
         return true;
     }

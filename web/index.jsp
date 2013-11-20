@@ -41,7 +41,7 @@
                     out.println("<h3>Portal do Administrador</h3>");
                     out.println("<hr>");
                     out.println("<a href=cadastroUsuario.jsp><p>Cadastrar usuário</p></a>");
-                    out.println("<a><p>Cadastrar turma</p></a>");
+                    out.println("<a href=cadastroTurma.jsp><p>Cadastrar turma</p></a>");
                     out.println("<a href=cadastroDisciplina.jsp><p>Cadastrar disciplina</p></a>");
                 }
                 if(tipo.equalsIgnoreCase("professor")){

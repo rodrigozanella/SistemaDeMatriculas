@@ -1,14 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Model.Logic;
 
 
-/**
- *
- * @author Tiago
- */
 public class Turma {
     private String codigoDisciplina;
     private int codigo; //'A', 'B', etc...

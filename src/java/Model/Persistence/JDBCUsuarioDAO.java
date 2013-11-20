@@ -7,6 +7,8 @@ import Model.Logic.Professor;
 import Model.Logic.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -123,15 +125,11 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
                 statement = con.prepareStatement("INSERT INTO aluno "
                         + "(cpf, nome, nomeUsuario, email, dataNascimento, matricula, "
                         + "semestreIngresso, metodoIngresso, pontuacaoVestibular, situacao, "
-                        + "pontuacao) VALUES ('?, ?, ?, ?, NULL, ?, ?, ?, ?, NULL, 100)");
+                        + "pontuacao) VALUES (?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, NULL, 100)");
                 statement.setString(1, aluno.getCpf()); 
                 statement.setString(2, aluno.getNome());
                 statement.setString(3, aluno.getNomeDeUsuario());
                 statement.setString(4, aluno.getEmail());
-                statement.setString(6, aluno.getNumeroDeMatricula()+"");
-                statement.setString(7, aluno.getSemestreDeIngresso());
-                statement.setString(8, aluno.getTipoDeIngresso().toString());
-                statement.setString(9, aluno.getPontuacaoVestibular()+"");
                 statement.execute();
             }
             else if(tipoUsuario.equalsIgnoreCase("professor")){
@@ -187,6 +185,53 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
             Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    /*
+     * getProfessores
+     * Obtém uma lista de todos os professores cadastrados no sistema.
+     */
+    @Override
+    public ArrayList<Professor> getProfessores(){
+        ArrayList<Professor> professores = new ArrayList<Professor>();
+        try{
+            //obtém todos os registros de professores
+            String query = "SELECT * FROM professor ORDER BY nome";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+
+            //cria as instâncias de professores e as coloca no array
+            while(rs.next()){
+                String cpf = rs.getString("cpf");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                Date nascimento =  rs.getDate("dataNascimento");
+                String areaDeInteresse = rs.getString("areaInteresse");
+
+                Professor professor = new Professor(nome, cpf, email, nascimento, areaDeInteresse);
+                professores.add(professor);
+            }
+        } catch(SQLException ex){
+            Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return professores;
+    }
+    
+    public boolean ehProfessor(String cpf){
+        try{
+            //obtém todos os registros de professores
+            String query = "SELECT * FROM professor WHERE cpf = '" + cpf + "'";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+
+            //se existir um registro, então o cpf pertence a algum professor
+            if(rs.next()){
+                return true;
+            }
+        } catch(SQLException ex){
+            Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
 }

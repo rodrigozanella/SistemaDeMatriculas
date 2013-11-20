@@ -1,27 +1,17 @@
 
 package Controller.Command;
 
-import Model.Logic.Administrador;
-import Model.Logic.Aluno;
 import Model.Logic.Disciplina;
-import Model.Logic.Professor;
 import Model.Persistence.DisciplinaDAO;
 import Model.Persistence.FactoryDAO;
-import Model.Persistence.UsuarioDAO;
 import Model.Validation.Validador;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-/**
- *
- */
 public class CadastrarDisciplinaComando implements Comando{
     @Override
      public void executar(HttpServletRequest request, HttpServletResponse response){
@@ -33,15 +23,11 @@ public class CadastrarDisciplinaComando implements Comando{
              boolean ehEletiva = request.getParameter("tipo").equalsIgnoreCase("eletiva");
              int creditosMnimos = Integer.parseInt(request.getParameter("creditos_minimos"));
              
-             
-             String stringao = "";
-             
              //obtém uma lista com os pré-requisitos
              String[] preRequisitos = request.getParameterValues("prerequisitos");
              ArrayList<String> requisitos = new ArrayList<String>();
              for(String preRequisito : preRequisitos){
                  requisitos.add(preRequisito);
-                 stringao = stringao + preRequisito + " ";
              }
              
              

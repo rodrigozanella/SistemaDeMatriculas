@@ -2,6 +2,7 @@
 package Model.Persistence;
 
 import Model.Logic.Turma;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,7 +35,24 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
 
     @Override
     public boolean adicionaTurma(Turma turma) {
-        return false;
+        try{
+            //insere a disciplina na tabela de turmas
+            PreparedStatement statement = con.prepareStatement("INSERT INTO turma "
+                                        + "(codigo, codigoDisciplina, horario, semestre, numvagas, cpfProfessor)"
+                                        + " VALUES (?, ?, ?, ?, ?, ?)");
+
+            statement.setString(1, String.valueOf((char)turma.getCodigo()));
+            statement.setString(2, turma.getCodigoDisciplina());
+            statement.setString(3, turma.getHorario());
+            statement.setString(4, turma.getSemestre());
+            statement.setInt(5, turma.getNumeroDeVagas());
+            statement.setString(6, turma.getCpfProfessor());
+            statement.execute();
+            
+        } catch(SQLException ex){
+            Logger.getLogger(JDBCTurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
 
     @Override

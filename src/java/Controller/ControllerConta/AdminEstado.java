@@ -1,6 +1,7 @@
 package Controller.ControllerConta;
 
 import Controller.Command.CadastrarDisciplinaComando;
+import Controller.Command.CadastrarTurmaComando;
 import Controller.Command.CadastrarUsuarioComando;
 
 /**
@@ -14,6 +15,7 @@ public class AdminEstado extends UsuarioEstado {
         //gerar comandos possíveis
         comandos.put("cadastrarUsuario", new CadastrarUsuarioComando());
         comandos.put("cadastrarDisciplina", new CadastrarDisciplinaComando());
+        comandos.put("cadastrarTurma", new CadastrarTurmaComando());
     }
    
 
