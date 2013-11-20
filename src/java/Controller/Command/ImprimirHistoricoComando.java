@@ -22,7 +22,7 @@ public class ImprimirHistoricoComando implements Comando {
              
              session.setAttribute("historico", novoHistorico);
              
-             RequestDispatcher reqDis= request.getRequestDispatcher("../historicoEscolar.jsp");
+             RequestDispatcher reqDis= request.getRequestDispatcher("historicoEscolar.jsp");
              reqDis.forward(request,response);
              
          } catch (IOException ex) {
