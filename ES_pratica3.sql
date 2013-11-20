@@ -129,6 +129,7 @@ CREATE TABLE `disciplina` (
   `nome` varchar(100) NOT NULL,
   `ehEletiva` bit(1) NOT NULL,
   `numCreditos` int(11) NOT NULL,
+  `numCreditosMin` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `codigo_UNIQUE` (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -140,7 +141,7 @@ CREATE TABLE `disciplina` (
 
 LOCK TABLES `disciplina` WRITE;
 /*!40000 ALTER TABLE `disciplina` DISABLE KEYS */;
-INSERT INTO `disciplina` VALUES ('INF01023','Arquitetura e Desempenho de Banco de Dados','',4),('INF01032','Empreendimento em Informática','\0',4),('INF01120','Técnicas de Construção de Programas','\0',4),('INF01124','Classificação e Pesquisa de Dados','\0',4),('INF01142','Sistemas Operacionais I N','\0',4),('INF01145','Fundamentos de Banco de Dados','\0',4),('INF01147','Compiladores','\0',4),('INF01209','Fundamentos de Tolerância a Falhas','\0',4),('INF05516','Semântica Formal N','\0',4);
+INSERT INTO `disciplina` VALUES ('INF01023','Arquitetura e Desempenho de Banco de Dados','',4,0),('INF01032','Empreendimento em Informática','\0',4,0),('INF01120','Técnicas de Construção de Programas','\0',4,0),('INF01124','Classificação e Pesquisa de Dados','\0',4,0),('INF01142','Sistemas Operacionais I N','\0',4,0),('INF01145','Fundamentos de Banco de Dados','\0',4,0),('INF01147','Compiladores','\0',4,0),('INF01209','Fundamentos de Tolerância a Falhas','\0',4,0),('INF05516','Semântica Formal N','\0',4,0);
 /*!40000 ALTER TABLE `disciplina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,8 +215,6 @@ CREATE TABLE `pre_requisito` (
   `codigoDisciplina` varchar(45) NOT NULL,
   `codigoDisciplinaRequisito` varchar(45) NOT NULL,
   PRIMARY KEY (`codigoDisciplina`,`codigoDisciplinaRequisito`),
-  UNIQUE KEY `codigoDisciplina_UNIQUE` (`codigoDisciplina`),
-  UNIQUE KEY `codigoDisciplinaRequisito_UNIQUE` (`codigoDisciplinaRequisito`),
   KEY `codigoDisciplinaRequisito_idx` (`codigoDisciplinaRequisito`),
   CONSTRAINT `disciplinaRequisito_codigo` FOREIGN KEY (`codigoDisciplinaRequisito`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `disciplina_codigo` FOREIGN KEY (`codigoDisciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -228,7 +227,7 @@ CREATE TABLE `pre_requisito` (
 
 LOCK TABLES `pre_requisito` WRITE;
 /*!40000 ALTER TABLE `pre_requisito` DISABLE KEYS */;
-INSERT INTO `pre_requisito` VALUES ('INF01023','INF01145'),('INF01145','INF01124'),('INF01147','INF05516'),('INF01209','INF01142');
+INSERT INTO `pre_requisito` VALUES ('INF01145','INF01124'),('INF01209','INF01142'),('INF01023','INF01145'),('INF01147','INF05516');
 /*!40000 ALTER TABLE `pre_requisito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -383,4 +382,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-13 20:28:54
+-- Dump completed on 2013-11-20 12:46:59
