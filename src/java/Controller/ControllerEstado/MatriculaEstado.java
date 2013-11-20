@@ -1,5 +1,6 @@
 package Controller.ControllerEstado;
 
+import Controller.Command.CadastrarUsuarioComando;
 import Controller.Estado;
 import Controller.Command.Comando;
 import Controller.Command.ImprimirHistoricoComando;
@@ -22,6 +23,7 @@ public class MatriculaEstado implements Estado {
         comandos.put("login", new LoginComando());
         comandos.put("possibilidadeMatricula", new PossibilidadeMatriculaComando());
         comandos.put("imprimirHistorico", new ImprimirHistoricoComando());
+        comandos.put("cadastrarUsuario", new CadastrarUsuarioComando());
     }
     
     @Override

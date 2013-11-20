@@ -17,7 +17,7 @@ public class JDBCDAO {
     public JDBCDAO(){
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/es_pratica3","root","12021993");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/es_pratica3","root","aaaa");
             st = null;
             rs = null;
         } catch (SQLException ex) {

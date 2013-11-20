@@ -12,7 +12,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Sistema de Matrícula</title>
 		<style media="screen" type="text/css">
-			body {padding:40px; text-align: center}
 			body {padding:70px; text-align: center}
 			hr {margin-bottom: 40px}
 			a {text-decoration:none; font-size:30px; color: #1D29D1}
@@ -39,7 +38,11 @@
                     out.println("<a href='ControladorContext?evento=imprimirHistorico'><p>Visualizar histórico escolar</p></a>");
                 }
                 if(tipo.equalsIgnoreCase("administrador")){
-
+                    out.println("<h3>Portal do Administrador</h3>");
+                    out.println("<hr>");
+                    out.println("<a href=cadastroUsuario.jsp><p>Cadastrar usuário</p></a>");
+                    out.println("<a><p>Cadastrar turma</p></a>");
+                    out.println("<a href=cadastroDisciplina.jsp><p>Cadastrar disciplina</p></a>");
                 }
                 if(tipo.equalsIgnoreCase("professor")){
 

@@ -4,23 +4,33 @@
  */
 package Model.Logic;
 
+import java.util.HashSet;
+
 
 /**
  *
- * @author Tiago
  */
 public class Disciplina {
     private String nome;
-    private String codigo; //o código é alfanumérico
+    private String codigo;
     private int numeroDeCreditos;
-    private boolean eletiva; //indica se a disciplina é eletiva ou não
-    private int numeroDeCreditosMinimos; //indica o número de créditos necessários para cursar esta disciplina
-
+    private boolean eletiva;
+    private int numeroDeCreditosMinimos;
+    private HashSet<String> preRequisitos;
+    
     public Disciplina(String codigo, String nome, boolean eletiva, int numCreditos){
         this.nome = nome;
         this.codigo = codigo;
         this.eletiva = eletiva;
         this.numeroDeCreditos = numCreditos;
+    }
+    
+    public HashSet<String> getPreRequisitos(){
+        return preRequisitos;
+    }
+    
+    public void setPreRequisitos(HashSet<String> preRequisitos){
+        this.preRequisitos = preRequisitos;
     }
     
     public void setNome(String nome) {

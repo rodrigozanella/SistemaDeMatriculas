@@ -2,6 +2,7 @@
 package Model.Persistence;
 
 import Model.Logic.Disciplina;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
@@ -49,6 +50,76 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
             Logger.getLogger(JDBCDisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return preRequisitos;
+    }
+    
+    /*
+     * getCodigoDisciplinas
+     * Obtém todos os nomes das disciplinas cadastradas no sistema.
+     */
+    @Override
+    public Set<String> getNomesDisciplinas(){
+        try{
+            String query = "(SELECT nome FROM disciplina)";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+
+            Set<String> nomesDisciplinas = new HashSet<String>();
+            while(rs.next()){
+                nomesDisciplinas.add(rs.getString("nome"));
+            }
+            return nomesDisciplinas;
+        } catch(SQLException ex){
+            Logger.getLogger(JDBCDisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    /*
+     * getCodigo
+     * Obtém o código correspondente ao nome da disciplina.
+     */
+    @Override
+    public String getCodigo(String nomeDisciplina){
+        try{
+            String query = "SELECT codigo FROM disciplina WHERE nome = '" + nomeDisciplina + "'";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+
+            if(rs.next()){
+                return rs.getString("codigo");
+            }
+            
+        } catch(SQLException ex){
+            Logger.getLogger(JDBCDisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return ""; 
+        }
+        return ""; 
+    }
+    
+    /*
+     * adicionarDisciplina
+     * Adiciona uma nova disciplina no BD. (assume que os dados esão corretos)
+     */
+    @Override
+    public boolean adicionarDisciplina(Disciplina disciplina){
+        try{
+            PreparedStatement statement = con.prepareStatement("INSERT INTO administrador "
+                                        + "(codigo, nome, ehEletiva, numCreditos)"
+                                        + " VALUES (?, ?, ?, ?)");
+            statement.setString(1, disciplina.getCodigo()); 
+            statement.setString(2, disciplina.getNome());
+            if(disciplina.isEletiva()){
+                statement.setString(3, "1");
+            }else{
+                statement.setString(3, "0");
+            }
+            statement.setString(4, disciplina.getNumeroDeCreditos()+"");
+            statement.execute();
+        } catch(SQLException ex){
+            Logger.getLogger(JDBCDisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false; 
+        }
+        return true;
     }
 
 }
