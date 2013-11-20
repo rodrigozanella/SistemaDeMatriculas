@@ -12,9 +12,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- */
 public class CadastrarDisciplinaComando implements Comando{
     @Override
     public void executar(HttpServletRequest request, HttpServletResponse response){
@@ -26,15 +23,11 @@ public class CadastrarDisciplinaComando implements Comando{
              boolean ehEletiva = request.getParameter("tipo").equalsIgnoreCase("eletiva");
              int creditosMnimos = Integer.parseInt(request.getParameter("creditos_minimos"));
              
-             
-             String stringao = "";
-             
              //obtém uma lista com os pré-requisitos
              String[] preRequisitos = request.getParameterValues("prerequisitos");
              ArrayList<String> requisitos = new ArrayList<String>();
              for(String preRequisito : preRequisitos){
                  requisitos.add(preRequisito);
-                 stringao = stringao + preRequisito + " ";
              }
              
              

@@ -5,6 +5,7 @@
 package Model.Logic;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -18,6 +19,11 @@ public class Professor extends Usuario{
         super(nome, cpf, nomeUsuario, senha);
         this.areaDeInteresse = areaDeInteresse;
         this.setRole("professor");
+    }
+    
+    public Professor(String nome, String cpf, String email, Date nascimento, String areaDeInteresse){
+        super(nome, cpf, email, nascimento, "professor");
+        this.areaDeInteresse = areaDeInteresse;
     }
 
     public void setAreaDeInteresse(String areaDeInteresse) {
