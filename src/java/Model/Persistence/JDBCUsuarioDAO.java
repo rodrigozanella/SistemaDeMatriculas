@@ -5,6 +5,7 @@ import Model.Logic.Administrador;
 import Model.Logic.Aluno;
 import Model.Logic.Professor;
 import Model.Logic.Usuario;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +39,7 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
             
             rs = st.executeQuery(query);
             while(rs.next()){
-                tipo = rs.getString(1);
+                tipo = rs.getString("tipo");
             }
             
             /*
@@ -94,7 +95,76 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
     }
     
     @Override
+    /**
+     * adicionarUsuario
+     * Dado um usuário de qualquer tipo, adiciona ele no BD.
+     * @param user Usuario a ser inserido no BD (deve estar validado)
+     * @return Valor booleano representando o sucesso ou não da operação
+     */
     public boolean adicionarUsuario(Usuario user){
+        try {
+            PreparedStatement statement;
+                    
+            //obtém o tipo do usuário
+            String tipoUsuario = user.getRole();
+            
+            //é necessário inserir uma entrada na tabela de usuários
+            statement = con.prepareStatement("INSERT INTO usuario "
+                    + "(nomeUsuario, senha, tipo) VALUES (?, ?, ?)");
+            statement.setString(1, user.getNomeDeUsuario());
+            statement.setString(2, user.getSenha());
+            statement.setString(3, user.getRole());
+            statement.execute();
+            
+            //e também na tabela especifica do usuario
+            if(tipoUsuario.equalsIgnoreCase("aluno")){
+                Aluno aluno = (Aluno)user;
+                
+                statement = con.prepareStatement("INSERT INTO aluno "
+                        + "(cpf, nome, nomeUsuario, email, dataNascimento, matricula, "
+                        + "semestreIngresso, metodoIngresso, pontuacaoVestibular, situacao, "
+                        + "pontuacao) VALUES ('?, ?, ?, ?, NULL, ?, ?, ?, ?, NULL, 100)");
+                statement.setString(1, aluno.getCpf()); 
+                statement.setString(2, aluno.getNome());
+                statement.setString(3, aluno.getNomeDeUsuario());
+                statement.setString(4, aluno.getEmail());
+                statement.setString(6, aluno.getNumeroDeMatricula()+"");
+                statement.setString(7, aluno.getSemestreDeIngresso());
+                statement.setString(8, aluno.getTipoDeIngresso().toString());
+                statement.setString(9, aluno.getPontuacaoVestibular()+"");
+                statement.execute();
+            }
+            else if(tipoUsuario.equalsIgnoreCase("professor")){
+                Professor professor = (Professor)user;
+                
+                statement = con.prepareStatement("INSERT INTO professor "
+                        + "(cpf, nome, email, nomeUsuario, dataNascimento, areaInteresse)"
+                        + " VALUES (?, ?, ?, ?, NULL, ?)");
+                statement.setString(1, professor.getCpf()); 
+                statement.setString(2, professor.getNome());
+                statement.setString(3, professor.getEmail());
+                statement.setString(4, professor.getNomeDeUsuario());
+                statement.setString(5, professor.getAreaDeInteresse());
+                statement.execute();
+            }        
+            else if(tipoUsuario.equalsIgnoreCase("administrador")){
+                Administrador administrador = (Administrador)user;
+                
+                statement = con.prepareStatement("INSERT INTO administrador "
+                        + "(cpf, nome, email, nomeUsuario, dataNascimento)"
+                        + " VALUES (?, ?, ?, ?, NULL)");
+                statement.setString(1, administrador.getCpf()); 
+                statement.setString(2, administrador.getNome());
+                statement.setString(3, administrador.getEmail());
+                statement.setString(4, administrador.getNomeDeUsuario());
+                
+                statement.execute();
+            }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         return true;
     }
 
