@@ -1,3 +1,4 @@
+<%@page import="Model.Logic.Disciplina"%>
 <%@page import="Model.Persistence.DisciplinaDAO"%>
 <%@page import="Model.Persistence.FactoryDAO"%>
 <%@page import="Model.Persistence.UsuarioDAO"%>
@@ -34,7 +35,9 @@
                     out.print(elemento.getTurma().getCodigoDisciplina()+" - ");
                     FactoryDAO novoFactory = new FactoryDAO();
                     DisciplinaDAO disciplinaDAO = novoFactory.criarDisciplinaDAO();
-                    out.print(disciplinaDAO.getDisciplina(elemento.getTurma().getCodigoDisciplina()).getNome());
+                    String codigoDaDisciplina = elemento.getTurma().getCodigoDisciplina();
+                    Disciplina novaDisciplina = disciplinaDAO.getDisciplina(codigoDaDisciplina);
+                    out.print(novaDisciplina.getNome());
                     out.print("Turma "+elemento.getTurma().getCodigo()+" - ");
                     out.print("Horário: "+elemento.getTurma().getHorario()+" - ");
                     out.print("Semestre: "+elemento.getTurma().getSemestre()+" - ");

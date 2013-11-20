@@ -24,7 +24,6 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
     public Disciplina getDisciplina(String id) {
         Disciplina novaDisciplina = null;
         try {
-            //obtém o registro da disciplina
             String query = "SELECT * FROM disciplina WHERE codigo ='" + id + "'";
             st = con.createStatement();
             rs = st.executeQuery(query);
@@ -37,7 +36,7 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
                 boolean ehEletiva = rs.getInt("ehEletiva") == 1;
                 
                 //obtém os pré-requisitos da disciplina
-                query = "SELECT codigoDisciplinaRequisito FROM pre_requisito WHERE codigo ='" + id + "'";
+                query = "SELECT codigoDisciplinaRequisito FROM pre_requisito WHERE codigoDisciplina ='" + id + "'";
                 st = con.createStatement();
                 rs = st.executeQuery(query);
                 

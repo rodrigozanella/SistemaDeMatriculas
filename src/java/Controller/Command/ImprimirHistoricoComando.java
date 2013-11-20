@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ImprimirHistoricoComando implements Comando {
+     @Override
      public void executar(HttpServletRequest request, HttpServletResponse response){
          try {
              HttpSession session = request.getSession();

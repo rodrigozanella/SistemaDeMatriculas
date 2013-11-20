@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
  * @author Rodrigo Zanella Ribeiro
  */
 public class PossibilidadeMatriculaComando implements Comando {
+    @Override
     public void executar(HttpServletRequest request, HttpServletResponse response){
         try {
             HttpSession session = request.getSession();
