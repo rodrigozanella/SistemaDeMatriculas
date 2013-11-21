@@ -1,8 +1,5 @@
 package Model.Persistence;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 public class JDBCSistemaDAO extends JDBCDAO implements SistemaDAO{
     
