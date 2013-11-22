@@ -4,6 +4,11 @@
  */
 package Model.Logic;
 
+import Model.Persistence.FactoryDAO;
+import Model.Persistence.UsuarioDAO;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -15,24 +20,34 @@ import org.junit.Test;
  * @author Zanella
  */
 public class AlunoTest {
+    private FactoryDAO factory;
+    private UsuarioDAO alunoDAO;
+    private Aluno instancia;
     
     public AlunoTest() {
+        factory = new FactoryDAO();
+        alunoDAO = factory.criarUsuarioDAO();
+        instancia = null;
     }
     
     @BeforeClass
     public static void setUpClass() {
+        
     }
     
     @AfterClass
     public static void tearDownClass() {
+        
     }
     
     @Before
     public void setUp() {
+        instancia = (Aluno) alunoDAO.getUsuario("rzanella", "1234");
     }
     
     @After
     public void tearDown() {
+        instancia = null;
     }
 
     /**
@@ -40,23 +55,8 @@ public class AlunoTest {
      */
     @Test
     public void testGetPossibilidadesMatricula() {
-    
-    }
-
-    /**
-     * Test of setPossibilidadesMatricula method, of class Aluno.
-     */
-    @Test
-    public void testSetPossibilidadesMatricula() {
-    
-    }
-
-    /**
-     * Test of getPossibilidadesDeMatricula method, of class Aluno.
-     */
-    @Test
-    public void testGetPossibilidadesDeMatricula() {
-    
+        Set<Turma> novasPossibilidades = instancia.getPossibilidadesMatricula();
+        
     }
 
     /**
@@ -64,70 +64,12 @@ public class AlunoTest {
      */
     @Test
     public void testGetHistorico() {
-    
+        HistoricoEscolar novohist = instancia.getHistorico();
+        List<HistoricoEscolarElemento> novoElemHist = novohist.getHistorico();
+        Iterator<HistoricoEscolarElemento> itElementoHist = novoElemHist.iterator();
+        while(itElementoHist.hasNext()){
+            HistoricoEscolarElemento novoElemento = itElementoHist.next();
+        }
     }
-
-    /**
-     * Test of setTipoDeIngresso method, of class Aluno.
-     */
-    @Test
-    public void testSetTipoDeIngresso() {
     
-    }
-
-    /**
-     * Test of setPontuacaoVestibular method, of class Aluno.
-     */
-    @Test
-    public void testSetPontuacaoVestibular() {
-    
-    }
-
-    /**
-     * Test of setSemestreDeIngresso method, of class Aluno.
-     */
-    @Test
-    public void testSetSemestreDeIngresso() {
-    
-    }
-
-    /**
-     * Test of setNumeroDeMatricula method, of class Aluno.
-     */
-    @Test
-    public void testSetNumeroDeMatricula() {
-    
-    }
-
-    /**
-     * Test of getTipoDeIngresso method, of class Aluno.
-     */
-    @Test
-    public void testGetTipoDeIngresso() {
-    
-    }
-
-    /**
-     * Test of getPontuacaoVestibular method, of class Aluno.
-     */
-    @Test
-    public void testGetPontuacaoVestibular() {
-    
-    }
-
-    /**
-     * Test of getSemestreDeIngresso method, of class Aluno.
-     */
-    @Test
-    public void testGetSemestreDeIngresso() {
-    
-    }
-
-    /**
-     * Test of getNumeroDeMatricula method, of class Aluno.
-     */
-    @Test
-    public void testGetNumeroDeMatricula() {
-    
-    }
 }

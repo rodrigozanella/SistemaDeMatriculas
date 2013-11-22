@@ -4,6 +4,8 @@
  */
 package Controller.ControllerConta;
 
+import Controller.Command.LogoffComando;
+
 /**
  * ProfEstado
  * Representa o estado, quando o usuário está logado como professor
@@ -12,6 +14,6 @@ package Controller.ControllerConta;
 public class ProfEstado extends UsuarioEstado{ 
     public ProfEstado(){
         super();
-        //gerar comandos possíveis
+        comandos.put("logoff", new LogoffComando());
     }
 }

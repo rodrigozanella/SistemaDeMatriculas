@@ -1,6 +1,7 @@
 package Controller.ControllerConta;
 
 import Controller.Command.ImprimirHistoricoComando;
+import Controller.Command.LogoffComando;
 import Controller.Command.PossibilidadeMatriculaComando;
 
 /**
@@ -15,6 +16,7 @@ public class AlunoEstado extends UsuarioEstado {
         //gerar comandos possíveis
         comandos.put("possibilidadeMatricula", new PossibilidadeMatriculaComando());
         comandos.put("imprimirHistorico", new ImprimirHistoricoComando());
+        comandos.put("logoff", new LogoffComando());
     }
 
 }

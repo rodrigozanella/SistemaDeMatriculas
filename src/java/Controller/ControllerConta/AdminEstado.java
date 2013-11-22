@@ -3,6 +3,8 @@ package Controller.ControllerConta;
 import Controller.Command.CadastrarDisciplinaComando;
 import Controller.Command.CadastrarTurmaComando;
 import Controller.Command.CadastrarUsuarioComando;
+import Controller.Command.LogoffComando;
+import Controller.Command.PossibilidadeMatriculaComando;
 
 /**
  * AdminEstado
@@ -16,6 +18,7 @@ public class AdminEstado extends UsuarioEstado {
         comandos.put("cadastrarUsuario", new CadastrarUsuarioComando());
         comandos.put("cadastrarDisciplina", new CadastrarDisciplinaComando());
         comandos.put("cadastrarTurma", new CadastrarTurmaComando());
+        comandos.put("logoff", new LogoffComando());
     }
    
 

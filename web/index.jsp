@@ -47,6 +47,8 @@
                 if(tipo.equalsIgnoreCase("professor")){
 
                 }
+                
+                out.println("<a href=ControladorContext?evento=logoff><p>Logoff</p></a>");
             }
         %>
     </body>

@@ -132,6 +132,10 @@
         <servlet-name>ImprimirHistoricoComando</servlet-name>
         <servlet-class>Controller.Command.ImprimirHistoricoComando</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoffComando</servlet-name>
+        <servlet-class>Controller.Command.LogoffComando</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
         <url-pattern>/Controlador</url-pattern>
@@ -275,6 +279,10 @@
     <servlet-mapping>
         <servlet-name>ImprimirHistoricoComando</servlet-name>
         <url-pattern>/ImprimirHistoricoComando</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoffComando</servlet-name>
+        <url-pattern>/LogoffComando</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
