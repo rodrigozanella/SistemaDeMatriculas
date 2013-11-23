@@ -16,7 +16,7 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
         super();
     }
     
-    /*
+    /**
      * getDisciplina
      * Dado um código de disciplina, obtém a instância da disciplina correspondente a ele.
      */
@@ -55,7 +55,7 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
         return novaDisciplina;
     }
 
-    /*
+    /**
      * getPreRequisitos
      * Obtém as disciplinas que são pré-requisitos de uma dada disciplina.
      */
@@ -80,7 +80,7 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
         return preRequisitos;
     }
     
-    /*
+    /**
      * getCodigoDisciplinas
      * Obtém todas as disciplinas cadastradas no sistema.
      */
@@ -123,30 +123,7 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
         return disciplinas;
     }
     
-    /*
-     * getCodigo
-     * Obtém o código correspondente ao nome da disciplina.
-     */
-    @Override
-    public String getCodigo(String nomeDisciplina){
-        try{
-            //obtém o código da disciplina correspondente ao nome
-            String query = "SELECT codigo FROM disciplina WHERE nome = '" + nomeDisciplina + "'";
-            st = con.createStatement();
-            rs = st.executeQuery(query);
-
-            //se existir algum resultado, obtém o seu código
-            if(rs.next()){
-                return rs.getString("codigo");
-            }
-        } catch(SQLException ex){
-            Logger.getLogger(JDBCDisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex); 
-        }
-        //se a disciplina não existir, retorna uma string vazia
-        return ""; 
-    }
-    
-    /*
+    /**
      * adicionarDisciplina
      * Adiciona uma nova disciplina no BD. (assume que os dados esão corretos)
      * OBS: PRECISAMOS ADICIONAR UM CAMPO DE NÚMERO DE CRÉDITOS MÍNIMOS NA TABELA DE DISCIPLINAS
@@ -167,7 +144,6 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
             statement.execute();
             
             //insere os seus pré-requisitos na tabela de pré-requisitos
-            /*
             for(String preRequisito : disciplina.getPreRequisitos()){
                 statement = con.prepareStatement("INSERT INTO pre_requisito "
                                         + "(codigoDisciplina, codigoDisciplinaRequisito)"
@@ -176,34 +152,10 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
                 statement.setString(2, preRequisito);
                 statement.execute();
             }
-            */
             
         } catch(SQLException ex){
             Logger.getLogger(JDBCDisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }
-
-     /*
-     * existeCodigo
-     * Verifica se o código passado por parâmetro já existe no BD.
-     */
-    @Override
-    public boolean existeCodigo(String codigo){
-        try{
-            //obtém os registros de disciplinas que contém o código
-            String query = "SELECT * FROM disciplina WHERE codigo = '" + codigo + "'";
-            st = con.createStatement();
-            rs = st.executeQuery(query);
-
-            //se existir algum resultado, então o código já existe
-            if(rs.next()){
-                return true;
-            }
-        } catch(SQLException ex){
-            Logger.getLogger(JDBCDisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-
 }

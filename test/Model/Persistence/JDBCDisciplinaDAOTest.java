@@ -84,21 +84,6 @@ public class JDBCDisciplinaDAOTest {
     }
 
     /**
-     * Test of getCodigo method, of class JDBCDisciplinaDAO.
-     */
-    @Test
-    public void testGetCodigo() {
-        System.out.println("getCodigo");
-        String nomeDisciplina = "";
-        JDBCDisciplinaDAO instance = new JDBCDisciplinaDAO();
-        String expResult = "";
-        String result = instance.getCodigo(nomeDisciplina);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of adicionarDisciplina method, of class JDBCDisciplinaDAO.
      */
     @Test
@@ -108,21 +93,6 @@ public class JDBCDisciplinaDAOTest {
         JDBCDisciplinaDAO instance = new JDBCDisciplinaDAO();
         boolean expResult = false;
         boolean result = instance.adicionarDisciplina(disciplina);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of existeCodigo method, of class JDBCDisciplinaDAO.
-     */
-    @Test
-    public void testExisteCodigo() {
-        System.out.println("existeCodigo");
-        String codigo = "";
-        JDBCDisciplinaDAO instance = new JDBCDisciplinaDAO();
-        boolean expResult = false;
-        boolean result = instance.existeCodigo(codigo);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

@@ -86,11 +86,11 @@ public class Validador {
         //código da disciplina não deve existir no BD
         FactoryDAO factoryDAO = new FactoryDAO();
         DisciplinaDAO disciplinaDAO = factoryDAO.criarDisciplinaDAO();
-        if(disciplinaDAO.existeCodigo(disciplina.getCodigo())) return false;
+        if(disciplinaDAO.getDisciplina(disciplina.getCodigo()) != null) return false;
         
         //os códigos dos pré-requisitos devem existir no BD
         for(String preRequisito : disciplina.getPreRequisitos()){
-            if(!disciplinaDAO.existeCodigo(preRequisito)) return false;
+            if(disciplinaDAO.getDisciplina(preRequisito) == null) return false;
         }
         
         //o número de créditos deve ser maior que 0
@@ -122,7 +122,7 @@ public class Validador {
         
         //verifica se a disciplina existe
         DisciplinaDAO disciplinaDAO = factoryDAO.criarDisciplinaDAO();
-        if(!disciplinaDAO.existeCodigo(turma.getCodigoDisciplina())) return false;
+        if(disciplinaDAO.getDisciplina(turma.getCodigoDisciplina()) == null) return false;
         
         //verifica quantas turmas da disciplina existem no semestre
         TurmaDAO turmaDAO = factoryDAO.criarTurmaDAO();
