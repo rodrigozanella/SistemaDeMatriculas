@@ -6,6 +6,8 @@ import Model.Persistence.DisciplinaDAO;
 import Model.Persistence.FactoryDAO;
 import Model.Validation.Validador;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -26,16 +28,16 @@ public class CadastrarDisciplinaComando implements Comando{
              //obtém uma lista com os pré-requisitos
              String[] preRequisitos = request.getParameterValues("prerequisitos");
              ArrayList<String> requisitos = new ArrayList<String>();
-             for(String preRequisito : preRequisitos){
-                 requisitos.add(preRequisito);
+             if(preRequisitos != null){
+                for(String s : preRequisitos){
+                    requisitos.add(s);
+                }
              }
-             
              
              //valida a disciplina
              Disciplina novaDisciplina = new Disciplina(codigo, nome, creditos, ehEletiva, creditosMnimos, requisitos);
              Validador validador = new Validador();
              if(validador.validaDisciplina(novaDisciplina)){
-                 
                  //insere a disciplina no BD
                  FactoryDAO factoryDAO = new FactoryDAO();
                  DisciplinaDAO disciplinaDAO = factoryDAO.criarDisciplinaDAO();

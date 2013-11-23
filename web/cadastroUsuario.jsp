@@ -107,8 +107,8 @@
         <input type="text" name="metodo" id="metodo" />
         <label>Pontuação no vestibular</label>
         <input type="text" name="vestibular" id="vestibular" />
-        <label>Data de ingresso</label>
-        <input type="date" name="ingresso" id="ingresso" />  
+        <label>Semestre de ingresso</label>
+        <input type="text" name="semestre" id="semestre" />  
         <label>Número de matrícula</label>
         <input type="text" name="matricula" id="matricula" />
         

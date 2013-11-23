@@ -15,6 +15,10 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
         super();
     }
     
+    /**
+     * getTurma
+     * Dado um id de turma, obtém o seu registro.
+     */
     @Override
     public Turma getTurma(int id) {
         Turma novaTurma = null;
@@ -33,6 +37,10 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
         return novaTurma;
     }
 
+    /**
+     * adicionaTurma
+     * Adiciona uma turma no BD. (assum que os seus dados estão corretos)
+     */
     @Override
     public boolean adicionaTurma(Turma turma) {
         try{
@@ -60,6 +68,10 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
         return false;
     }
 
+    /**
+     * getTurmasSemestre
+     * Obtém um conjunto de turmas de um determinado semenstre.
+     */
     @Override
     public Set<Turma> getTurmasSemestre(String codDisciplina, String semestre) {
         Set<Turma> turmasSemestre = new HashSet<Turma>();

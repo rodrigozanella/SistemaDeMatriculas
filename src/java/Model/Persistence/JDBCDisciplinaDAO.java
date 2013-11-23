@@ -34,6 +34,7 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
                 String codigo = rs.getString("codigo");
                 int numCreditos = rs.getInt("numCreditos");
                 boolean ehEletiva = rs.getInt("ehEletiva") == 1;
+                int numCreditosMin = rs.getInt("numCreditosMin");
                 
                 //obtém os pré-requisitos da disciplina
                 query = "SELECT codigoDisciplinaRequisito FROM pre_requisito WHERE codigoDisciplina ='" + id + "'";
@@ -47,7 +48,7 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
                 }
                 
                 //cria a instância
-                novaDisciplina = new Disciplina (codigo, nome, numCreditos, ehEletiva, 0, preRequisitos);
+                novaDisciplina = new Disciplina (codigo, nome, numCreditos, ehEletiva, numCreditosMin, preRequisitos);
             }
         } catch (SQLException ex) {
             Logger.getLogger(JDBCDisciplinaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,8 +100,9 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
                 String codigo = rs.getString("codigo");
                 int numCreditos = rs.getInt("numCreditos");
                 boolean ehEletiva = rs.getInt("ehEletiva") == 1;
+                int numCreditosMin = rs.getInt("numCreditosMin");
 
-                Disciplina disciplina = new Disciplina(codigo, nome, numCreditos, ehEletiva, numCreditos, new ArrayList<String>());
+                Disciplina disciplina = new Disciplina(codigo, nome, numCreditos, ehEletiva, numCreditosMin, new ArrayList<String>());
                 disciplinas.add(disciplina);
             }
             
@@ -126,26 +128,25 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
     /**
      * adicionarDisciplina
      * Adiciona uma nova disciplina no BD. (assume que os dados esão corretos)
-     * OBS: PRECISAMOS ADICIONAR UM CAMPO DE NÚMERO DE CRÉDITOS MÍNIMOS NA TABELA DE DISCIPLINAS
-     * OBS: UMA DISCIPLINA SÓ PODE TER UM REQUISITO DE ACORDO COM A TABELA
      */
     @Override
     public boolean adicionarDisciplina(Disciplina disciplina){
         try{
             //insere a disciplina na tabela de disciplinas
             PreparedStatement statement = con.prepareStatement("INSERT INTO disciplina "
-                                        + "(codigo, nome, ehEletiva, numCreditos)"
-                                        + " VALUES (?, ?, ?, ?)");
+                                        + "(codigo, nome, ehEletiva, numCreditos, numCreditosMin)"
+                                        + " VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, disciplina.getCodigo()); 
             statement.setString(2, disciplina.getNome());
             if(disciplina.isEletiva()){ statement.setInt(3, 1); }
             else{ statement.setInt(3, 0); }
             statement.setInt(4, disciplina.getNumeroDeCreditos());
+            statement.setInt(5, disciplina.getNumeroDeCreditosMinimos());
             statement.execute();
             
             //insere os seus pré-requisitos na tabela de pré-requisitos
             for(String preRequisito : disciplina.getPreRequisitos()){
-                statement = con.prepareStatement("INSERT INTO pre_requisito "
+                statement = con.prepareStatement("INSERT INTO pre_requisitos "
                                         + "(codigoDisciplina, codigoDisciplinaRequisito)"
                                         + " VALUES (?, ?)");
                 statement.setString(1, disciplina.getCodigo()); 
