@@ -45,8 +45,14 @@
                     out.println("<a href=cadastroDisciplina.jsp><p>Cadastrar disciplina</p></a>");
                 }
                 if(tipo.equalsIgnoreCase("professor")){
-
+                    out.println("<h3>Portal do Professor</h3>");
+                    out.println("<hr>");
+                    out.println("<a><p>Visualizar turmas</p></a>");
+                    out.println("<a><p>Atribuir conceitos</p></a>");
                 }
+                out.println("<a href=arvoreCurricular.jsp><p>Árvore curricular do curso</p></a>");
+                out.println("<a><p>Informações das disciplinas</p></a>");
+                out.println("<a><p>Informações dos professores</p></a>");
                 
                 out.println("<a href=ControladorContext?evento=logoff><p>Logoff</p></a>");
             }
