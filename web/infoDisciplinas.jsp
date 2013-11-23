@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Árvore curricular</title>
+        <title>Informações das disciplinas</title>
         <style media="screen" type="text/css">
             body {padding:15px; text-align: center}
             hr {margin-bottom: 25px}
@@ -26,7 +26,7 @@
         <h1 style="font-size: 35px; font-family:Times New Roman;">Sistema de Matrículas do INF</h1>
         <hr>
         
-        <h1>Árvore Curricular</h1>
+        <h1>Informações das disciplinas</h1>
         <%
             //Obtém lista das disciplinas cadastradas
             FactoryDAO factoryDAO = new FactoryDAO();
@@ -52,7 +52,7 @@
                 out.println("<td>" + disciplina.getNumeroDeCreditos() + "</td>");
                 out.println("<td>");
                 if(disciplina.isEletiva()) out.println("Sim");
-                else out.println("Nao");
+                else out.println("Não");
                 out.println("</td>");
                 out.println("<td>" + disciplina.getNumeroDeCreditosMinimos() + "</td>");
                 String codigoPreRequisitos = "";
