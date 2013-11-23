@@ -85,21 +85,6 @@ public class JDBCUsuarioDAOTest {
     }
 
     /**
-     * Test of getNomeUsuario method, of class JDBCUsuarioDAO.
-     */
-    @Test
-    public void testGetNomeUsuario() {
-        System.out.println("getNomeUsuario");
-        String cpf = "";
-        JDBCUsuarioDAO instance = new JDBCUsuarioDAO();
-        String expResult = "";
-        String result = instance.getNomeUsuario(cpf);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getProfessores method, of class JDBCUsuarioDAO.
      */
     @Test
@@ -108,21 +93,6 @@ public class JDBCUsuarioDAOTest {
         JDBCUsuarioDAO instance = new JDBCUsuarioDAO();
         ArrayList expResult = null;
         ArrayList result = instance.getProfessores();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of ehProfessor method, of class JDBCUsuarioDAO.
-     */
-    @Test
-    public void testEhProfessor() {
-        System.out.println("ehProfessor");
-        String cpf = "";
-        JDBCUsuarioDAO instance = new JDBCUsuarioDAO();
-        boolean expResult = false;
-        boolean result = instance.ehProfessor(cpf);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

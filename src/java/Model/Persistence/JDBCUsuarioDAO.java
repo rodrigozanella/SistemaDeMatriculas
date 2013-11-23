@@ -35,11 +35,11 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
              * Pesquisa na tabela usuário
              */
             
-            String tipo = null;
             String query = "SELECT tipo FROM usuario WHERE nomeUsuario='"+name+"' AND senha='"+password+"'";            
             st = con.createStatement();
-            
             rs = st.executeQuery(query);
+            
+            String tipo = null;
             while(rs.next()){
                 tipo = rs.getString("tipo");
             }
@@ -49,15 +49,11 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
              */
             
             if(tipo.equalsIgnoreCase("aluno")){
-                query ="SELECT * FROM aluno WHERE nomeUsuario='"+name+"'";
+                query ="SELECT * FROM aluno WHERE nomeUsuario='" + name + "'";
                 st = con.createStatement();
                 rs = st.executeQuery(query);
                 if(rs.next()){
-                    Aluno novoAluno = new Aluno(rs.getString("nome"), 
-                            rs.getString("cpf"), 
-                            rs.getString("nomeUsuario"), 
-                            password);
-                    return novoAluno;
+                    return new Aluno(rs.getString("nome"),  rs.getString("cpf"),  name, password, rs.getString("email"), null, rs.getString("metodoIngresso"), rs.getInt("pontuacaoVestibular"), rs.getString("semestreIngresso"), rs.getInt("matricula"));
                 }
             }
             if(tipo.equalsIgnoreCase("administrador")){
@@ -65,10 +61,7 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
                 st = con.createStatement();
                 rs = st.executeQuery(query);
                 if(rs.next()){
-                    return new Administrador(rs.getString("nome"), 
-                            rs.getString("cpf"), 
-                            rs.getString("nomeUsuario"), 
-                            password);
+                    return new Administrador(rs.getString("nome"),  rs.getString("cpf"), name, password, rs.getString("email"), null);
                 }
             }
             if(tipo.equalsIgnoreCase("professor")){
@@ -76,11 +69,7 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
                 st = con.createStatement();
                 rs = st.executeQuery(query);
                 if(rs.next()){
-                    return new Professor(rs.getString("nome"), 
-                            rs.getString("cpf"), 
-                            rs.getString("nomeUsuario"), 
-                            password,
-                            rs.getString("areaInteresse"));
+                    return new Professor(rs.getString("nome"), rs.getString("cpf"), name, password, rs.getString("email"), null, rs.getString("areaInteresse"));
                 }
             }
         } catch (SQLException ex) {
@@ -125,11 +114,15 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
                 statement = con.prepareStatement("INSERT INTO aluno "
                         + "(cpf, nome, nomeUsuario, email, dataNascimento, matricula, "
                         + "semestreIngresso, metodoIngresso, pontuacaoVestibular, situacao, "
-                        + "pontuacao) VALUES (?, ?, ?, ?, NULL, NULL, NULL, NULL, NULL, NULL, 100)");
+                        + "pontuacao) VALUES (?, ?, ?, ?, NULL, ?, ?, ?, ?, NULL, 100)");
                 statement.setString(1, aluno.getCpf()); 
                 statement.setString(2, aluno.getNome());
                 statement.setString(3, aluno.getNomeDeUsuario());
                 statement.setString(4, aluno.getEmail());
+                statement.setInt(5, aluno.getNumeroDeMatricula()); 
+                statement.setString(6, aluno.getSemestreDeIngresso());
+                statement.setString(7, aluno.getTipoDeIngresso()); 
+                statement.setInt(8, aluno.getPontuacaoVestibular());
                 statement.execute();
             }
             else if(tipoUsuario.equalsIgnoreCase("professor")){
@@ -166,28 +159,7 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
         return true;
     }
 
-    @Override
-    public String getNomeUsuario(String cpf) {
-        String nome = "";
-        try {
-            String query = "(SELECT aluno.cpf, aluno.nome FROM aluno WHERE "
-                    + "cpf = '"+cpf+"') UNION (SELECT professor.cpf, professor.nome "
-                    + "FROM professor WHERE cpf = '"+cpf+"') UNION"
-                    + "(SELECT administrador.cpf, administrador.nome FROM administrador "
-                    + "WHERE cpf = '"+cpf+"')";
-            st = con.createStatement();
-            rs = st.executeQuery(query);
-            
-            if(rs.next()){
-                nome=rs.getString("nome");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
-    
-    /*
+    /**
      * getProfessores
      * Obtém uma lista de todos os professores cadastrados no sistema.
      */
@@ -196,7 +168,7 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
         ArrayList<Professor> professores = new ArrayList<Professor>();
         try{
             //obtém todos os registros de professores
-            String query = "SELECT * FROM professor ORDER BY nome";
+            String query = "SELECT * FROM professor, usuario WHERE usuario.nomeUsuario = professor.nomeUsuario ORDER BY nome";
             st = con.createStatement();
             rs = st.executeQuery(query);
 
@@ -204,11 +176,13 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
             while(rs.next()){
                 String cpf = rs.getString("cpf");
                 String nome = rs.getString("nome");
+                String nomeUsuario = rs.getString("nomeUsuario");
+                String senha = rs.getString("senha");
                 String email = rs.getString("email");
-                Date nascimento =  rs.getDate("dataNascimento");
+                //Date nascimento =  rs.getDate("dataNascimento");
                 String areaDeInteresse = rs.getString("areaInteresse");
-
-                Professor professor = new Professor(nome, cpf, email, nascimento, areaDeInteresse);
+                
+                Professor professor = new Professor(nome, cpf, nomeUsuario, senha, email, null, areaDeInteresse);
                 professores.add(professor);
             }
         } catch(SQLException ex){
@@ -217,21 +191,43 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
         return professores;
     }
     
-    public boolean ehProfessor(String cpf){
-        try{
-            //obtém todos os registros de professores
-            String query = "SELECT * FROM professor WHERE cpf = '" + cpf + "'";
+    /**
+     * getUsuario
+     * Dado um CPF, obtém o usuário que possui o cpf, caso contrário, retorna null.
+     */
+    @Override
+    public Usuario getUsuario(String cpf) {
+        try {
+            //procura pelo cpf na tabela de alunos
+            String query = "SELECT * FROM aluno, usuario WHERE cpf = '" + cpf + "' AND aluno.nomeUsuario = usuario.nomeUsuario";
             st = con.createStatement();
             rs = st.executeQuery(query);
-
-            //se existir um registro, então o cpf pertence a algum professor
+            
             if(rs.next()){
-                return true;
+                return new Aluno(rs.getString("nome"), cpf, rs.getString("aluno.nomeUsuario"), rs.getString("senha"), rs.getString("email"), null, rs.getString("metodoIngresso"), rs.getInt("pontuacaoVestibular"), rs.getString("semestreIngresso"), rs.getInt("matricula"));
             }
-        } catch(SQLException ex){
+            
+            //procura pelo cpf na tabela de professores
+            query = "SELECT * FROM professor, usuario WHERE cpf = '" + cpf + "' AND professor.nomeUsuario = usuario.nomeUsuario";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            
+            if(rs.next()){
+                return new Professor(rs.getString("nome"), cpf, rs.getString("professor.nomeUsuario"), rs.getString("senha"), rs.getString("email"), null, rs.getString("areaInteresse"));
+            }
+            
+            //procura pelo cpf na tabela de professores
+            query = "SELECT * FROM administrador, usuario WHERE cpf = '" + cpf + "' AND administrador.nomeUsuario = usuario.nomeUsuario";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            
+            if(rs.next()){
+                return new Administrador(rs.getString("nome"), cpf, rs.getString("administrador.nomeUsuario"), rs.getString("senha"), rs.getString("email"), null);
+            }
+            
+        } catch (SQLException ex) {
             Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return null;
     }
-    
 }

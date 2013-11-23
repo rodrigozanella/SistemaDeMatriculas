@@ -15,15 +15,10 @@ public class Professor extends Usuario{
     private String areaDeInteresse;
     private ArrayList<Turma> turmasLecionadas; //turmas nas quais o professor lecionou
     
-    public Professor(String nome, String cpf, String nomeUsuario, String senha, String areaDeInteresse){
-        super(nome, cpf, nomeUsuario, senha);
+    public Professor(String nome, String cpf, String nomeUsuario, String senha, String email, Date dataDeNascimento, String areaDeInteresse){
+        super(nome, cpf, nomeUsuario, senha, email, dataDeNascimento);
         this.areaDeInteresse = areaDeInteresse;
         this.setRole("professor");
-    }
-    
-    public Professor(String nome, String cpf, String email, Date nascimento, String areaDeInteresse){
-        super(nome, cpf, email, nascimento, "professor");
-        this.areaDeInteresse = areaDeInteresse;
     }
 
     public void setAreaDeInteresse(String areaDeInteresse) {

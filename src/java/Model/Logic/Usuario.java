@@ -19,20 +19,15 @@ public class Usuario {
     private String senha;
     private String role;
     
-    public Usuario(String nome, String cpf, String nomeUsuario, String senha){
+    public Usuario(String nome, String cpf, String nomeUsuario, String senha, String email, Date dataDeNascimento){
         this.nome = nome;
         this.cpf = cpf;
         this.nomeDeUsuario = nomeUsuario;
         this.senha = senha;
+        this.email = email;
+        this.dataDeNascimento = dataDeNascimento;
     }
     
-    public Usuario(String nome, String cpf, String email, Date nascimento, String role){
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.dataDeNascimento = nascimento;
-        this.role = role;
-    }
     
     public String getRole(){
         return role;

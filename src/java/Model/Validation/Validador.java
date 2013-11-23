@@ -118,7 +118,7 @@ public class Validador {
         //verifica se o professor existe
         FactoryDAO factoryDAO = new FactoryDAO();
         UsuarioDAO usuarioDAO = factoryDAO.criarUsuarioDAO();
-        if(!usuarioDAO.ehProfessor(turma.getCpfProfessor())) return false;
+        if(!usuarioDAO.getUsuario(turma.getCpfProfessor()).getRole().equalsIgnoreCase("professor")) return false;
         
         //verifica se a disciplina existe
         DisciplinaDAO disciplinaDAO = factoryDAO.criarDisciplinaDAO();

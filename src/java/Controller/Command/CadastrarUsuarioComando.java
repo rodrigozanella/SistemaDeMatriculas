@@ -26,11 +26,6 @@ public class CadastrarUsuarioComando implements Comando{
              String email = request.getParameter("email");
              String cpf = request.getParameter("cpf");
              String nascimento = request.getParameter("nascimento");
-             String areaDeInteresse = request.getParameter("interesse");
-             String metodoDeIngresso = request.getParameter("metodo");
-             String pontuacao = request.getParameter("vestibular");
-             String ingresso = request.getParameter("ingresso");
-             String matricula = request.getParameter("matricula");
              String username = request.getParameter("username");
              String senha = request.getParameter("senha");
   
@@ -38,22 +33,24 @@ public class CadastrarUsuarioComando implements Comando{
              UsuarioDAO novoUsuarioDAO = novoFactoryDAO.criarUsuarioDAO();
              Validador validador = new Validador();
              if(tipo.equalsIgnoreCase("aluno")){
-                 Aluno novoAluno = new Aluno(nome, cpf, username, senha);
-                 novoAluno.setEmail(email);
+                 String metodoDeIngresso = request.getParameter("metodo");
+                 int pontuacaoVestibular = Integer.parseInt(request.getParameter("vestibular"));
+                 String semestre = request.getParameter("semestre");
+                 int matricula = Integer.parseInt(request.getParameter("matricula"));
+                 Aluno novoAluno = new Aluno(nome, cpf, username, senha, email, null, metodoDeIngresso, pontuacaoVestibular, semestre, matricula);
                  if(validador.validaAluno(novoAluno)){
                     novoUsuarioDAO.adicionarUsuario(novoAluno);
                  }
                  
              }else if(tipo.equalsIgnoreCase("professor")){
-                 Professor novoProfessor = new Professor(nome, cpf, username, senha, areaDeInteresse);
-                 novoProfessor.setEmail(email);
+                 String areaDeInteresse = request.getParameter("interesse");
+                 Professor novoProfessor = new Professor(nome, cpf, nome, senha, email, null, areaDeInteresse);
                  if(validador.validaProfessor(novoProfessor)){
                     novoUsuarioDAO.adicionarUsuario(novoProfessor);
                  }
                  
              }else if(tipo.equalsIgnoreCase("administrador")){
-                 Administrador novoAdministrador = new Administrador(nome, cpf, username, senha);
-                 novoAdministrador.setEmail(email);
+                 Administrador novoAdministrador = new Administrador(nome, cpf, nome, senha, email, null);
                  if(validador.validaAdministrador(novoAdministrador)){
                     novoUsuarioDAO.adicionarUsuario(novoAdministrador);
                  }

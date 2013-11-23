@@ -8,6 +8,7 @@ import Model.Persistence.DisciplinaDAO;
 import Model.Persistence.FactoryDAO;
 import Model.Persistence.HistoricoDAO;
 import Model.Persistence.TurmaDAO;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -19,23 +20,18 @@ import java.util.Set;
  */
 public class Aluno extends Usuario{
 
-    public enum TipoDeIngresso {
-        regular,
-        convenio,
-        ordemJudicial,
-        transferenciaInterna,
-        transferenciaVoluntaria,
-        transferenciaCompulsoria;
-    }
-    
-    private TipoDeIngresso tipoDeIngresso;
+    private String tipoDeIngresso;
     private int pontuacaoVestibular; //entre 0 e 100
     private String semestreDeIngresso; //no formato "20xx/x"
     private int numeroDeMatricula;
     private static Set<Turma> possibilidadesMatricula;
-
-    public Aluno(String nome, String cpf, String nomeUsuario, String senha){
-        super(nome, cpf, nomeUsuario, senha);
+    
+    public Aluno(String nome, String cpf, String nomeUsuario, String senha, String email, Date dataDeNascimento, String tipoDeIngresso, int pontuacaoVestibular, String semestreDeIngresso, int numeroDeMatricula){
+        super(nome, cpf, nomeUsuario, senha, email, dataDeNascimento);
+        this.tipoDeIngresso = tipoDeIngresso;
+        this.numeroDeMatricula = numeroDeMatricula;
+        this.pontuacaoVestibular = pontuacaoVestibular;
+        this.semestreDeIngresso = semestreDeIngresso;
         this.setRole("aluno");
     }
     
@@ -93,7 +89,7 @@ public class Aluno extends Usuario{
         return historico;
     }
 
-    public void setTipoDeIngresso(TipoDeIngresso tipoDeIngresso) {
+    public void setTipoDeIngresso(String tipoDeIngresso) {
         this.tipoDeIngresso = tipoDeIngresso;
     }
 
@@ -109,7 +105,7 @@ public class Aluno extends Usuario{
         this.numeroDeMatricula = numeroDeMatricula;
     }
 
-    public TipoDeIngresso getTipoDeIngresso() {
+    public String getTipoDeIngresso() {
         return tipoDeIngresso;
     }
 
