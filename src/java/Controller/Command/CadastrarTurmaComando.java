@@ -3,7 +3,7 @@ package Controller.Command;
 
 import Model.Logic.Turma;
 import Model.Persistence.FactoryDAO;
-import Model.Persistence.TurmaDAO;
+import Model.Persistence.DAOs.TurmaDAO;
 import Model.Validation.Validador;
 import java.util.Set;
 import java.util.logging.Level;

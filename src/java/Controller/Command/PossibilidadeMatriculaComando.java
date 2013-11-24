@@ -3,7 +3,7 @@ package Controller.Command;
 import Model.Logic.Aluno;
 import Model.Logic.Turma;
 import Model.Persistence.FactoryDAO;
-import Model.Persistence.SistemaDAO;
+import Model.Persistence.DAOs.SistemaDAO;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -4,6 +4,7 @@
  */
 package Model.Persistence;
 
+import Model.Persistence.JDBC.JDBCTurmaDAO;
 import Model.Logic.Turma;
 import java.util.Set;
 import org.junit.After;

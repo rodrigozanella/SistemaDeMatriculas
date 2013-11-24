@@ -1,11 +1,15 @@
 
-package Model.Persistence;
+package Model.Persistence.JDBC;
 
+import Model.Persistence.DAOs.TurmaDAO;
+import Model.Persistence.DAOs.HistoricoDAO;
+import Model.Persistence.DAOs.DisciplinaDAO;
 import Model.Logic.Aluno;
 import Model.Logic.Disciplina;
 import Model.Logic.HistoricoEscolar;
 import Model.Logic.HistoricoEscolarElemento;
 import Model.Logic.Turma;
+import Model.Persistence.FactoryDAO;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;

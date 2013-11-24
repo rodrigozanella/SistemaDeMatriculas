@@ -1,4 +1,4 @@
-package Model.Persistence;
+package Model.Persistence.DAOs;
 
 import Model.Logic.Professor;
 import Model.Logic.Usuario;

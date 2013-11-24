@@ -3,7 +3,7 @@ package Controller.Command;
 
 import Model.Logic.Usuario;
 import Model.Persistence.FactoryDAO;
-import Model.Persistence.UsuarioDAO;
+import Model.Persistence.DAOs.UsuarioDAO;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

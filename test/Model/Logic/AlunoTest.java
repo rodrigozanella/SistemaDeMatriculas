@@ -5,7 +5,7 @@
 package Model.Logic;
 
 import Model.Persistence.FactoryDAO;
-import Model.Persistence.UsuarioDAO;
+import Model.Persistence.DAOs.UsuarioDAO;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;

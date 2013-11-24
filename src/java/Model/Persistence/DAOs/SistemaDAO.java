@@ -1,4 +1,4 @@
-package Model.Persistence;
+package Model.Persistence.DAOs;
 
 public interface SistemaDAO {
     public String getEstado();

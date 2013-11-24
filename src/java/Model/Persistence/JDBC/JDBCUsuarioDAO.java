@@ -1,10 +1,15 @@
 
-package Model.Persistence;
+package Model.Persistence.JDBC;
 
+import Model.Persistence.DAOs.ProfessorDAO;
+import Model.Persistence.DAOs.UsuarioDAO;
+import Model.Persistence.DAOs.AdministradorDAO;
 import Model.Logic.Administrador;
 import Model.Logic.Aluno;
 import Model.Logic.Professor;
 import Model.Logic.Usuario;
+import Model.Persistence.DAOs.AlunoDAO;
+import Model.Persistence.FactoryDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,12 +34,8 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
      */
     @Override
     public Usuario getUsuario(String name, String password){ 
+        Usuario novoUser = null;
         try {
-            
-            /*
-             * Pesquisa na tabela usuário
-             */
-            
             String query = "SELECT tipo FROM usuario WHERE nomeUsuario='"+name+"' AND senha='"+password+"'";            
             st = con.createStatement();
             rs = st.executeQuery(query);
@@ -43,41 +44,27 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
             while(rs.next()){
                 tipo = rs.getString("tipo");
             }
-            
-            /*
-             * Pesquisa na tabela específica do usuário
-             */
+          
+            FactoryDAO factory = new FactoryDAO();
             
             if(tipo.equalsIgnoreCase("aluno")){
-                query ="SELECT * FROM aluno WHERE nomeUsuario='" + name + "'";
-                st = con.createStatement();
-                rs = st.executeQuery(query);
-                if(rs.next()){
-                    return new Aluno(rs.getString("nome"),  rs.getString("cpf"),  name, password, rs.getString("email"), null, rs.getString("metodoIngresso"), rs.getInt("pontuacaoVestibular"), rs.getString("semestreIngresso"), rs.getInt("matricula"));
-                }
+                AlunoDAO alunoDAO = factory.criarAlunoDAO();
+                novoUser = alunoDAO.getAluno(name, password);
             }
             if(tipo.equalsIgnoreCase("administrador")){
-                query ="SELECT * FROM administrador WHERE nomeUsuario='"+name+"'";
-                st = con.createStatement();
-                rs = st.executeQuery(query);
-                if(rs.next()){
-                    return new Administrador(rs.getString("nome"),  rs.getString("cpf"), name, password, rs.getString("email"), null);
-                }
+                AdministradorDAO administradorDAO = factory.criarAdministradorDAO();
+                novoUser = administradorDAO.getAdministrador(name, password);
             }
             if(tipo.equalsIgnoreCase("professor")){
-                query ="SELECT * FROM professor WHERE nomeUsuario='"+name+"'";
-                st = con.createStatement();
-                rs = st.executeQuery(query);
-                if(rs.next()){
-                    return new Professor(rs.getString("nome"), rs.getString("cpf"), name, password, rs.getString("email"), null, rs.getString("areaInteresse"));
-                }
+                ProfessorDAO  professorDAO = factory.criarProfessorDAO();
+                novoUser = professorDAO.getProfessor(name, password);
             }
         } catch (SQLException ex) {
             Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e){
             return null;
         }
-        return null;
+        return novoUser;
     }
     
     @Override

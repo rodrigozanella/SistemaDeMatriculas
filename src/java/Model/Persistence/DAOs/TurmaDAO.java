@@ -1,5 +1,5 @@
 
-package Model.Persistence;
+package Model.Persistence.DAOs;
 
 import Model.Logic.Turma;
 import java.util.Set;

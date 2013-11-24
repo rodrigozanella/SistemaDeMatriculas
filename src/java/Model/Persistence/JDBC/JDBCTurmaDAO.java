@@ -1,6 +1,7 @@
 
-package Model.Persistence;
+package Model.Persistence.JDBC;
 
+import Model.Persistence.DAOs.TurmaDAO;
 import Model.Logic.Turma;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

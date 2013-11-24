@@ -1,4 +1,6 @@
-package Model.Persistence;
+package Model.Persistence.JDBC;
+
+import Model.Persistence.DAOs.SistemaDAO;
 
 
 public class JDBCSistemaDAO extends JDBCDAO implements SistemaDAO{

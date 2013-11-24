@@ -1,5 +1,22 @@
 package Model.Persistence;
 
+import Model.Persistence.JDBC.JDBCAdministradorDAO;
+import Model.Persistence.JDBC.JDBCHistoricoDAO;
+import Model.Persistence.JDBC.JDBCDisciplinaDAO;
+import Model.Persistence.JDBC.JDBCSistemaDAO;
+import Model.Persistence.JDBC.JDBCProfessorDAO;
+import Model.Persistence.JDBC.JDBCUsuarioDAO;
+import Model.Persistence.JDBC.JDBCTurmaDAO;
+import Model.Persistence.DAOs.SistemaDAO;
+import Model.Persistence.DAOs.ProfessorDAO;
+import Model.Persistence.DAOs.UsuarioDAO;
+import Model.Persistence.DAOs.TurmaDAO;
+import Model.Persistence.DAOs.HistoricoDAO;
+import Model.Persistence.DAOs.DisciplinaDAO;
+import Model.Persistence.DAOs.AdministradorDAO;
+import Model.Persistence.DAOs.AlunoDAO;
+import Model.Persistence.JDBC.JDBCAlunoDAO;
+
 public class FactoryDAO {
     public UsuarioDAO criarUsuarioDAO(){
         return new JDBCUsuarioDAO();
@@ -19,5 +36,17 @@ public class FactoryDAO {
     
     public DisciplinaDAO criarDisciplinaDAO(){
         return new JDBCDisciplinaDAO();
+    }
+    
+    public ProfessorDAO criarProfessorDAO(){
+        return new JDBCProfessorDAO();
+    }
+    
+    public AdministradorDAO criarAdministradorDAO(){
+        return new JDBCAdministradorDAO();
+    }
+    
+    public AlunoDAO criarAlunoDAO(){
+        return new JDBCAlunoDAO();
     }
 }

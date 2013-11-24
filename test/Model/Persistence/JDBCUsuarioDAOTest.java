@@ -4,6 +4,7 @@
  */
 package Model.Persistence;
 
+import Model.Persistence.JDBC.JDBCUsuarioDAO;
 import Model.Logic.Usuario;
 import java.util.ArrayList;
 import org.junit.After;

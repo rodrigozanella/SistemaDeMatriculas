@@ -2,7 +2,7 @@
 package Controller.Command;
 
 import Model.Logic.Disciplina;
-import Model.Persistence.DisciplinaDAO;
+import Model.Persistence.DAOs.DisciplinaDAO;
 import Model.Persistence.FactoryDAO;
 import Model.Validation.Validador;
 import java.util.ArrayList;

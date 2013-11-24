@@ -4,6 +4,11 @@
  */
 package Model.Persistence;
 
+import Model.Persistence.DAOs.SistemaDAO;
+import Model.Persistence.DAOs.UsuarioDAO;
+import Model.Persistence.DAOs.DisciplinaDAO;
+import Model.Persistence.DAOs.TurmaDAO;
+import Model.Persistence.DAOs.HistoricoDAO;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

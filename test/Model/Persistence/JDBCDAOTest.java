@@ -4,6 +4,7 @@
  */
 package Model.Persistence;
 
+import Model.Persistence.JDBC.JDBCDAO;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,7 +44,7 @@ public class JDBCDAOTest {
     public void testFinalize() {
         System.out.println("finalize");
         JDBCDAO instance = new JDBCDAO();
-        instance.finalize();
+        
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

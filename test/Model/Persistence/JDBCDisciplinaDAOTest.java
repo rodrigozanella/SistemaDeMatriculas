@@ -4,6 +4,7 @@
  */
 package Model.Persistence;
 
+import Model.Persistence.JDBC.JDBCDisciplinaDAO;
 import Model.Logic.Disciplina;
 import java.util.ArrayList;
 import java.util.Set;

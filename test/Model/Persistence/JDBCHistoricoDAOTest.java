@@ -4,6 +4,7 @@
  */
 package Model.Persistence;
 
+import Model.Persistence.JDBC.JDBCHistoricoDAO;
 import Model.Logic.Aluno;
 import Model.Logic.HistoricoEscolar;
 import Model.Logic.HistoricoEscolarElemento;

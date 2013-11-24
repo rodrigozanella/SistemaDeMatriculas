@@ -10,10 +10,10 @@ import Model.Logic.Disciplina;
 import Model.Logic.Professor;
 import Model.Logic.Turma;
 import Model.Logic.Usuario;
-import Model.Persistence.DisciplinaDAO;
+import Model.Persistence.DAOs.DisciplinaDAO;
 import Model.Persistence.FactoryDAO;
-import Model.Persistence.TurmaDAO;
-import Model.Persistence.UsuarioDAO;
+import Model.Persistence.DAOs.TurmaDAO;
+import Model.Persistence.DAOs.UsuarioDAO;
 import java.util.HashSet;
 import java.util.Set;
 

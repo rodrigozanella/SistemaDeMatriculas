@@ -1,7 +1,9 @@
 
-package Model.Persistence;
+package Model.Persistence.JDBC;
 
+import Model.Persistence.DAOs.DisciplinaDAO;
 import Model.Logic.Disciplina;
+import Model.Persistence.FactoryDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;

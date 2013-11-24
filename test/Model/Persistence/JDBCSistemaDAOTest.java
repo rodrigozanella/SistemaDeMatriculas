@@ -4,6 +4,7 @@
  */
 package Model.Persistence;
 
+import Model.Persistence.JDBC.JDBCSistemaDAO;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

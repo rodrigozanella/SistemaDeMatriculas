@@ -4,10 +4,10 @@
  */
 package Model.Logic;
 
-import Model.Persistence.DisciplinaDAO;
+import Model.Persistence.DAOs.DisciplinaDAO;
 import Model.Persistence.FactoryDAO;
-import Model.Persistence.HistoricoDAO;
-import Model.Persistence.TurmaDAO;
+import Model.Persistence.DAOs.HistoricoDAO;
+import Model.Persistence.DAOs.TurmaDAO;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;

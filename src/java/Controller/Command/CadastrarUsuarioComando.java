@@ -5,7 +5,7 @@ import Model.Logic.Administrador;
 import Model.Logic.Aluno;
 import Model.Logic.Professor;
 import Model.Persistence.FactoryDAO;
-import Model.Persistence.UsuarioDAO;
+import Model.Persistence.DAOs.UsuarioDAO;
 import Model.Validation.Validador;
 import java.util.logging.Level;
 import java.util.logging.Logger;

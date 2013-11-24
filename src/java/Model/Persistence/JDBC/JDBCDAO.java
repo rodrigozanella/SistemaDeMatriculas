@@ -1,5 +1,5 @@
 
-package Model.Persistence;
+package Model.Persistence.JDBC;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
