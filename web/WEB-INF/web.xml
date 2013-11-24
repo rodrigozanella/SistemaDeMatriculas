@@ -78,11 +78,11 @@
     </servlet>
     <servlet>
         <servlet-name>UsuarioDAO</servlet-name>
-        <servlet-class>Model.Persistence.UsuarioDAO</servlet-class>
+        <servlet-class>Model.Persistence.DAOs.UsuarioDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>JDBCUsuarioDAO</servlet-name>
-        <servlet-class>Model.Persistence.JDBCUsuarioDAO</servlet-class>
+        <servlet-class>Model.Persistence.JDBC.JDBCUsuarioDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FactoryDAO</servlet-name>
@@ -90,15 +90,15 @@
     </servlet>
     <servlet>
         <servlet-name>SistemaDAO</servlet-name>
-        <servlet-class>Model.Persistence.SistemaDAO</servlet-class>
+        <servlet-class>Model.Persistence.DAOs.SistemaDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>JDBCSistemaDAO</servlet-name>
-        <servlet-class>Model.Persistence.JDBCSistemaDAO</servlet-class>
+        <servlet-class>Model.Persistence.JDBC.JDBCSistemaDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>JDBCDAO</servlet-name>
-        <servlet-class>Model.Persistence.JDBCDAO</servlet-class>
+        <servlet-class>Model.Persistence.JDBC.JDBCDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>HistoricoEscolarElemento</servlet-name>
@@ -106,27 +106,27 @@
     </servlet>
     <servlet>
         <servlet-name>HistoricoDAO</servlet-name>
-        <servlet-class>Model.Persistence.HistoricoDAO</servlet-class>
+        <servlet-class>Model.Persistence.DAOs.HistoricoDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>JDBCHistoricoDAO</servlet-name>
-        <servlet-class>Model.Persistence.JDBCHistoricoDAO</servlet-class>
+        <servlet-class>Model.Persistence.JDBC.JDBCHistoricoDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>TurmaDAO</servlet-name>
-        <servlet-class>Model.Persistence.TurmaDAO</servlet-class>
+        <servlet-class>Model.Persistence.DAOs.TurmaDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>JDBCTurmaDAO</servlet-name>
-        <servlet-class>Model.Persistence.JDBCTurmaDAO</servlet-class>
+        <servlet-class>Model.Persistence.JDBC.JDBCTurmaDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DisciplinaDAO</servlet-name>
-        <servlet-class>Model.Persistence.DisciplinaDAO</servlet-class>
+        <servlet-class>Model.Persistence.DAOs.DisciplinaDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>JDBCDisciplinaDAO</servlet-name>
-        <servlet-class>Model.Persistence.JDBCDisciplinaDAO</servlet-class>
+        <servlet-class>Model.Persistence.JDBC.JDBCDisciplinaDAO</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ImprimirHistoricoComando</servlet-name>
@@ -135,6 +135,26 @@
     <servlet>
         <servlet-name>LogoffComando</servlet-name>
         <servlet-class>Controller.Command.LogoffComando</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VisualizarTurmasComando</servlet-name>
+        <servlet-class>Controller.Command.VisualizarTurmasComando</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfessorDAO</servlet-name>
+        <servlet-class>Model.Persistence.DAOs.ProfessorDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JDBCProfessorDAO</servlet-name>
+        <servlet-class>Model.Persistence.JDBC.JDBCProfessorDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdministradorDAO</servlet-name>
+        <servlet-class>Model.Persistence.DAOs.AdministradorDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JDBCAdministradorDAO</servlet-name>
+        <servlet-class>Model.Persistence.JDBC.JDBCAdministradorDAO</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
@@ -283,6 +303,26 @@
     <servlet-mapping>
         <servlet-name>LogoffComando</servlet-name>
         <url-pattern>/LogoffComando</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VisualizarTurmasComando</servlet-name>
+        <url-pattern>/VisualizarTurmasComando</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfessorDAO</servlet-name>
+        <url-pattern>/ProfessorDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JDBCProfessorDAO</servlet-name>
+        <url-pattern>/JDBCProfessorDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdministradorDAO</servlet-name>
+        <url-pattern>/AdministradorDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JDBCAdministradorDAO</servlet-name>
+        <url-pattern>/JDBCAdministradorDAO</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
