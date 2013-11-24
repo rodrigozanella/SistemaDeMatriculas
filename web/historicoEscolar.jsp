@@ -1,7 +1,9 @@
+
+<%@page import="Model.Logic.Usuario"%>
+<%@page import="Model.Persistence.DAOs.DisciplinaDAO"%>
+<%@page import="Model.Persistence.DAOs.UsuarioDAO"%>
 <%@page import="Model.Logic.Disciplina"%>
-<%@page import="Model.Persistence.DisciplinaDAO"%>
 <%@page import="Model.Persistence.FactoryDAO"%>
-<%@page import="Model.Persistence.UsuarioDAO"%>
 <%@page import="Model.Logic.HistoricoEscolarElemento"%>
 <%@page import="Model.Logic.Turma"%>
 <%@page import="Model.Logic.HistoricoEscolar"%>
@@ -42,7 +44,8 @@
                     out.print("Horário: "+elemento.getTurma().getHorario()+" - ");
                     out.print("Semestre: "+elemento.getTurma().getSemestre()+" - ");
                     UsuarioDAO usuarioDAO = novoFactory.criarUsuarioDAO();
-                    out.print("Professor: "+usuarioDAO.getNomeUsuario(elemento.getTurma().getCpfProfessor()));
+                    Usuario novoUsuario = usuarioDAO.getUsuario(elemento.getTurma().getCpfProfessor());
+                    out.print("Professor: "+novoUsuario.getNome());
                     out.println("</p>");
                     out.print("Conceito: "+elemento.getConceito());
                 }

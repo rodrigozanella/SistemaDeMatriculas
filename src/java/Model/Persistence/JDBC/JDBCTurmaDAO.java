@@ -1,8 +1,12 @@
 
 package Model.Persistence.JDBC;
 
+import Model.Logic.Aluno;
 import Model.Persistence.DAOs.TurmaDAO;
 import Model.Logic.Turma;
+import Model.Persistence.DAOs.AlunoDAO;
+import Model.Persistence.DAOs.UsuarioDAO;
+import Model.Persistence.FactoryDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -90,6 +94,25 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
             Logger.getLogger(JDBCTurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return turmasSemestre;
+    }
+
+    @Override
+    public Set<Aluno> getAlunos(int id) {
+        Set<Aluno> alunos = new HashSet<Aluno>();
+        try {
+            String query = "SELECT cpfAluno FROM turma_cursada WHERE idTurma = "+id;
+             st = con.createStatement();
+             rs = st.executeQuery(query);
+             FactoryDAO factory = new FactoryDAO();
+             UsuarioDAO usuarioDAO = factory.criarUsuarioDAO();
+             while(rs.next()){
+                 Aluno novoAluno = (Aluno) usuarioDAO.getUsuario(rs.getString("cpfAluno"));
+                 alunos.add(novoAluno);
+             }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCTurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alunos;
     }
     
 }

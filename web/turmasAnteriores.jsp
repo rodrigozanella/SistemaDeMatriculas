@@ -29,10 +29,11 @@
         Iterator<Turma> itTurma = turmas.iterator();
         while(itTurma.hasNext()){
             Turma novaTurma = itTurma.next();
-            out.println("<a href=ControladorContext?evento=detalharTurma&id="+
+            out.println("<a href=detalharTurma.jsp?id="+
                     novaTurma.getCodigo()+"><p>"+novaTurma.getCodigoDisciplina()
                     +" - "+novaTurma.getSemestre()+"</p></a>");
         }
+        session.removeAttribute("turmas");
         %>
     </body>
 </html>

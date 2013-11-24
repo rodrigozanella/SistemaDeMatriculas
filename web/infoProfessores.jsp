@@ -1,12 +1,12 @@
 
+<%@page import="Model.Persistence.DAOs.UsuarioDAO"%>
 <%@page import="Model.Logic.Professor"%>
-<%@page import="Model.Persistence.UsuarioDAO"%>
 <%@page import="Model.Logic.Usuario"%>
 <%@page import="java.util.Queue"%>
 <%@page import="java.util.TreeMap"%>
 <%@page import="Model.Logic.Disciplina"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Model.Persistence.DisciplinaDAO"%>
+<%@page import="Model.Persistence.DAOs.DisciplinaDAO"%>
 <%@page import="Model.Persistence.FactoryDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

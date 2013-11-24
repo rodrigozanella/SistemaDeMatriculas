@@ -1,7 +1,7 @@
+<%@page import="Model.Persistence.DAOs.DisciplinaDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Model.Logic.Disciplina"%>
 <%@page import="java.util.HashSet"%>
-<%@page import="Model.Persistence.DisciplinaDAO"%>
 <%@page import="Model.Persistence.FactoryDAO"%>
 <%@page import="Model.Logic.HistoricoEscolarElemento"%>
 <%@page import="Model.Logic.Turma"%>

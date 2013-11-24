@@ -1,9 +1,9 @@
+<%@page import="Model.Persistence.DAOs.UsuarioDAO"%>
+<%@page import="Model.Persistence.DAOs.DisciplinaDAO"%>
 ﻿<%@page import="Model.Logic.Professor"%>
-<%@page import="Model.Persistence.UsuarioDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Model.Logic.Disciplina"%>
 <%@page import="java.util.HashSet"%>
-<%@page import="Model.Persistence.DisciplinaDAO"%>
 <%@page import="Model.Persistence.FactoryDAO"%>
 <%@page import="Model.Logic.HistoricoEscolarElemento"%>
 <%@page import="Model.Logic.Turma"%>
@@ -60,7 +60,7 @@
                         }
                         #stylized button{
                             clear:both;
-                            width:125px
+                            width:125px;
                             height:31px;
                             background:#666666;
                             text-align:center;

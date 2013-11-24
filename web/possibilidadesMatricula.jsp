@@ -4,8 +4,8 @@
     Author     : Rodrigo Zanella Ribeiro
 --%>
 
+<%@page import="Model.Persistence.DAOs.DisciplinaDAO"%>
 <%@page import="Model.Logic.Disciplina"%>
-<%@page import="Model.Persistence.DisciplinaDAO"%>
 <%@page import="Model.Persistence.FactoryDAO"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.Iterator"%>

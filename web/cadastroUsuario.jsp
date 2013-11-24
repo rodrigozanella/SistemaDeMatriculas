@@ -1,4 +1,5 @@
-<%@page import="Model.Persistence.DisciplinaDAO"%>
+
+<%@page import="Model.Persistence.DAOs.DisciplinaDAO"%>
 <%@page import="Model.Persistence.FactoryDAO"%>
 <%@page import="Model.Logic.HistoricoEscolarElemento"%>
 <%@page import="Model.Logic.Turma"%>
