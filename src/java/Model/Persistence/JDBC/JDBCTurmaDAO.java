@@ -32,7 +32,7 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
             st = con.createStatement();
             rs = st.executeQuery(query);
             while(rs.next()){
-                novaTurma = new Turma(rs.getInt("id"), rs.getString("codigoDisciplina"), 
+                novaTurma = new Turma((int)rs.getString("codigo").charAt(0), rs.getString("codigoDisciplina"), 
                         rs.getString("horario"), rs.getString("semestre"), 
                         rs.getInt("numvagas"), rs.getString("cpfProfessor"));
             }
