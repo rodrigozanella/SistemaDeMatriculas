@@ -30,7 +30,7 @@
         while(itTurma.hasNext()){
             Turma novaTurma = itTurma.next();
             out.println("<a href=detalharTurma.jsp?id="+
-                    novaTurma.getCodigo()+"><p>"+novaTurma.getCodigoDisciplina()
+                    novaTurma.getCodigoUnico()+"><p>"+novaTurma.getCodigoDisciplina()
                     +" - "+novaTurma.getSemestre()+"</p></a>");
         }
         session.removeAttribute("turmas");

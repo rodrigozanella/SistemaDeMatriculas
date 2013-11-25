@@ -35,6 +35,7 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
                 novaTurma = new Turma((int)rs.getString("codigo").charAt(0), rs.getString("codigoDisciplina"), 
                         rs.getString("horario"), rs.getString("semestre"), 
                         rs.getInt("numvagas"), rs.getString("cpfProfessor"));
+                novaTurma.setCodigoUnico(id);
             }
         } catch (SQLException ex) {
             Logger.getLogger(JDBCTurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,9 +86,10 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
             String query = "SELECT * FROM turma WHERE codigoDisciplina = '"+codDisciplina+"' AND semestre = '"+semestre+"'";
             rs = st.executeQuery(query);
             while(rs.next()){
-                Turma novaTurma = new Turma(rs.getInt("id"), rs.getString("codigoDisciplina"), 
+                Turma novaTurma = new Turma((int)rs.getString("codigo").charAt(0), rs.getString("codigoDisciplina"), 
                         rs.getString("horario"), rs.getString("semestre"), 
                         rs.getInt("numvagas"), rs.getString("cpfProfessor"));
+                novaTurma.setCodigoUnico(rs.getInt("id"));
                 turmasSemestre.add(novaTurma);
             }
         } catch (SQLException ex) {
