@@ -12,7 +12,6 @@ import Model.Persistence.DAOs.AlunoDAO;
 import Model.Persistence.FactoryDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -92,30 +91,7 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
             statement.setString(2, user.getSenha());
             statement.setString(3, user.getRole());
             statement.execute();
-            
-            FactoryDAO factory = new FactoryDAO();
-            
-            boolean gravou = false;
-            //e também na tabela especifica do usuario
-            if(tipoUsuario.equalsIgnoreCase("aluno")){
-                AlunoDAO alunoDAO = factory.criarAlunoDAO();
-                gravou = alunoDAO.adicionarAluno((Aluno) user);
-            }
-            else if(tipoUsuario.equalsIgnoreCase("professor")){
-               ProfessorDAO professorDAO = factory.criarProfessorDAO();
-               gravou = professorDAO.adicionarProfessor((Professor) user);
-            }        
-            else if(tipoUsuario.equalsIgnoreCase("administrador")){
-               AdministradorDAO administradorDAO = factory.criarAdministradorDAO();
-               gravou = administradorDAO.adicionarAdministrador((Administrador) user);
-            }
-            
-           if(gravou == true){
-               return true;
-           }
-           else{
-               return false;
-           }
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

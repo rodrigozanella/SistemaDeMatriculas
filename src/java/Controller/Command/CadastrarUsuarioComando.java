@@ -4,14 +4,19 @@ package Controller.Command;
 import Model.Logic.Administrador;
 import Model.Logic.Aluno;
 import Model.Logic.Professor;
+import Model.Logic.Usuario;
 import Model.Persistence.FactoryDAO;
 import Model.Persistence.DAOs.UsuarioDAO;
 import Model.Validation.Validador;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,35 +33,17 @@ public class CadastrarUsuarioComando implements Comando{
              String nascimento = request.getParameter("nascimento");
              String username = request.getParameter("username");
              String senha = request.getParameter("senha");
-  
-             FactoryDAO novoFactoryDAO = new FactoryDAO();
-             UsuarioDAO novoUsuarioDAO = novoFactoryDAO.criarUsuarioDAO();
-             Validador validador = new Validador();
-             if(tipo.equalsIgnoreCase("aluno")){
-                 String metodoDeIngresso = request.getParameter("metodo");
-                 int pontuacaoVestibular = Integer.parseInt(request.getParameter("vestibular"));
-                 String semestre = request.getParameter("semestre");
-                 int matricula = Integer.parseInt(request.getParameter("matricula"));
-                 Aluno novoAluno = new Aluno(nome, cpf, username, senha, email, null, metodoDeIngresso, pontuacaoVestibular, semestre, matricula);
-                 if(validador.validaAluno(novoAluno)){
-                    novoUsuarioDAO.adicionarUsuario(novoAluno);
-                 }
-                 
-             }else if(tipo.equalsIgnoreCase("professor")){
-                 String areaDeInteresse = request.getParameter("interesse");
-                 Professor novoProfessor = new Professor(nome, cpf, nome, senha, email, null, areaDeInteresse);
-                 if(validador.validaProfessor(novoProfessor)){
-                    novoUsuarioDAO.adicionarUsuario(novoProfessor);
-                 }
-                 
-             }else if(tipo.equalsIgnoreCase("administrador")){
-                 Administrador novoAdministrador = new Administrador(nome, cpf, nome, senha, email, null);
-                 if(validador.validaAdministrador(novoAdministrador)){
-                    novoUsuarioDAO.adicionarUsuario(novoAdministrador);
-                 }
-             }
+             DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD"); 
+             Date dataNascimento = (Date)formatter.parse(nascimento);
              
-             RequestDispatcher reqDis = request.getRequestDispatcher("index.jsp");
+             
+             Usuario novoUsuario = new Usuario(nome, cpf, username, senha, email, dataNascimento);
+             
+             HttpSession session = request.getSession();
+             session.setAttribute("tipo", tipo);
+             session.setAttribute("novoUsuario", novoUsuario);
+             
+             RequestDispatcher reqDis = request.getRequestDispatcher("cadastroUsuario.jsp");
              reqDis.forward(request,response); 
          } catch (Exception ex) {
              Logger.getLogger(CadastrarUsuarioComando.class.getName()).log(Level.SEVERE, null, ex);

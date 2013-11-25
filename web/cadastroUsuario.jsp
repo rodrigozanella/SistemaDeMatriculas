@@ -85,41 +85,61 @@
         <form id="form" name="form" method="post" action="ControladorContext">
         <h2>Formulário de cadastro de usuário</h2>
         <hr>
+       <%
+        String tipo = (String) request.getParameter("tipo");
+        if(tipo == null){
+            
+            out.print("<label>Tipo do usuário</label>");
+            out.print("<select name=\"tipo\" id=\"tipo\">");
+                out.print("<option selected value=\"aluno\">aluno</option>");
+                out.print("<option value=\"professor\">professor</option>");
+                out.print("<option value=\"administrador\">administrador</option>");
+            out.print("</select>");
 
-        <label>Tipo do usuário</label>
-        <select name="tipo" id="tipo">
-            <option selected value="aluno">aluno</option>
-            <option value="professor">professor</option>
-            <option value="administrador">administrador</option>
-        </select>
+            out.print("<label>Nome</label>");
+            out.print("<input type=\"text\" name=\"nome\" id=\"nome\" />");
+            out.print("<label>Email</label>");
+            out.print("<input type=\"text\" name=\"email\" id=\"email\" />");
+            out.print("<label>CPF</label>");
+            out.print("<input type=\"text\" name=\"cpf\" id=\"cpf\" />");
+            out.print("<label>Data de nascimento</label>");
+            out.print("<input type=\"date\" name=\"nascimento\" id=\"nascimento\" />");        
+
+            out.print("<label>Nome de usuário</label>");
+            out.print("<input type=\"text\" name=\"username\" id=\"username\" />");
+            out.print("<label>Senha</label>");
+            out.print("<input type=\"text\" name=\"senha\" id=\"senha\" />");
+            out.print("<input type=\"hidden\" value=\"cadastrarUsuario\" name=\"evento\" id=\"evento\">");
+            out.print("<button type=\"submit\">Next</button>");
         
-        <label>Nome</label>
-        <input type="text" name="nome" id="nome" />
-        <label>Email</label>
-        <input type="text" name="email" id="email" />
-        <label>CPF</label>
-        <input type="text" name="cpf" id="cpf" />
-        <label>Data de nascimento</label>
-        <input type="date" name="nascimento" id="nascimento" />        
-        
-        <label>Área de interesse</label>
-        <input type="text" name="interesse" id="interesse" />
-        <label>Método de ingresso</label>
-        <input type="text" name="metodo" id="metodo" />
-        <label>Pontuação no vestibular</label>
-        <input type="text" name="vestibular" id="vestibular" />
-        <label>Semestre de ingresso</label>
-        <input type="text" name="semestre" id="semestre" />  
-        <label>Número de matrícula</label>
-        <input type="text" name="matricula" id="matricula" />
-        
-        <label>Nome de usuário</label>
-        <input type="text" name="username" id="username" />
-        <label>Senha</label>
-        <input type="text" name="senha" id="senha" />
-        
-        <input type="hidden" value="cadastrarUsuario" name="evento" id="evento">
-        <button type="submit">Cadastrar</button>
+        }
+        else{
+            if(tipo.equalsIgnoreCase("aluno")){
+                out.print("<label>Método de ingresso</label>");
+                out.print("<input type=\"text\" name=\"metodo\" id=\"metodo\" />");
+                out.print("<label>Pontuação no vestibular</label>");
+                out.print("<input type=\"text\" name=\"vestibular\" id=\"vestibular\" />");
+                out.print("<label>Semestre de ingresso</label>");
+                out.print("<input type=\"text\" name=\"semestre\" id=\"semestre\" />");  
+                out.print("<label>Número de matrícula</label>");
+                out.print("<input type=\"text\" name=\"matricula\" id=\"matricula\" />");
+                out.print("<input type=\"hidden\" value=\"cadastrarAluno\" name=\"evento\" id=\"evento\">");
+                out.print("<button type=\"submit\">Finalizar Cadastro</button>");
+            }
+            if(tipo.equalsIgnoreCase("administrador")){
+                request.getRequestDispatcher("ControladorContext?evento=cadastrarAdministrador").
+                        forward(request, response);
+            }
+            if(tipo.equalsIgnoreCase("professor")){
+                out.print("<label>Área de interesse</label>");
+                out.print("<input type=\"text\" name=\"interesse\" id=\"interesse\" />");
+                out.print("<input type=\"hidden\" value=\"cadastrarProfessor\" name=\"evento\" id=\"evento\">");
+                out.print("<button type=\"submit\">Finalizar Cadastro</button>");
+            }
+            session.removeAttribute("tipo");
+        }    
+            %>
+
         <div class="spacer"></div>
 
         </form>
