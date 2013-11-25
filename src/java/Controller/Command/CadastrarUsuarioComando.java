@@ -38,6 +38,7 @@ public class CadastrarUsuarioComando implements Comando{
              
              
              Usuario novoUsuario = new Usuario(nome, cpf, username, senha, email, dataNascimento);
+             novoUsuario.setRole(tipo);
              
              HttpSession session = request.getSession();
              session.setAttribute("tipo", tipo);

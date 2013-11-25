@@ -80,9 +80,6 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
     public boolean adicionarUsuario(Usuario user){
         try {
             PreparedStatement statement;
-                    
-            //obtém o tipo do usuário
-            String tipoUsuario = user.getRole();
             
             //é necessário inserir uma entrada na tabela de usuários
             statement = con.prepareStatement("INSERT INTO usuario "
