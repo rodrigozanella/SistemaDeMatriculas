@@ -53,7 +53,6 @@
                 
                 out.println("<a href=ControladorContext?evento=logoff><p>Logoff</p></a>");
             }
-            out.println("<a href=infoDisciplinas.jsp><p>Árvore curricular do curso</p></a>");
             out.println("<a href=infoDisciplinas.jsp><p>Informações das disciplinas</p></a>");
             out.println("<a href=infoProfessores.jsp><p>Informações dos professores</p></a>");
         %>

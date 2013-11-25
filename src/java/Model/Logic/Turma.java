@@ -4,6 +4,7 @@ package Model.Logic;
 
 public class Turma {
     private String codigoDisciplina;
+    private int codigoUnico; //identificador único da turma
     private int codigo; //'A', 'B', etc...
     private String semestre; //no formato "20xx/x"
     private String horario; //no formato "13:30"
@@ -19,6 +20,14 @@ public class Turma {
         this.cpfProfessor = cpfProfessor;
     }
     
+    public void setCodigoUnico(int codigoUnico) {
+        this.codigoUnico = codigoUnico;
+    }
+    
+    public int getCodigoUnico() {
+        return codigoUnico;
+    }
+        
     public void setCodigoDisciplina(String codigoDisciplina) {
         this.codigoDisciplina = codigoDisciplina;
     }

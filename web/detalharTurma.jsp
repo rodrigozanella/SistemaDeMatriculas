@@ -23,7 +23,6 @@
 		<style media="screen" type="text/css">
 			body {padding:70px; text-align: center}
 			hr {margin-bottom: 40px}
-			a {text-decoration:none; font-size:30px; color: #1D29D1}
 			a:hover{color:#1E0A6E}
 			h1{font-size: 35px}
 		</style>
@@ -42,7 +41,7 @@
         
         out.println("<table cellspacing=\"10\">");
         out.println("<tr>");
-        out.println("<th>Codigo da Turma</th>");
+        out.println("<th>Turma</th>");
         out.println("<th>Nome da Disciplina</th>");
         out.println("<th>Nome do Professor</th>");
         out.println("<th>Semestre</th>");
@@ -50,7 +49,7 @@
         out.println("</tr>");
         
         out.println("<tr>");
-        out.println("<th>"+turma.getCodigo()+"</th>");
+        out.println("<th>"+(char)turma.getCodigo()+"</th>");
         Disciplina novaDisciplina = disciplinaDAO.getDisciplina(turma.getCodigoDisciplina());
         out.println("<th>"+novaDisciplina.getCodigo()+" - "+novaDisciplina.getNome()+"</th>");
         Professor novoProf = (Professor) usuarioDAO.getUsuario(turma.getCpfProfessor());

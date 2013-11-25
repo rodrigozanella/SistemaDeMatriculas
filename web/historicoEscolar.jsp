@@ -1,4 +1,5 @@
 
+<%@page import="javax.persistence.Convert"%>
 <%@page import="Model.Logic.Usuario"%>
 <%@page import="Model.Persistence.DAOs.DisciplinaDAO"%>
 <%@page import="Model.Persistence.DAOs.UsuarioDAO"%>
@@ -21,6 +22,12 @@
 			a:hover{color:#1E0A6E}
 			h1{font-size: 35px}
                         h3{font-size: 28px}
+                        table{
+                            padding: 2px;
+                            text-align: center;
+                            font-size: 18px;
+                            border:0;
+                        }
 		</style>
     </head>
     <body>
@@ -31,27 +38,45 @@
         <form action="ControladorContext">
             <input type="hidden" value="encomenda" name="evento" id="evento">
             <%
+                //Imprime cabeçalhos da tabela
+                out.println("<table cellspacing=\"10\">");
+                out.println("<tr>");
+                out.println("<th>Codigo</th>");
+                out.println("<th>Nome</th>");
+                out.println("<th>Nr. de créditos</th>");
+                out.println("<th>Eletiva</th>");
+                out.println("<th>Turma</th>");
+                out.println("<th>Professor</th>");
+                out.println("<th>Semestre</th>");
+                out.println("<th>Conceito</th>");
+                out.println("</tr>");
+            
+                //Imprime disciplinas cursadas
                 HistoricoEscolar historico = (HistoricoEscolar) session.getAttribute("historico");
+                FactoryDAO novoFactory = new FactoryDAO();
+                DisciplinaDAO disciplinaDAO = novoFactory.criarDisciplinaDAO();
+                UsuarioDAO usuarioDAO = novoFactory.criarUsuarioDAO();
                 for(HistoricoEscolarElemento elemento : historico.getHistorico()){
-                    out.println("<p>");
-                    out.print(elemento.getTurma().getCodigoDisciplina()+" - ");
-                    FactoryDAO novoFactory = new FactoryDAO();
-                    DisciplinaDAO disciplinaDAO = novoFactory.criarDisciplinaDAO();
                     String codigoDaDisciplina = elemento.getTurma().getCodigoDisciplina();
                     Disciplina novaDisciplina = disciplinaDAO.getDisciplina(codigoDaDisciplina);
-                    out.print(novaDisciplina.getNome());
-                    out.print("Turma "+elemento.getTurma().getCodigo()+" - ");
-                    out.print("Horário: "+elemento.getTurma().getHorario()+" - ");
-                    out.print("Semestre: "+elemento.getTurma().getSemestre()+" - ");
-                    UsuarioDAO usuarioDAO = novoFactory.criarUsuarioDAO();
+                    
+                    out.println("<tr>");
+                    out.print("<td>" + novaDisciplina.getCodigo() + "</td>");                    
+                    out.print("<td>" + novaDisciplina.getNome() + "</td>");
+                    out.print("<td>" + novaDisciplina.getNumeroDeCreditos() + "</td>");
+                    if(novaDisciplina.isEletiva()) out.println("<td>Sim</td>");
+                    else out.println("<td>Não</td>");
+                    out.print("<td>" + (char)elemento.getTurma().getCodigo() + "</td>");
                     Usuario novoUsuario = usuarioDAO.getUsuario(elemento.getTurma().getCpfProfessor());
-                    out.print("Professor: "+novoUsuario.getNome());
-                    out.println("</p>");
-                    out.print("Conceito: "+elemento.getConceito());
+                    out.print("<td>" + novoUsuario.getNome() + "</td>");
+                    out.print("<td>" + elemento.getTurma().getSemestre() + "</td>");
+                    out.print("<td>" + elemento.getConceito() + "</td>");
+                    out.println("</tr>");
                 }
+                out.println("</table>");
                 application.removeAttribute("historico");
             %>
         </form>
-        </div>>
+        </div>
     </body>
 </html>

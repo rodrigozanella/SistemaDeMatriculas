@@ -19,7 +19,7 @@ public class JDBCProfessorDAO extends JDBCDAO implements ProfessorDAO {
     public List<Turma> getTurmas(String cpfProfessor) {
         List<Turma> turmas = new ArrayList<Turma>();
         try {
-            String query =  "SELECT id FROM turma WHERE cpfProfessor = '"+cpfProfessor+"'";
+            String query =  "SELECT id FROM turma WHERE cpfProfessor = '"+cpfProfessor+"' ORDER BY semestre";
             st = con.createStatement();
             rs = st.executeQuery(query);
             FactoryDAO factory = new FactoryDAO();
