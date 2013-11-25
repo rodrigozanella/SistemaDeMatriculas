@@ -13,7 +13,6 @@ import Model.Persistence.FactoryDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -94,89 +93,35 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
             statement.setString(3, user.getRole());
             statement.execute();
             
+            FactoryDAO factory = new FactoryDAO();
+            
+            boolean gravou = false;
             //e também na tabela especifica do usuario
             if(tipoUsuario.equalsIgnoreCase("aluno")){
-                Aluno aluno = (Aluno)user;
-                
-                statement = con.prepareStatement("INSERT INTO aluno "
-                        + "(cpf, nome, nomeUsuario, email, dataNascimento, matricula, "
-                        + "semestreIngresso, metodoIngresso, pontuacaoVestibular, situacao, "
-                        + "pontuacao) VALUES (?, ?, ?, ?, NULL, ?, ?, ?, ?, NULL, 100)");
-                statement.setString(1, aluno.getCpf()); 
-                statement.setString(2, aluno.getNome());
-                statement.setString(3, aluno.getNomeDeUsuario());
-                statement.setString(4, aluno.getEmail());
-                statement.setInt(5, aluno.getNumeroDeMatricula()); 
-                statement.setString(6, aluno.getSemestreDeIngresso());
-                statement.setString(7, aluno.getTipoDeIngresso()); 
-                statement.setInt(8, aluno.getPontuacaoVestibular());
-                statement.execute();
+                AlunoDAO alunoDAO = factory.criarAlunoDAO();
+                gravou = alunoDAO.adicionarAluno((Aluno) user);
             }
             else if(tipoUsuario.equalsIgnoreCase("professor")){
-                Professor professor = (Professor)user;
-                
-                statement = con.prepareStatement("INSERT INTO professor "
-                        + "(cpf, nome, email, nomeUsuario, dataNascimento, areaInteresse)"
-                        + " VALUES (?, ?, ?, ?, NULL, ?)");
-                statement.setString(1, professor.getCpf()); 
-                statement.setString(2, professor.getNome());
-                statement.setString(3, professor.getEmail());
-                statement.setString(4, professor.getNomeDeUsuario());
-                statement.setString(5, professor.getAreaDeInteresse());
-                statement.execute();
+               ProfessorDAO professorDAO = factory.criarProfessorDAO();
+               gravou = professorDAO.adicionarProfessor((Professor) user);
             }        
             else if(tipoUsuario.equalsIgnoreCase("administrador")){
-                Administrador administrador = (Administrador)user;
-                
-                statement = con.prepareStatement("INSERT INTO administrador "
-                        + "(cpf, nome, email, nomeUsuario, dataNascimento)"
-                        + " VALUES (?, ?, ?, ?, NULL)");
-                statement.setString(1, administrador.getCpf()); 
-                statement.setString(2, administrador.getNome());
-                statement.setString(3, administrador.getEmail());
-                statement.setString(4, administrador.getNomeDeUsuario());
-                
-                statement.execute();
+               AdministradorDAO administradorDAO = factory.criarAdministradorDAO();
+               gravou = administradorDAO.adicionarAdministrador((Administrador) user);
             }
-           
+            
+           if(gravou == true){
+               return true;
+           }
+           else{
+               return false;
+           }
         } catch (SQLException ex) {
             Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         }
-        return true;
+        return false;
     }
 
-    /**
-     * getProfessores
-     * Obtém uma lista de todos os professores cadastrados no sistema.
-     */
-    @Override
-    public ArrayList<Professor> getProfessores(){
-        ArrayList<Professor> professores = new ArrayList<Professor>();
-        try{
-            //obtém todos os registros de professores
-            String query = "SELECT * FROM professor, usuario WHERE usuario.nomeUsuario = professor.nomeUsuario ORDER BY nome";
-            st = con.createStatement();
-            rs = st.executeQuery(query);
-
-            //cria as instâncias de professores e as coloca no array
-            while(rs.next()){
-                String cpf = rs.getString("cpf");
-                String nome = rs.getString("nome");
-                String nomeUsuario = rs.getString("nomeUsuario");
-                String senha = rs.getString("senha");
-                String email = rs.getString("email");
-                //Date nascimento =  rs.getDate("dataNascimento");
-                String areaDeInteresse = rs.getString("areaInteresse");
-                
-                Professor professor = new Professor(nome, cpf, nomeUsuario, senha, email, null, areaDeInteresse);
-                professores.add(professor);
-            }
-        } catch(SQLException ex){
-            Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return professores;
-    }
     
     /**
      * getUsuario

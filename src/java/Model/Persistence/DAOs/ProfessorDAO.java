@@ -7,5 +7,7 @@ import java.util.List;
 public interface ProfessorDAO {
     public List<Turma> getTurmas(String cpfProfessor);
     public Professor getProfessor(String usuario, String password);
+    public boolean adicionarProfessor(Professor professor);
+    public List<Professor> getProfessores();
     
 }

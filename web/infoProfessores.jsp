@@ -1,11 +1,11 @@
 
-<%@page import="Model.Persistence.DAOs.UsuarioDAO"%>
+<%@page import="java.util.List"%>
+<%@page import="Model.Persistence.DAOs.ProfessorDAO"%>
 <%@page import="Model.Logic.Professor"%>
 <%@page import="Model.Logic.Usuario"%>
 <%@page import="java.util.Queue"%>
 <%@page import="java.util.TreeMap"%>
 <%@page import="Model.Logic.Disciplina"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="Model.Persistence.DAOs.DisciplinaDAO"%>
 <%@page import="Model.Persistence.FactoryDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -33,8 +33,8 @@
         <%
             //Obtém lista dos professores cadastrados
             FactoryDAO factoryDAO = new FactoryDAO();
-            UsuarioDAO usuarioDAO = factoryDAO.criarUsuarioDAO();
-            ArrayList<Professor> professores = usuarioDAO.getProfessores();
+            ProfessorDAO professorDAO = factoryDAO.criarProfessorDAO();
+            List<Professor> professores = professorDAO.getProfessores();
             
             //Imprime cabeçalhos da tabela
             out.println("<table cellspacing=\"10\">");

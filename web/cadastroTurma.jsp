@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="Model.Persistence.DAOs.ProfessorDAO"%>
 <%@page import="Model.Persistence.DAOs.UsuarioDAO"%>
 <%@page import="Model.Persistence.DAOs.DisciplinaDAO"%>
 ﻿<%@page import="Model.Logic.Professor"%>
@@ -85,8 +87,8 @@
             <label>Professor</label>
             <%
                 FactoryDAO factoryDAO = new FactoryDAO();
-                UsuarioDAO usuarioDAO = factoryDAO.criarUsuarioDAO();
-                ArrayList<Professor> professores = usuarioDAO.getProfessores();
+                ProfessorDAO professorDAO = factoryDAO.criarProfessorDAO();
+                List<Professor> professores = professorDAO.getProfessores();
                 out.println("<select style=\"margin:0 0 10px 10px; width: 350px;\" size=\"10\" name=\"professor\" id=\"professor\">");
                 for(Professor professor : professores){
                     out.println("<option value=\"" + professor.getCpf() + "\">" + professor.getNome() + "</option>");

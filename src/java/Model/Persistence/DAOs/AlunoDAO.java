@@ -12,5 +12,5 @@ import Model.Logic.Aluno;
  */
 public interface AlunoDAO {
     public Aluno getAluno(String usuario, String password);
-    
+    public boolean adicionarAluno(Aluno aluno);
 }

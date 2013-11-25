@@ -24,7 +24,7 @@ public class Aluno extends Usuario{
     private int pontuacaoVestibular; //entre 0 e 100
     private String semestreDeIngresso; //no formato "20xx/x"
     private int numeroDeMatricula;
-    private static Set<Turma> possibilidadesMatricula;
+    private Set<Turma> possibilidadesMatricula;
     
     public Aluno(String nome, String cpf, String nomeUsuario, String senha, String email, Date dataDeNascimento, String tipoDeIngresso, int pontuacaoVestibular, String semestreDeIngresso, int numeroDeMatricula){
         super(nome, cpf, nomeUsuario, senha, email, dataDeNascimento);
