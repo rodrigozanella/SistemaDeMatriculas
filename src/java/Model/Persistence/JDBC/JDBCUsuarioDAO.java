@@ -48,6 +48,9 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
             if(tipo.equalsIgnoreCase("aluno")){
                 AlunoDAO alunoDAO = factory.criarAlunoDAO();
                 novoUser = alunoDAO.getAluno(name, password);
+                if(!alunoDAO.situacao((Aluno) novoUser)){
+                    novoUser = null;
+                }
             }
             if(tipo.equalsIgnoreCase("administrador")){
                 AdministradorDAO administradorDAO = factory.criarAdministradorDAO();
@@ -57,6 +60,7 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
                 ProfessorDAO  professorDAO = factory.criarProfessorDAO();
                 novoUser = professorDAO.getProfessor(name, password);
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(JDBCUsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e){

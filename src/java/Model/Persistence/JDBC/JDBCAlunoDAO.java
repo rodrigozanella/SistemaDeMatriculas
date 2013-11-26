@@ -3,8 +3,12 @@ package Model.Persistence.JDBC;
 
 import Model.Logic.Aluno;
 import Model.Persistence.DAOs.AlunoDAO;
+import Model.Persistence.DAOs.UsuarioDAO;
+import Model.Persistence.FactoryDAO;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,6 +54,57 @@ public class JDBCAlunoDAO extends JDBCDAO implements AlunoDAO{
             Logger.getLogger(JDBCAlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public Set<Aluno> getAlunosIrregulares() {
+        Set<Aluno> alunos = new HashSet<Aluno>();
+        
+        try {
+            String query = "SELECT cpfAluno,COUNT(conceito) as numconc FROM turma_cursada WHERE conceito = 'FF' GROUP BY cpfAluno";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            FactoryDAO factory = new FactoryDAO();
+            UsuarioDAO usuarioDAO = factory.criarUsuarioDAO();
+ 
+            while(rs.next()){
+                if(rs.getInt("nunconc")>=10){
+                    Aluno aluno = (Aluno) usuarioDAO.getUsuario(rs.getString("cpfAluno"));
+                    alunos.add(aluno);
+                }
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCAlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alunos;
+    }
+
+    @Override
+    public boolean expulsarAluno(Aluno aluno) {
+        try {
+            PreparedStatement statement;
+            statement = con.prepareStatement("UPDATE aluno SET situacao = 'ExpulsoFF' WHERE cpf = '"+aluno.getCpf()+"'");
+            return statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCAlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean situacao(Aluno aluno) {
+        try {
+            String query = "SELECT * FROM aluno WHERE (situacao = 'ExpulsoFF' OR situacao = 'Expulso') AND cpf = '"+aluno.getCpf()+"'";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            if(rs.next()){
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCAlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
     
 }
