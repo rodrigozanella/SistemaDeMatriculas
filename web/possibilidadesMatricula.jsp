@@ -57,7 +57,7 @@
         <h3>Encomenda de matricula</h3>
         <div>
         <form id="form" name="form" method="post" action="ControladorContext">
-            <input type="hidden" value="encomendarMatricula" name="evento" id="evento">
+            <input type="hidden" value="encomendaMatricula" name="evento" id="evento">
             <%
                 //Obtém a instância do aluno logado
                 Aluno aluno = (Aluno) session.getAttribute("usuario");
