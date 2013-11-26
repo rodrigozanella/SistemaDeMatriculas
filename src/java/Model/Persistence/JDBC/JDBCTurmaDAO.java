@@ -165,5 +165,25 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
         }
         return false;
     }
+
+    @Override
+    public Set<Turma> getTurmasMatriculadas(Aluno aluno, String semestre){
+        Set<Turma> turmas = new HashSet<Turma>();
+        try {
+            String query = "SELECT * FROM turma_cursada, turma WHERE turma_cursada.idTurma = turma.id AND turma.semestre = '" + semestre + "' AND turma_cursada.cpfAluno = '" + aluno.getCpf() + "'";
+             st = con.createStatement();
+             rs = st.executeQuery(query);
+             while(rs.next()){
+                Turma turma = new Turma((int)rs.getString("codigo").charAt(0), rs.getString("codigoDisciplina"), 
+                        rs.getString("horario"), rs.getString("semestre"), 
+                        rs.getInt("numvagas"), rs.getString("cpfProfessor"));
+                turma.setCodigoUnico(rs.getInt("id"));
+                turmas.add(turma);
+             }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCTurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return turmas; 
+    }
     
 }

@@ -34,7 +34,7 @@ public class IniciarPeriodoLetivoComando implements Comando{
             
             //o sistema deve estar em matrícula
             if(estadoAtual.equalsIgnoreCase("matricula")){
-                //if(sistemaDAO.setEstado("letivo")){
+                if(sistemaDAO.setEstado("letivo")){
 
                     
                     //Obtém todas turmas disponíveis para o semestre
@@ -58,15 +58,22 @@ public class IniciarPeriodoLetivoComando implements Comando{
                         int contador = 0;
                         UsuarioDAO usuarioDAO = factory.criarUsuarioDAO();
                         for(Lance lance : lances){
+                            if(contador >= turma.getNumeroDeVagas()){
+                                lance.setSituacao("recusado");
+                                lanceDAO.atualizaLance(lance);
+                            }
                             //Matricula o aluno
                             Aluno aluno = (Aluno)usuarioDAO.getUsuario(lance.getCpfAluno());
                             turmaDAO.matriculaAluno(turma, aluno);
+                            lance.setSituacao("aceito");
+                            lanceDAO.atualizaLance(lance);
 
                             contador++;
-                            if(contador == turma.getNumeroDeVagas()) break;
                         }
                     }
-                //}
+                    
+                    
+                }
             }
         
             RequestDispatcher reqDis= request.getRequestDispatcher("index.jsp");       

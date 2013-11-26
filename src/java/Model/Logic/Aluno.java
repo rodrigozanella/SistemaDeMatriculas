@@ -27,6 +27,7 @@ public class Aluno extends Usuario{
     private int numeroDeMatricula;
     private Set<Turma> possibilidadesMatricula;
     private Set<Lance> lances;
+    private Set<Turma> turmasMatriculadas;
     
     public Aluno(String nome, String cpf, String nomeUsuario, String senha, String email, Date dataDeNascimento, String tipoDeIngresso, int pontuacaoVestibular, String semestreDeIngresso, int numeroDeMatricula){
         super(nome, cpf, nomeUsuario, senha, email, dataDeNascimento);
@@ -97,6 +98,14 @@ public class Aluno extends Usuario{
     
     public Set<Lance> getLances(){
         return lances;
+    }
+    
+    public void setTurmasMatriculadas(Set<Turma> turmasMatriculadas){
+        this.turmasMatriculadas = turmasMatriculadas;
+    }
+    
+    public Set<Turma> getTurmasMatriculadas(){
+        return turmasMatriculadas;
     }
 
     public void setTipoDeIngresso(String tipoDeIngresso) {
