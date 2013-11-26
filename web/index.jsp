@@ -39,7 +39,7 @@
                     out.println("<hr>");
                     out.println("<a href='ControladorContext?evento=possibilidadeMatricula'><p>Ver possibilidades de matrícula</p></a>");
                     out.println("<a href='ControladorContext?evento=resultadoEncomenda'><p>Visualizar resultado da encomenda</p></a>");
-                    out.println("<a><p>Visualizar comprovante de matrícula</p></a>");
+                    out.println("<a href='ControladorContext?evento=comprovanteMatricula'><p>Visualizar comprovante de matrícula</p></a>");
                     out.println("<a href='ControladorContext?evento=imprimirHistorico'><p>Visualizar histórico escolar</p></a>");
                 }
                 if(tipo.equalsIgnoreCase("administrador")){
