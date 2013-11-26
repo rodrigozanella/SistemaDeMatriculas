@@ -1,5 +1,6 @@
 package Controller.ControllerConta;
 
+import Controller.Command.EncomendarMatriculaComando;
 import Controller.Command.ImprimirHistoricoComando;
 import Controller.Command.LogoffComando;
 import Controller.Command.PossibilidadeMatriculaComando;
@@ -14,6 +15,7 @@ public class AlunoEstado extends UsuarioEstado {
     public AlunoEstado(){
         super();
         //gerar comandos possíveis
+        comandos.put("encomendaMatricula", new EncomendarMatriculaComando());
         comandos.put("possibilidadeMatricula", new PossibilidadeMatriculaComando());
         comandos.put("imprimirHistorico", new ImprimirHistoricoComando());
         comandos.put("logoff", new LogoffComando());
