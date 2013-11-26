@@ -63,7 +63,17 @@ public class JDBCSistemaDAO extends JDBCDAO implements SistemaDAO{
     
     @Override
     public boolean setSemestre(String novoSemestre){
-        return false;
+       try{
+            //atualiza lance
+            String update = "UPDATE sistema "
+                           + "SET semestre = '" + novoSemestre + "'";
+            st = con.createStatement();
+            st.executeUpdate(update);
+  
+        } catch(SQLException ex){
+            Logger.getLogger(JDBCTurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
     }
-    
 }
