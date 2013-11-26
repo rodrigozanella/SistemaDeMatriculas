@@ -4,7 +4,6 @@ package Model.Persistence.JDBC;
 import Model.Logic.Aluno;
 import Model.Persistence.DAOs.TurmaDAO;
 import Model.Logic.Turma;
-import Model.Persistence.DAOs.AlunoDAO;
 import Model.Persistence.DAOs.UsuarioDAO;
 import Model.Persistence.FactoryDAO;
 import java.sql.PreparedStatement;
@@ -115,6 +114,21 @@ public class JDBCTurmaDAO extends JDBCDAO implements TurmaDAO{
             Logger.getLogger(JDBCTurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return alunos;
+    }
+
+    @Override
+    public boolean existeTurmas(String semestre) {
+        try {
+            String query = "SELECT * FROM turma WHERE semestre = '"+semestre+"'";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            if(rs.next()){
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCTurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
 }

@@ -5,7 +5,13 @@
 package Controller.Command;
 
 import Model.Persistence.DAOs.SistemaDAO;
+import Model.Persistence.DAOs.TurmaDAO;
 import Model.Persistence.FactoryDAO;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,15 +23,25 @@ public class IniciarPeriodoEncomendaComando implements Comando{
 
     @Override
     public void executar(HttpServletRequest request, HttpServletResponse response) {
-        FactoryDAO factory = new FactoryDAO();
-        SistemaDAO sistemaDAO = factory.criarSistemaDAO();
-        String estadoAtual = sistemaDAO.getEstado();
-        if(estadoAtual.equalsIgnoreCase("ferias")){
-            //verifica se tem ao menos uma turma aberta
-                if(sistemaDAO.setSemestre("matricula")){
-                    //calcula pontos de ordenamento dos alunos
-                    
+        try {
+            FactoryDAO factory = new FactoryDAO();
+            SistemaDAO sistemaDAO = factory.criarSistemaDAO();
+            TurmaDAO turmaDAO = factory.criarTurmaDAO();
+            String estadoAtual = sistemaDAO.getEstado();
+            if(estadoAtual.equalsIgnoreCase("ferias")){
+                if(turmaDAO.existeTurmas(sistemaDAO.getSemestre())){
+                    if(sistemaDAO.setSemestre("matricula")){
+                        //calcula pontos de ordenamento dos alunos
+
+                    }
                 }
+            }
+            RequestDispatcher reqDis= request.getRequestDispatcher("index.jsp");      
+            reqDis.forward(request,response);
+        } catch (ServletException ex) {
+            Logger.getLogger(IniciarPeriodoEncomendaComando.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(IniciarPeriodoEncomendaComando.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

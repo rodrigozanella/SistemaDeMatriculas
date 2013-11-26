@@ -11,5 +11,5 @@ public interface TurmaDAO{
     public boolean excluirTurma(Turma turma);
     public Set<Turma> getTurmasSemestre(String codDisciplina, String semestre);
     public Set<Aluno> getAlunos(int id);
-    
+    public boolean existeTurmas(String semestre);
 }

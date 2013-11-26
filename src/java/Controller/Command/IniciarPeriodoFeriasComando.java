@@ -8,8 +8,13 @@ import Model.Logic.Aluno;
 import Model.Persistence.DAOs.AlunoDAO;
 import Model.Persistence.DAOs.SistemaDAO;
 import Model.Persistence.FactoryDAO;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,23 +26,31 @@ public class IniciarPeriodoFeriasComando implements Comando{
 
     @Override
     public void executar(HttpServletRequest request, HttpServletResponse response) {  
-        FactoryDAO factory = new FactoryDAO();
-        SistemaDAO sistemaDAO = factory.criarSistemaDAO();
-        String estadoAtual = sistemaDAO.getEstado();
-        if(estadoAtual.equalsIgnoreCase("letivo")){
-            if(sistemaDAO.setEstado("ferias")){
-                //expulsa alunos com 10 ou mais FF
-                AlunoDAO alunoDAO = factory.criarAlunoDAO();
-                Set<Aluno> alunosIrregulares = alunoDAO.getAlunosIrregulares();
-                Iterator<Aluno> itAlunos = alunosIrregulares.iterator();
-                while(itAlunos.hasNext()){
-                    Aluno aluno = itAlunos.next();
-                    alunoDAO.expulsarAluno(aluno);
-                }
-                //expulsa alunos com 10 ou mais anos de curso
+        try {
+            FactoryDAO factory = new FactoryDAO();
+            SistemaDAO sistemaDAO = factory.criarSistemaDAO();
+            String estadoAtual = sistemaDAO.getEstado();
+            if(estadoAtual.equalsIgnoreCase("letivo")){
+                if(sistemaDAO.setEstado("ferias")){
+                    //expulsa alunos com 10 ou mais FF
+                    AlunoDAO alunoDAO = factory.criarAlunoDAO();
+                    Set<Aluno> alunosIrregulares = alunoDAO.getAlunosIrregulares();
+                    Iterator<Aluno> itAlunos = alunosIrregulares.iterator();
+                    while(itAlunos.hasNext()){
+                        Aluno aluno = itAlunos.next();
+                        alunoDAO.expulsarAluno(aluno);
+                    }
+                    //expulsa alunos com 10 ou mais anos de curso
 
-                //gradua alunos que completaram os creditos obrigatorios e eletivos
+                    //gradua alunos que completaram os creditos obrigatorios e eletivos
+                }
             }
+            RequestDispatcher reqDis= request.getRequestDispatcher("index.jsp");      
+            reqDis.forward(request,response);
+        } catch (ServletException ex) {
+            Logger.getLogger(IniciarPeriodoFeriasComando.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(IniciarPeriodoFeriasComando.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
