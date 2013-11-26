@@ -12,10 +12,10 @@ import Model.Logic.Professor;
 import Model.Logic.Turma;
 import Model.Logic.Usuario;
 import Model.Persistence.DAOs.DisciplinaDAO;
+import Model.Persistence.DAOs.LanceDAO;
 import Model.Persistence.FactoryDAO;
 import Model.Persistence.DAOs.TurmaDAO;
 import Model.Persistence.DAOs.UsuarioDAO;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -139,15 +139,34 @@ public class Validador {
         return true;
     }
     
-    public boolean validaLance(Lance lance){
-        if(lance.getValor() <= 0) return false;
-        
-        /* VERIFICA SE O ALUNO TEM PONTOS PARA REALIZAR ESTE LANCE
+    public boolean existeLance(Lance lance){
+        //verifica se o aluno já possui um lance para a turma selecionada
         FactoryDAO factoryDAO = new FactoryDAO();
         UsuarioDAO usuarioDAO = factoryDAO.criarUsuarioDAO();
         Aluno aluno = (Aluno)usuarioDAO.getUsuario(lance.getCpfAluno());
-        ...
-        */
+        LanceDAO lanceDAO = factoryDAO.criarLanceDAO();
+        Set<Lance> lances = lanceDAO.getLances(aluno);
+        for(Lance lanceCorrente : lances){
+            if(lanceCorrente.getIdTurma() == lance.getIdTurma()){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean validaLance(Lance lance){
+        //verifica se o valor do lance é maior que zero
+        if(lance.getValor() <= 0) return false;
+        
+        //verifica se o usuário é um aluno
+        FactoryDAO factoryDAO = new FactoryDAO();
+        UsuarioDAO usuarioDAO = factoryDAO.criarUsuarioDAO();
+        Usuario usuario = usuarioDAO.getUsuario(lance.getCpfAluno());
+        if(!usuario.getRole().equalsIgnoreCase("aluno")) return false;
+        
+        /* 
+         * VERIFICA SE O ALUNO TEM PONTOS PARA REALIZAR ESTE LANCE
+         */
                 
         return true;
     }
