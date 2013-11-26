@@ -12,6 +12,7 @@ import Controller.Command.ImprimirHistoricoComando;
 import Controller.Command.LoginComando;
 import Controller.Command.LogoffComando;
 import Controller.Command.PossibilidadeMatriculaComando;
+import Controller.Command.ResultadoEncomendaComando;
 import Controller.Command.VisualizarTurmasComando;
 import java.util.HashMap;
 
@@ -27,6 +28,7 @@ public class FeriasEstado implements Estado {
         //gerar comandos possíveis
         comandos = new HashMap<String,Comando>();
         comandos.put("login", new LoginComando());
+        comandos.put("resultadoEncomenda", new ResultadoEncomendaComando());
         comandos.put("possibilidadeMatricula", new PossibilidadeMatriculaComando());
         comandos.put("imprimirHistorico", new ImprimirHistoricoComando());
         comandos.put("cadastrarUsuario", new CadastrarUsuarioComando());
