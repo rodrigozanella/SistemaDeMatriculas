@@ -7,6 +7,7 @@ package Model.Validation;
 import Model.Logic.Administrador;
 import Model.Logic.Aluno;
 import Model.Logic.Disciplina;
+import Model.Logic.Lance;
 import Model.Logic.Professor;
 import Model.Logic.Turma;
 import Model.Logic.Usuario;
@@ -135,6 +136,19 @@ public class Validador {
             if(turma.getCodigo() != ((int)'A' + turmas.size() - 1)) return false;
         }
         
+        return true;
+    }
+    
+    public boolean validaLance(Lance lance){
+        if(lance.getValor() <= 0) return false;
+        
+        /* VERIFICA SE O ALUNO TEM PONTOS PARA REALIZAR ESTE LANCE
+        FactoryDAO factoryDAO = new FactoryDAO();
+        UsuarioDAO usuarioDAO = factoryDAO.criarUsuarioDAO();
+        Aluno aluno = (Aluno)usuarioDAO.getUsuario(lance.getCpfAluno());
+        ...
+        */
+                
         return true;
     }
 }

@@ -15,7 +15,9 @@ import Model.Persistence.DAOs.HistoricoDAO;
 import Model.Persistence.DAOs.DisciplinaDAO;
 import Model.Persistence.DAOs.AdministradorDAO;
 import Model.Persistence.DAOs.AlunoDAO;
+import Model.Persistence.DAOs.LanceDAO;
 import Model.Persistence.JDBC.JDBCAlunoDAO;
+import Model.Persistence.JDBC.JDBCLanceDAO;
 
 public class FactoryDAO {
     public UsuarioDAO criarUsuarioDAO(){
@@ -48,5 +50,9 @@ public class FactoryDAO {
     
     public AlunoDAO criarAlunoDAO(){
         return new JDBCAlunoDAO();
+    }
+    
+    public LanceDAO criarLanceDAO(){
+        return new JDBCLanceDAO();
     }
 }
