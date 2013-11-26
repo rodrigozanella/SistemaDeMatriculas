@@ -3,6 +3,7 @@ package Model.Persistence.JDBC;
 
 import Model.Logic.Aluno;
 import Model.Logic.Lance;
+import Model.Logic.Turma;
 import Model.Persistence.DAOs.LanceDAO;
 import Model.Validation.Validador;
 import java.sql.PreparedStatement;
@@ -78,6 +79,36 @@ public class JDBCLanceDAO extends JDBCDAO implements LanceDAO{
     }
     
     /**
+     * getLances
+     * Obtém todos os lances de uma determinada turma.
+     */
+    @Override
+    public Set<Lance> getLances(Turma turma){
+        Set<Lance> lances = new HashSet<Lance>();
+        try{
+            //obtém lista de lances
+            String query = "SELECT * FROM lance "
+                           + "WHERE lance.idTurma = '" + turma.getCodigoUnico() + "'";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+
+            while(rs.next()){
+                int idTurma = rs.getInt("idTurma");
+                String cpfAluno = rs.getString("cpfAluno");
+                int valor = rs.getInt("valor");
+
+                Lance lance = new Lance(idTurma, cpfAluno, valor);
+                lances.add(lance);
+            }
+            
+        } catch(SQLException ex){
+            Logger.getLogger(JDBCTurmaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        return lances;
+    }
+    
+    /**
      * atualizaLance
      * Atualiza um lance. Ocorre se um usuário já possuia um lance para uma determinada turma.
      */
@@ -98,5 +129,4 @@ public class JDBCLanceDAO extends JDBCDAO implements LanceDAO{
         }
         return true;
     }
-    
 }

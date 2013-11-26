@@ -43,7 +43,7 @@
                     out.println("<a href=cadastroUsuario.jsp><p>Cadastrar usuário</p></a>");
                     out.println("<a href=cadastroTurma.jsp><p>Cadastrar turma</p></a>");
                     out.println("<a href=cadastroDisciplina.jsp><p>Cadastrar disciplina</p></a>");
-                    
+                    out.println("<a href='ControladorContext?evento=iniciarPeriodoLetivo'><p>Iniciar Período Letivo</p></a>");
                 }
                 if(tipo.equalsIgnoreCase("professor")){
                     out.println("<h3>Portal do Professor</h3>");
