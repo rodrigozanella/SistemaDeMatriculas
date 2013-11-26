@@ -4,6 +4,8 @@
  */
 package Controller.Command;
 
+import Model.Persistence.DAOs.SistemaDAO;
+import Model.Persistence.FactoryDAO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,7 +17,15 @@ public class IniciarPeriodoLetivoComando implements Comando{
 
     @Override
     public void executar(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FactoryDAO factory = new FactoryDAO();
+        SistemaDAO sistemaDAO = factory.criarSistemaDAO();
+        String estadoAtual = sistemaDAO.getEstado();
+        if(estadoAtual.equalsIgnoreCase("metricula")){
+            if(sistemaDAO.setEstado("letivo")){
+                //preencher vaga das turmas
+                
+            }
+        }
     }
     
 }

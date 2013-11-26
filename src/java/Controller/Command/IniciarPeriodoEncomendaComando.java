@@ -21,7 +21,10 @@ public class IniciarPeriodoEncomendaComando implements Comando{
         SistemaDAO sistemaDAO = factory.criarSistemaDAO();
         String estadoAtual = sistemaDAO.getEstado();
         if(estadoAtual.equalsIgnoreCase("ferias")){
-            
+            //verifica se tem ao menos uma turma aberta
+                if(sistemaDAO.setSemestre("matricula")){
+                    //calcula pontos de ordenamento dos alunos
+                }
         }
     }
     
