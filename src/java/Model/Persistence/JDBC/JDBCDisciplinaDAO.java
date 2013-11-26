@@ -148,7 +148,7 @@ public class JDBCDisciplinaDAO extends JDBCDAO implements DisciplinaDAO{
             
             //insere os seus pré-requisitos na tabela de pré-requisitos
             for(String preRequisito : disciplina.getPreRequisitos()){
-                statement = con.prepareStatement("INSERT INTO pre_requisitos "
+                statement = con.prepareStatement("INSERT INTO pre_requisito "
                                         + "(codigoDisciplina, codigoDisciplinaRequisito)"
                                         + " VALUES (?, ?)");
                 statement.setString(1, disciplina.getCodigo()); 
