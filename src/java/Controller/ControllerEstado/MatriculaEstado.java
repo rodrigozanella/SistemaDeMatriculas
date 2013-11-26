@@ -8,6 +8,7 @@ import Controller.Command.CadastrarTurmaComando;
 import Controller.Command.CadastrarUsuarioComando;
 import Controller.Estado;
 import Controller.Command.Comando;
+import Controller.Command.EncomendarMatriculaComando;
 import Controller.Command.ImprimirHistoricoComando;
 import Controller.Command.LoginComando;
 import Controller.Command.LogoffComando;
@@ -28,6 +29,7 @@ public class MatriculaEstado implements Estado {
         //gerar comandos possíveis
         comandos = new HashMap<String,Comando>();
         comandos.put("login", new LoginComando());
+        comandos.put("encomendaMatricula", new EncomendarMatriculaComando());
         comandos.put("possibilidadeMatricula", new PossibilidadeMatriculaComando());
         comandos.put("imprimirHistorico", new ImprimirHistoricoComando());
         comandos.put("cadastrarUsuario", new CadastrarUsuarioComando());
