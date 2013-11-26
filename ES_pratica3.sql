@@ -158,8 +158,6 @@ CREATE TABLE `lance` (
   `cpfAluno` varchar(45) NOT NULL,
   `valor` int(11) NOT NULL,
   PRIMARY KEY (`idTurma`,`cpfAluno`),
-  UNIQUE KEY `idTurma_UNIQUE` (`idTurma`),
-  UNIQUE KEY `cpfAluno_UNIQUE` (`cpfAluno`),
   KEY `cpfAluno_idx` (`cpfAluno`),
   CONSTRAINT `cpfAluno2` FOREIGN KEY (`cpfAluno`) REFERENCES `aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idTurma3` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -383,4 +381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-25 23:43:16
+-- Dump completed on 2013-11-25 23:54:55
