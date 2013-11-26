@@ -129,4 +129,20 @@ public class Aluno extends Usuario{
     public int getNumeroDeMatricula() {
         return numeroDeMatricula;
     }
+    
+    public int getSerializacao(String semestreAtual){
+        String semestreSys[] = new String[2];
+        String semestreAl[] = new String[2];
+        semestreSys = semestreAtual.split("/");
+        semestreAl = this.semestreDeIngresso.split("/");
+        Integer anoSys = Integer.parseInt(semestreSys[0]);
+        Integer semSys = Integer.parseInt(semestreSys[1]);
+        
+        Integer anoAl = Integer.parseInt(semestreAl[0]);
+        Integer semAl = Integer.parseInt(semestreAl[1]);
+        
+        int valueSys = ( anoSys * 2) - (semSys - 2);
+        int valueAl = ( anoAl * 2) - (semAl - 2);
+        return valueSys - valueAl + 1;
+    }
 }

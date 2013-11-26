@@ -31,17 +31,24 @@ public class IniciarPeriodoFeriasComando implements Comando{
             SistemaDAO sistemaDAO = factory.criarSistemaDAO();
             String estadoAtual = sistemaDAO.getEstado();
             if(estadoAtual.equalsIgnoreCase("letivo")){
+                AlunoDAO alunoDAO = factory.criarAlunoDAO();
                 if(sistemaDAO.setEstado("ferias")){
                     //expulsa alunos com 10 ou mais FF
-                    AlunoDAO alunoDAO = factory.criarAlunoDAO();
                     Set<Aluno> alunosIrregulares = alunoDAO.getAlunosIrregulares();
-                    Iterator<Aluno> itAlunos = alunosIrregulares.iterator();
-                    while(itAlunos.hasNext()){
-                        Aluno aluno = itAlunos.next();
+                    Iterator<Aluno> itAlunosIr = alunosIrregulares.iterator();
+                    while(itAlunosIr.hasNext()){
+                        Aluno aluno = itAlunosIr.next();
                         alunoDAO.expulsarAluno(aluno);
                     }
                     //expulsa alunos com 10 ou mais anos de curso
-
+                    Set<Aluno> alunos = alunoDAO.getAlunos();
+                    Iterator<Aluno> itAlunos = alunos.iterator();
+                    while(itAlunos.hasNext()){
+                        Aluno novoAluno = itAlunos.next();
+                        if(novoAluno.getSerializacao(sistemaDAO.getSemestre())>=10){
+                            alunoDAO.expulsarAluno(novoAluno);
+                        }
+                    }
                     //gradua alunos que completaram os creditos obrigatorios e eletivos
                 }
             }

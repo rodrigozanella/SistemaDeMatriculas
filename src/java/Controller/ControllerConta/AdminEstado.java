@@ -6,6 +6,7 @@ import Controller.Command.CadastrarDisciplinaComando;
 import Controller.Command.CadastrarProfessorComando;
 import Controller.Command.CadastrarTurmaComando;
 import Controller.Command.CadastrarUsuarioComando;
+import Controller.Command.IniciarPeriodoLetivoComando;
 import Controller.Command.LogoffComando;
 
 /**
@@ -17,6 +18,7 @@ public class AdminEstado extends UsuarioEstado {
     public AdminEstado(){
         super();
         //gerar comandos possíveis
+        comandos.put("iniciarPeriodoLetivo", new IniciarPeriodoLetivoComando());
         comandos.put("cadastrarUsuario", new CadastrarUsuarioComando());
         comandos.put("cadastrarAluno", new CadastrarAlunoComando());
         comandos.put("cadastrarProfessor", new CadastrarProfessorComando());

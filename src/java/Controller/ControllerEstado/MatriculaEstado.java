@@ -10,6 +10,7 @@ import Controller.Estado;
 import Controller.Command.Comando;
 import Controller.Command.EncomendarMatriculaComando;
 import Controller.Command.ImprimirHistoricoComando;
+import Controller.Command.IniciarPeriodoLetivoComando;
 import Controller.Command.LoginComando;
 import Controller.Command.LogoffComando;
 import Controller.Command.PossibilidadeMatriculaComando;
@@ -30,6 +31,7 @@ public class MatriculaEstado implements Estado {
         //gerar comandos possíveis
         comandos = new HashMap<String,Comando>();
         comandos.put("login", new LoginComando());
+        comandos.put("iniciarPeriodoLetivo", new IniciarPeriodoLetivoComando());
         comandos.put("resultadoEncomenda", new ResultadoEncomendaComando());
         comandos.put("encomendaMatricula", new EncomendarMatriculaComando());
         comandos.put("possibilidadeMatricula", new PossibilidadeMatriculaComando());

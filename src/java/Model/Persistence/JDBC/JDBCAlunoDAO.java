@@ -106,5 +106,24 @@ public class JDBCAlunoDAO extends JDBCDAO implements AlunoDAO{
         }
         return true;
     }
+
+    @Override
+    public Set<Aluno> getAlunos() {
+        Set<Aluno> alunos = new HashSet<Aluno>();
+        try {
+            FactoryDAO factory = new FactoryDAO();
+            UsuarioDAO usuarioDAO = factory.criarUsuarioDAO();
+            String query = "SELECT cpf FROM aluno";
+            st = con.createStatement();
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                Aluno aluno = (Aluno) usuarioDAO.getUsuario(rs.getString("cpf"));
+                alunos.add(aluno);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCAlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alunos;
+    }
     
 }

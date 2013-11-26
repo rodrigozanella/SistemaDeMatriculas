@@ -17,4 +17,5 @@ public interface AlunoDAO {
     public Set<Aluno> getAlunosIrregulares();
     public boolean expulsarAluno(Aluno aluno);
     public boolean situacao(Aluno aluno);
+    public Set<Aluno> getAlunos();
 }
