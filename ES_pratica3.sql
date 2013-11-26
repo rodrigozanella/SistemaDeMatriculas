@@ -43,6 +43,7 @@ CREATE TABLE `administrador` (
 
 LOCK TABLES `administrador` WRITE;
 /*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
+INSERT INTO `administrador` VALUES ('123.654.789-60','Jorge Silva','jsilva@gmail.com','jsilva','1985-06-28');
 /*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,12 +59,12 @@ CREATE TABLE `aluno` (
   `nome` varchar(100) NOT NULL,
   `nomeUsuario` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `dataNascimento` date DEFAULT NULL,
-  `matricula` int(8) DEFAULT NULL,
-  `semestreIngresso` char(6) DEFAULT NULL,
+  `dataNascimento` date NOT NULL,
+  `matricula` int(8) NOT NULL,
+  `semestreIngresso` char(6) NOT NULL,
   `metodoIngresso` varchar(45) DEFAULT NULL,
   `pontuacaoVestibular` int(11) DEFAULT NULL,
-  `situacao` varchar(45) DEFAULT NULL,
+  `situacao` varchar(45) NOT NULL,
   `pontuacao` int(11) NOT NULL,
   PRIMARY KEY (`cpf`),
   UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`),
@@ -78,7 +79,7 @@ CREATE TABLE `aluno` (
 
 LOCK TABLES `aluno` WRITE;
 /*!40000 ALTER TABLE `aluno` DISABLE KEYS */;
-INSERT INTO `aluno` VALUES ('010.325.689-02','Rofrigo Zanella','rzanella','rodrigo@exemplo.com',NULL,NULL,NULL,NULL,NULL,NULL,500),('025.180.450-56','Henrique Dambros','hdambros','hvdambros@gmail.com',NULL,NULL,NULL,NULL,NULL,NULL,450),('100.252.666-99','Paulo dos Santos','psantos','paulo@uol.com',NULL,NULL,NULL,NULL,NULL,NULL,300);
+INSERT INTO `aluno` VALUES ('010.325.689-02','Rofrigo Zanella','rzanella','rodrigo@exemplo.com','1994-02-23',205845,'2011/1',NULL,666,'Cursando',500),('025.180.450-56','Henrique Dambros','hdambros','hvdambros@gmail.com','1993-10-11',205675,'2011/1',NULL,685,'Cursando',450),('100.252.666-99','Paulo dos Santos','psantos','paulo@uol.com','1965-01-01',140675,'2008/2',NULL,590,'Cursando',300);
 /*!40000 ALTER TABLE `aluno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +157,6 @@ CREATE TABLE `lance` (
   `idTurma` int(11) NOT NULL,
   `cpfAluno` varchar(45) NOT NULL,
   `valor` int(11) NOT NULL,
-  `atendida` bit(1) DEFAULT NULL,
   PRIMARY KEY (`idTurma`,`cpfAluno`),
   UNIQUE KEY `idTurma_UNIQUE` (`idTurma`),
   UNIQUE KEY `cpfAluno_UNIQUE` (`cpfAluno`),
@@ -258,7 +258,7 @@ CREATE TABLE `professor` (
 
 LOCK TABLES `professor` WRITE;
 /*!40000 ALTER TABLE `professor` DISABLE KEYS */;
-INSERT INTO `professor` VALUES ('001.002.003-04','Marcelo Pimenta','mpimenta@inf.ufrgs.br','mpimenta',NULL,NULL),('003.669.876-26','Manuel Oliveira','moliveira@inf.ufrgs.br','moliveira',NULL,NULL),('025.301.254-56','Mariana Luderitz Kolberg','mlkolberg@inf.ufrgs.br','mlkolberg',NULL,NULL),('032.256.215-89','Taisy Silva Weber','tsweber@inf.ufrgs.br','tsweber',NULL,NULL),('123.456.789-10','Sérgio Cechin','scechin@inf.ufrgs.br','scechin',NULL,NULL),('125.254.698-00','Lucas Schnorr','lschnorr@inf.ufrgs.br','lschnorr',NULL,NULL),('154.258.548-12','Cirano Iochpe','ciochpe@inf.ufrgs.br','cioshpe',NULL,NULL),('501.254.328-98','Luciana Porcher Nedel','lpnedel@inf.ufrgs.br','lpnedel',NULL,NULL);
+INSERT INTO `professor` VALUES ('001.002.003-04','Marcelo Pimenta','mpimenta@inf.ufrgs.br','mpimenta','1970-01-01',NULL),('003.669.876-26','Manuel Oliveira','moliveira@inf.ufrgs.br','moliveira','1960-02-02',NULL),('025.301.254-56','Mariana Luderitz Kolberg','mlkolberg@inf.ufrgs.br','mlkolberg','1985-03-03',NULL),('032.256.215-89','Taisy Silva Weber','tsweber@inf.ufrgs.br','tsweber','1950-04-04',NULL),('123.456.789-10','Sérgio Cechin','scechin@inf.ufrgs.br','scechin','1970-05-05',NULL),('125.254.698-00','Lucas Schnorr','lschnorr@inf.ufrgs.br','lschnorr','1985-06-06',NULL),('154.258.548-12','Cirano Iochpe','ciochpe@inf.ufrgs.br','cioshpe','1955-07-07',NULL),('501.254.328-98','Luciana Porcher Nedel','lpnedel@inf.ufrgs.br','lpnedel','1975-08-08',NULL);
 /*!40000 ALTER TABLE `professor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,6 +281,7 @@ CREATE TABLE `sistema` (
 
 LOCK TABLES `sistema` WRITE;
 /*!40000 ALTER TABLE `sistema` DISABLE KEYS */;
+INSERT INTO `sistema` VALUES ('matricula','2013/2');
 /*!40000 ALTER TABLE `sistema` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,7 +370,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('cioshpe','1234','professor'),('hdambros','1234','aluno'),('lpnedel','1234','professor'),('lschnorr','1234','professor'),('mlkolberg','1234','professor'),('moliveira','1234','professor'),('mpimenta','1234','professor'),('psantos','1234','aluno'),('rzanella','1234','aluno'),('scechin','1234','professor'),('tsweber','1234','professor');
+INSERT INTO `usuario` VALUES ('cioshpe','1234','professor'),('hdambros','1234','aluno'),('jsilva','1234','administrador'),('lpnedel','1234','professor'),('lschnorr','1234','professor'),('mlkolberg','1234','professor'),('moliveira','1234','professor'),('mpimenta','1234','professor'),('psantos','1234','aluno'),('rzanella','1234','aluno'),('scechin','1234','professor'),('tsweber','1234','professor');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -382,4 +383,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-20 12:46:59
+-- Dump completed on 2013-11-25 23:43:16
