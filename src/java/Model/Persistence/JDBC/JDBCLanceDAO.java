@@ -34,12 +34,12 @@ public class JDBCLanceDAO extends JDBCDAO implements LanceDAO{
             //insere o lance na tabela de lances
             PreparedStatement statement = con.prepareStatement("INSERT INTO lance "
                                         + "(idTurma, cpfAluno, valor, situacao)"
-                                        + " VALUES (?, ?, ?, NULL)");
+                                        + " VALUES (?, ?, ?, ?)");
 
             statement.setInt(1, lance.getIdTurma());
             statement.setString(2, lance.getCpfAluno());
             statement.setInt(3, lance.getValor());
-            //statement.setString(4, lance.getSituacao());
+            statement.setString(4, lance.getSituacao());
             statement.execute();
             
         } catch(SQLException ex){
@@ -67,7 +67,7 @@ public class JDBCLanceDAO extends JDBCDAO implements LanceDAO{
                 int idTurma = rs.getInt("idTurma");
                 String cpfAluno = rs.getString("cpfAluno");
                 int valor = rs.getInt("valor");
-                String situacao = ""; //rs.getString("situacao");
+                String situacao = rs.getString("situacao");
 
                 Lance lance = new Lance(idTurma, cpfAluno, valor, situacao);
                 lances.add(lance);
@@ -98,7 +98,7 @@ public class JDBCLanceDAO extends JDBCDAO implements LanceDAO{
                 int idTurma = rs.getInt("idTurma");
                 String cpfAluno = rs.getString("cpfAluno");
                 int valor = rs.getInt("valor");
-                String situacao = "";// rs.getString("situacao");
+                String situacao = rs.getString("situacao");
                 
                 Lance lance = new Lance(idTurma, cpfAluno, valor, situacao);
                 lances.add(lance);
@@ -120,8 +120,7 @@ public class JDBCLanceDAO extends JDBCDAO implements LanceDAO{
         try{
             //atualiza lance
             String update = "UPDATE lance "
-                           + "SET valor = '" + lance.getValor() + "'"
-                           //+ "SET valor = '" + lance.getValor() + "', situacao = '" + lance.getSituacao() + "'"
+                           + "SET valor = '" + lance.getValor() + "', situacao = '" + lance.getSituacao() + "'"
                            + "WHERE cpfAluno = '" + lance.getCpfAluno() + "'"
                            + "AND idTurma = '" + lance.getIdTurma() + "'";
             st = con.createStatement();

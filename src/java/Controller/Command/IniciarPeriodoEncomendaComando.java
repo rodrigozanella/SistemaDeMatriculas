@@ -35,7 +35,7 @@ public class IniciarPeriodoEncomendaComando implements Comando{
             String estadoAtual = sistemaDAO.getEstado();
             if(estadoAtual.equalsIgnoreCase("ferias")){
                 if(turmaDAO.existeTurmas(sistemaDAO.getSemestre())){
-                    if(sistemaDAO.setSemestre("matricula")){
+                    if(sistemaDAO.setEstado("matricula")){
                         //calcula pontos de ordenamento dos alunos
                         Set<Aluno> alunos = alunoDAO.getAlunos();
                         Iterator<Aluno> itAluno = alunos.iterator();

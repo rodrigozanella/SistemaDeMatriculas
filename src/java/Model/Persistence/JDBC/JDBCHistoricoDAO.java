@@ -39,6 +39,7 @@ public class JDBCHistoricoDAO extends JDBCDAO implements HistoricoDAO{
             rs = st.executeQuery(query);
             while(rs.next()){
                 Turma novaTurma = novaTurmaDAO.getTurma(rs.getInt("idTurma"));
+                if(rs.getString("conceito") == null) continue;
                 novoHistorico.addElemento(novaTurma, rs.getString("conceito").charAt(0));
             }
         } catch (SQLException ex) {

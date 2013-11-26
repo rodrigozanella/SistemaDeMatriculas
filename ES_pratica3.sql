@@ -34,7 +34,7 @@ CREATE TABLE `administrador` (
   UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`),
   UNIQUE KEY `cpf_UNIQUE` (`cpf`),
   CONSTRAINT `nomeUsuario3` FOREIGN KEY (`nomeUsuario`) REFERENCES `usuario` (`nomeUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `administrador` (
 LOCK TABLES `administrador` WRITE;
 /*!40000 ALTER TABLE `administrador` DISABLE KEYS */;
 INSERT INTO `administrador` VALUES ('123.654.789-60','Jorge Silva','jsilva@gmail.com','jsilva','1985-06-28');
+INSERT INTO `administrador` VALUES ('024.334.612-12','Tiago Bozzetti','tiago@email.com','tcbozzetti',NULL);
 /*!40000 ALTER TABLE `administrador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,18 +60,18 @@ CREATE TABLE `aluno` (
   `nome` varchar(100) NOT NULL,
   `nomeUsuario` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `dataNascimento` date NOT NULL,
+  `dataNascimento` date DEFAULT NULL,
   `matricula` int(8) NOT NULL,
   `semestreIngresso` char(6) NOT NULL,
   `metodoIngresso` varchar(45) DEFAULT NULL,
   `pontuacaoVestibular` int(11) DEFAULT NULL,
-  `situacao` varchar(45) NOT NULL,
-  `pontuacao` int(11) NOT NULL,
+  `situacao` varchar(45) DEFAULT NULL,
+  `pontuacao` int(11) DEFAULT NULL,
   PRIMARY KEY (`cpf`),
   UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`),
   UNIQUE KEY `cpf_UNIQUE` (`cpf`),
   CONSTRAINT `nomeUsuario` FOREIGN KEY (`nomeUsuario`) REFERENCES `usuario` (`nomeUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +107,7 @@ CREATE TABLE `correcao_conceito` (
   CONSTRAINT `cpfAluno4` FOREIGN KEY (`cpfAluno`) REFERENCES `aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `cpfProfessor5` FOREIGN KEY (`cpfProfessor`) REFERENCES `professor` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idTurma4` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +134,7 @@ CREATE TABLE `disciplina` (
   `numCreditosMin` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `codigo_UNIQUE` (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,11 +158,12 @@ CREATE TABLE `lance` (
   `idTurma` int(11) NOT NULL,
   `cpfAluno` varchar(45) NOT NULL,
   `valor` int(11) NOT NULL,
+	`situacao` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idTurma`,`cpfAluno`),
   KEY `cpfAluno_idx` (`cpfAluno`),
   CONSTRAINT `cpfAluno2` FOREIGN KEY (`cpfAluno`) REFERENCES `aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idTurma3` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +192,7 @@ CREATE TABLE `operacao_administrador` (
   UNIQUE KEY `cpfAdministrador_UNIQUE` (`cpfAdministrador`),
   KEY `cpfAdministrador_idx` (`cpfAdministrador`),
   CONSTRAINT `cpfAdministrador` FOREIGN KEY (`cpfAdministrador`) REFERENCES `administrador` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +218,7 @@ CREATE TABLE `pre_requisito` (
   KEY `codigoDisciplinaRequisito_idx` (`codigoDisciplinaRequisito`),
   CONSTRAINT `disciplinaRequisito_codigo` FOREIGN KEY (`codigoDisciplinaRequisito`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `disciplina_codigo` FOREIGN KEY (`codigoDisciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +249,7 @@ CREATE TABLE `professor` (
   UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`),
   UNIQUE KEY `cpf_UNIQUE` (`cpf`),
   CONSTRAINT `nomeUsuario2` FOREIGN KEY (`nomeUsuario`) REFERENCES `usuario` (`nomeUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,7 +272,7 @@ DROP TABLE IF EXISTS `sistema`;
 CREATE TABLE `sistema` (
   `estado` varchar(45) NOT NULL,
   `semestre` varchar(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -305,7 +307,7 @@ CREATE TABLE `turma` (
   KEY `cpfProfessor_idx` (`cpfProfessor`),
   CONSTRAINT `codigoDisciplina` FOREIGN KEY (`codigoDisciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `cpfProfessor` FOREIGN KEY (`cpfProfessor`) REFERENCES `professor` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -333,7 +335,7 @@ CREATE TABLE `turma_cursada` (
   KEY `idTurma_idx` (`idTurma`),
   CONSTRAINT `cpfAluno` FOREIGN KEY (`cpfAluno`) REFERENCES `aluno` (`cpf`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idTurma` FOREIGN KEY (`idTurma`) REFERENCES `turma` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -359,7 +361,7 @@ CREATE TABLE `usuario` (
   `tipo` varchar(45) NOT NULL,
   PRIMARY KEY (`nomeUsuario`),
   UNIQUE KEY `nomeUsuario_UNIQUE` (`nomeUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -368,7 +370,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES ('cioshpe','1234','professor'),('hdambros','1234','aluno'),('jsilva','1234','administrador'),('lpnedel','1234','professor'),('lschnorr','1234','professor'),('mlkolberg','1234','professor'),('moliveira','1234','professor'),('mpimenta','1234','professor'),('psantos','1234','aluno'),('rzanella','1234','aluno'),('scechin','1234','professor'),('tsweber','1234','professor');
+INSERT INTO `usuario` VALUES ('cioshpe','1234','professor'),('hdambros','1234','aluno'),('tcbozzetti','1234','administrador'),('jsilva','1234','administrador'),('lpnedel','1234','professor'),('lschnorr','1234','professor'),('mlkolberg','1234','professor'),('moliveira','1234','professor'),('mpimenta','1234','professor'),('psantos','1234','aluno'),('rzanella','1234','aluno'),('scechin','1234','professor'),('tsweber','1234','professor');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
