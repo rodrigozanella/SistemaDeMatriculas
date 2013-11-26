@@ -11,6 +11,7 @@ import Model.Logic.Lance;
 import Model.Logic.Professor;
 import Model.Logic.Turma;
 import Model.Logic.Usuario;
+import Model.Persistence.DAOs.AlunoDAO;
 import Model.Persistence.DAOs.DisciplinaDAO;
 import Model.Persistence.DAOs.LanceDAO;
 import Model.Persistence.FactoryDAO;
@@ -164,9 +165,9 @@ public class Validador {
         Usuario usuario = usuarioDAO.getUsuario(lance.getCpfAluno());
         if(!usuario.getRole().equalsIgnoreCase("aluno")) return false;
         
-        /* 
-         * VERIFICA SE O ALUNO TEM PONTOS PARA REALIZAR ESTE LANCE
-         */
+        //verifica se o lance não tem valor maior que o valor que o usuário tem
+        //Aluno aluno = (Aluno)usuario;
+        //if(aluno.getPontuacao() < lance.getValor()) return false;
                 
         return true;
     }

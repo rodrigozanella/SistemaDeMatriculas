@@ -21,10 +21,12 @@ public class JDBCAlunoDAO extends JDBCDAO implements AlunoDAO{
             st = con.createStatement();
             rs = st.executeQuery(query);
             if(rs.next()){
-                return new Aluno(rs.getString("nome"),  rs.getString("cpf"),  
+                Aluno aluno = new Aluno(rs.getString("nome"),  rs.getString("cpf"),  
                         usuario, password, rs.getString("email"), null, 
                         rs.getString("metodoIngresso"), rs.getInt("pontuacaoVestibular"), 
                         rs.getString("semestreIngresso"), rs.getInt("matricula"));
+                aluno.setPontuacao(rs.getInt("pontuacao"));
+                return aluno;
            }
         } catch (SQLException ex) {
             Logger.getLogger(JDBCAlunoDAO.class.getName()).log(Level.SEVERE, null, ex);

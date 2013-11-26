@@ -46,7 +46,7 @@ public class IniciarPeriodoEncomendaComando implements Comando{
                         }
                     }
                 }
-            }
+            }      
             RequestDispatcher reqDis= request.getRequestDispatcher("index.jsp");      
             reqDis.forward(request,response);
         } catch (ServletException ex) {

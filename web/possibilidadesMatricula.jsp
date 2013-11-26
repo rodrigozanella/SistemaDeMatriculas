@@ -61,6 +61,7 @@
             <%
                 //Obtém a instância do aluno logado
                 Aluno aluno = (Aluno) session.getAttribute("usuario");
+                out.println("<p>Você possui " + aluno.getPontuacao() + " pontos de ordenamento</p>");
                 
                 //Obtém uma lista de turmas que o aluno pode se matricular
                 Set<Turma> lista = aluno.getPossibilidadesMatricula();

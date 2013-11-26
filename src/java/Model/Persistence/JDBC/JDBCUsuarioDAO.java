@@ -113,7 +113,9 @@ public class JDBCUsuarioDAO extends JDBCDAO implements UsuarioDAO {
             rs = st.executeQuery(query);
             
             if(rs.next()){
-                return new Aluno(rs.getString("nome"), cpf, rs.getString("aluno.nomeUsuario"), rs.getString("senha"), rs.getString("email"), null, rs.getString("metodoIngresso"), rs.getInt("pontuacaoVestibular"), rs.getString("semestreIngresso"), rs.getInt("matricula"));
+                Aluno aluno = new Aluno(rs.getString("nome"), cpf, rs.getString("aluno.nomeUsuario"), rs.getString("senha"), rs.getString("email"), null, rs.getString("metodoIngresso"), rs.getInt("pontuacaoVestibular"), rs.getString("semestreIngresso"), rs.getInt("matricula"));
+                aluno.setPontuacao(rs.getInt("pontuacao"));
+                return aluno;
             }
             
             //procura pelo cpf na tabela de professores

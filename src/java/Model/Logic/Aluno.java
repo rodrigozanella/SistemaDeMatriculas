@@ -28,6 +28,7 @@ public class Aluno extends Usuario{
     private Set<Turma> possibilidadesMatricula;
     private Set<Lance> lances;
     private Set<Turma> turmasMatriculadas;
+    private int pontuacao;
     
     public Aluno(String nome, String cpf, String nomeUsuario, String senha, String email, Date dataDeNascimento, String tipoDeIngresso, int pontuacaoVestibular, String semestreDeIngresso, int numeroDeMatricula){
         super(nome, cpf, nomeUsuario, senha, email, dataDeNascimento);
@@ -36,6 +37,14 @@ public class Aluno extends Usuario{
         this.pontuacaoVestibular = pontuacaoVestibular;
         this.semestreDeIngresso = semestreDeIngresso;
         this.setRole("aluno");
+    }
+    
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
     }
     
     public Set<Turma> getPossibilidadesMatricula() {
