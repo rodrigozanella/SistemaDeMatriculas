@@ -69,6 +69,7 @@
                 out.println("<th>Turma</th>");
                 out.println("<th>Horario</th>");
                 out.println("<th>Valor do lance</th>");
+                out.println("<th>Situação</th>");
                 out.println("</tr>");
                 
                 //Para cada lance da lista, imprime suas informações
@@ -85,6 +86,7 @@
                     out.print("<td>" + (char)turma.getCodigo() + "</td>");
                     out.print("<td>" + turma.getHorario() + "</td>");
                     out.print("<td>" + lance.getValor() + "</td>");
+                    out.print("<td>" + lance.getSituacao() + "</td>");
                     out.println("</tr>");
                 }
             %>

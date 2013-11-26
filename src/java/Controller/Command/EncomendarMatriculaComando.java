@@ -45,7 +45,7 @@ public class EncomendarMatriculaComando implements Comando{
             FactoryDAO factoryDAO = new FactoryDAO();
             LanceDAO lanceDAO = factoryDAO.criarLanceDAO();
             for(Integer codigoTurma : lances.keySet()){
-                Lance lance = new Lance(codigoTurma, aluno.getCpf(), lances.get(codigoTurma));
+                Lance lance = new Lance(codigoTurma, aluno.getCpf(), lances.get(codigoTurma), "pendente");
                 if(!lanceDAO.adicionaLance(lance)){
                     //lance não pode ser inserido
                     //trata o erro

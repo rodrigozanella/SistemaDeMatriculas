@@ -4,6 +4,8 @@
     Author     : Zanella
 --%>
 
+<%@page import="Model.Persistence.DAOs.SistemaDAO"%>
+<%@page import="Model.Persistence.FactoryDAO"%>
 <%@page import="Model.Logic.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,6 +31,9 @@
             }
             else{
                 String tipo = umUsuario.getRole();
+                FactoryDAO factory = new FactoryDAO();
+                SistemaDAO sistemaDAO = factory.criarSistemaDAO();
+                String estadoSys = sistemaDAO.getEstado();
                 if(tipo.equalsIgnoreCase("aluno")){
                     out.println("<h3>Portal do Aluno</h3>");
                     out.println("<hr>");
@@ -43,7 +48,15 @@
                     out.println("<a href=cadastroUsuario.jsp><p>Cadastrar usuário</p></a>");
                     out.println("<a href=cadastroTurma.jsp><p>Cadastrar turma</p></a>");
                     out.println("<a href=cadastroDisciplina.jsp><p>Cadastrar disciplina</p></a>");
-                    out.println("<a href='ControladorContext?evento=iniciarPeriodoLetivo'><p>Iniciar Período Letivo</p></a>");
+                    if(estadoSys.equalsIgnoreCase("matricula")){
+                        out.println("<a href='ControladorContext?evento=iniciarPeriodoLetivo'><p>Iniciar Período Letivo</p></a>");
+                    }
+                    if(estadoSys.equalsIgnoreCase("letivo")){
+                        out.println("<a href='ControladorContext?evento=iniciarPeriodoFerias'><p>Iniciar Período de Férias</p></a>");
+                    }
+                    if(estadoSys.equalsIgnoreCase("ferias")){
+                        out.println("<a href='ControladorContext?evento=iniciarPeriodoEncomenda'><p>Iniciar Encomenda de Matrículas</p></a>");
+                    }
                 }
                 if(tipo.equalsIgnoreCase("professor")){
                     out.println("<h3>Portal do Professor</h3>");

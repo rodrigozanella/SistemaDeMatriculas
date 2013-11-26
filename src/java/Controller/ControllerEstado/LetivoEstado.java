@@ -9,6 +9,7 @@ import Controller.Command.CadastrarUsuarioComando;
 import Controller.Estado;
 import Controller.Command.Comando;
 import Controller.Command.ImprimirHistoricoComando;
+import Controller.Command.IniciarPeriodoFeriasComando;
 import Controller.Command.LoginComando;
 import Controller.Command.LogoffComando;
 import Controller.Command.PossibilidadeMatriculaComando;
@@ -38,6 +39,7 @@ public class LetivoEstado implements Estado {
         comandos.put("cadastrarAdministrador", new CadastrarAdministradorComando());
         comandos.put("cadastrarDisciplina", new CadastrarDisciplinaComando());
         comandos.put("cadastrarTurma", new CadastrarTurmaComando());
+        comandos.put("iniciarPeriodoFerias", new IniciarPeriodoFeriasComando());
         comandos.put("logoff", new LogoffComando());
         comandos.put("visualizarTurmas", new VisualizarTurmasComando());
     }

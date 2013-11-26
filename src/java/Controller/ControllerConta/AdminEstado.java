@@ -6,6 +6,8 @@ import Controller.Command.CadastrarDisciplinaComando;
 import Controller.Command.CadastrarProfessorComando;
 import Controller.Command.CadastrarTurmaComando;
 import Controller.Command.CadastrarUsuarioComando;
+import Controller.Command.IniciarPeriodoEncomendaComando;
+import Controller.Command.IniciarPeriodoFeriasComando;
 import Controller.Command.IniciarPeriodoLetivoComando;
 import Controller.Command.LogoffComando;
 
@@ -26,6 +28,8 @@ public class AdminEstado extends UsuarioEstado {
         comandos.put("cadastrarDisciplina", new CadastrarDisciplinaComando());
         comandos.put("cadastrarTurma", new CadastrarTurmaComando());
         comandos.put("logoff", new LogoffComando());
+        comandos.put("iniciarPeriodoFerias", new IniciarPeriodoFeriasComando());
+        comandos.put("iniciarPeriodoEncomenda", new IniciarPeriodoEncomendaComando());
     }
    
 

@@ -9,6 +9,7 @@ import Controller.Command.CadastrarUsuarioComando;
 import Controller.Estado;
 import Controller.Command.Comando;
 import Controller.Command.ImprimirHistoricoComando;
+import Controller.Command.IniciarPeriodoEncomendaComando;
 import Controller.Command.LoginComando;
 import Controller.Command.LogoffComando;
 import Controller.Command.PossibilidadeMatriculaComando;
@@ -39,6 +40,7 @@ public class FeriasEstado implements Estado {
         comandos.put("cadastrarTurma", new CadastrarTurmaComando());
         comandos.put("logoff", new LogoffComando());
         comandos.put("visualizarTurmas", new VisualizarTurmasComando());
+        comandos.put("iniciarPeriodoEncomenda", new IniciarPeriodoEncomendaComando());
     }
     
     @Override

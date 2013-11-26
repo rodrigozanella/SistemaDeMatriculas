@@ -6,11 +6,21 @@ public class Lance {
     private int idTurma;
     private String cpfAluno;
     private int valor;
+    private String situacao;
 
-    public Lance(int idTurma, String cpfAluno, int valor){
+    public Lance(int idTurma, String cpfAluno, int valor, String situacao){
         this.idTurma = idTurma;
         this.cpfAluno = cpfAluno;
         this.valor = valor;
+        this.situacao = situacao;
+    }
+    
+    public String getSituacao(){
+        return situacao;
+    }
+    
+    public void setSituacao(String situacao){
+        this.situacao = situacao;
     }
     
     public int getIdTurma(){
