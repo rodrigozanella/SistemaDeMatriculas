@@ -18,4 +18,5 @@ public interface AlunoDAO {
     public boolean expulsarAluno(Aluno aluno);
     public boolean situacao(Aluno aluno);
     public Set<Aluno> getAlunos();
+    public boolean atualizaPontuacao(Aluno aluno, int pontuacao);
 }

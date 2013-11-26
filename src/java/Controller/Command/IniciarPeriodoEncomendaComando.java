@@ -4,10 +4,14 @@
  */
 package Controller.Command;
 
+import Model.Logic.Aluno;
+import Model.Persistence.DAOs.AlunoDAO;
 import Model.Persistence.DAOs.SistemaDAO;
 import Model.Persistence.DAOs.TurmaDAO;
 import Model.Persistence.FactoryDAO;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -27,12 +31,19 @@ public class IniciarPeriodoEncomendaComando implements Comando{
             FactoryDAO factory = new FactoryDAO();
             SistemaDAO sistemaDAO = factory.criarSistemaDAO();
             TurmaDAO turmaDAO = factory.criarTurmaDAO();
+            AlunoDAO alunoDAO = factory.criarAlunoDAO();
             String estadoAtual = sistemaDAO.getEstado();
             if(estadoAtual.equalsIgnoreCase("ferias")){
                 if(turmaDAO.existeTurmas(sistemaDAO.getSemestre())){
                     if(sistemaDAO.setSemestre("matricula")){
                         //calcula pontos de ordenamento dos alunos
-
+                        Set<Aluno> alunos = alunoDAO.getAlunos();
+                        Iterator<Aluno> itAluno = alunos.iterator();
+                        while(itAluno.hasNext()){
+                            Aluno aluno = itAluno.next();
+                            int pontucao = aluno.pontuacaoSemestre();
+                            alunoDAO.atualizaPontuacao(aluno, pontucao);
+                        }
                     }
                 }
             }

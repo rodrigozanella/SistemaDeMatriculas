@@ -125,5 +125,17 @@ public class JDBCAlunoDAO extends JDBCDAO implements AlunoDAO{
         }
         return alunos;
     }
+
+    @Override
+    public boolean atualizaPontuacao(Aluno aluno, int pontuacao) {
+         try {
+            PreparedStatement statement;
+            statement = con.prepareStatement("UPDATE aluno SET pontuacao = "+pontuacao+" WHERE cpf = '"+aluno.getCpf()+"'");
+            return statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCAlunoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     
 }

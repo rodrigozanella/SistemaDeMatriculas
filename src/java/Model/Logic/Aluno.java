@@ -7,6 +7,7 @@ package Model.Logic;
 import Model.Persistence.DAOs.DisciplinaDAO;
 import Model.Persistence.FactoryDAO;
 import Model.Persistence.DAOs.HistoricoDAO;
+import Model.Persistence.DAOs.SistemaDAO;
 import Model.Persistence.DAOs.TurmaDAO;
 import java.util.Date;
 import java.util.HashSet;
@@ -144,5 +145,26 @@ public class Aluno extends Usuario{
         int valueSys = ( anoSys * 2) - (semSys - 2);
         int valueAl = ( anoAl * 2) - (semAl - 2);
         return valueSys - valueAl + 1;
+    }
+    
+    public int pontuacaoSemestre(){
+        FactoryDAO factory = new FactoryDAO();
+        SistemaDAO sistemaDAO = factory.criarSistemaDAO();
+        int i1 = this.getSerializacao(sistemaDAO.getSemestre());
+        int i2 = this.getPontuacaoVestibular();
+        int i3 = 0; //média harmônica dos conceitos obtidos até então
+        int i4 = 0; //numero de disciplinas cursadas até então
+        
+        if(i1>1){
+            return i1*100+i3;
+        }
+        else{
+            if(i4>0){
+                return i3;
+            }
+            else{
+                return i2 + 100;
+            }
+        }
     }
 }
