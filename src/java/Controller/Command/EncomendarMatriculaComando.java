@@ -30,27 +30,31 @@ public class EncomendarMatriculaComando implements Comando{
             //obtém uma tabela com os valores de lances inseridos
             HashMap<Integer, Integer> lances = new HashMap<Integer, Integer>();;
             Set<String> parameterNames = request.getParameterMap().keySet();
+            int totalPontos = 0;
             for(String parameter : parameterNames){
                 if(parameter.charAt(0) != 'l') continue;
                 String input = request.getParameter(parameter);
                 if(input.length() == 0) continue;
                 lances.put(Integer.parseInt(parameter.substring(1)), Integer.parseInt(input));
+                totalPontos += Integer.parseInt(input);
             }
 
             //Obtém uma instância do usuário logado
             HttpSession session = request.getSession();
             Aluno aluno = (Aluno)session.getAttribute("usuario");
             
-            //Insere os lances no BD
-            FactoryDAO factoryDAO = new FactoryDAO();
-            LanceDAO lanceDAO = factoryDAO.criarLanceDAO();
-            for(Integer codigoTurma : lances.keySet()){
-                Lance lance = new Lance(codigoTurma, aluno.getCpf(), lances.get(codigoTurma), "pendente");
-                if(!lanceDAO.adicionaLance(lance)){
-                    //lance não pode ser inserido
-                    //trata o erro
-                }else{
-                    //lance inserido
+            if(aluno.getPontuacao() >= totalPontos){
+                //Insere os lances no BD
+                FactoryDAO factoryDAO = new FactoryDAO();
+                LanceDAO lanceDAO = factoryDAO.criarLanceDAO();
+                for(Integer codigoTurma : lances.keySet()){
+                    Lance lance = new Lance(codigoTurma, aluno.getCpf(), lances.get(codigoTurma), "pendente");
+                    if(!lanceDAO.adicionaLance(lance)){
+                        //lance não pode ser inserido
+                        //trata o erro
+                    }else{
+                        //lance inserido
+                    }
                 }
             }
             
