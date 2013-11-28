@@ -2,6 +2,8 @@
 package Model.Validation;
 
 import Model.Logic.Usuario;
+import Model.Persistence.DAOs.UsuarioDAO;
+import Model.Persistence.FactoryDAO;
 
 /**
  * Classe usada para validar um usuário
@@ -32,7 +34,17 @@ public class UsuarioValidador {
     }
     
     public boolean validaCPF(){
-        return usuario.getCpf().matches("[0-9][0-9][0-9].[0-9][0-9][0-9].[0-9][0-9][0-9]-[0-9][0-9]");
+        if(!usuario.getCpf().matches("[0-9][0-9][0-9].[0-9][0-9][0-9].[0-9][0-9][0-9]-[0-9][0-9]")){
+            return false;
+        }
+        
+        FactoryDAO factoryDAO = new FactoryDAO();
+        UsuarioDAO usuarioDAO = factoryDAO.criarUsuarioDAO();
+        if(usuarioDAO.getUsuario(usuario.getCpf()) != null){
+            return false;
+        }
+        
+        return true;
     }
     
     public boolean validaUserName(){

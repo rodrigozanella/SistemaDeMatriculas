@@ -2,6 +2,8 @@
 package Model.Validation;
 
 import Model.Logic.Lance;
+import Model.Persistence.DAOs.TurmaDAO;
+import Model.Persistence.FactoryDAO;
 
 /**
  * Classe utilizada para a validação de dados de um lance
@@ -20,6 +22,13 @@ public class LanceValidador {
     }
     
     public boolean validaIDTurma(){
+        FactoryDAO factoryDAO = new FactoryDAO();
+        TurmaDAO turmaDAO = factoryDAO.criarTurmaDAO();
+        
+        if(turmaDAO.getTurma(lance.getIdTurma()) == null){
+            return false;
+        } 
+        
         return true;
     }
     

@@ -5,6 +5,9 @@
 package Model.Validation;
 
 import Model.Logic.Turma;
+import Model.Persistence.DAOs.DisciplinaDAO;
+import Model.Persistence.DAOs.UsuarioDAO;
+import Model.Persistence.FactoryDAO;
 
 
 /**
@@ -24,6 +27,13 @@ public class TurmaValidador {
     }
     
     public boolean validaCodigoDisciplina(){
+        FactoryDAO factoryDAO = new FactoryDAO();
+        DisciplinaDAO disciplinaDAO = factoryDAO.criarDisciplinaDAO();
+        
+        if(disciplinaDAO.getDisciplina(turma.getCodigoDisciplina()) == null){
+            return false;
+        }
+        
         return true;
     }
     
@@ -48,7 +58,17 @@ public class TurmaValidador {
     }
     
     public boolean validaCPFProfessor(){
-        return turma.getCpfProfessor().matches("[0-9][0-9][0-9].[0-9][0-9][0-9].[0-9][0-9][0-9]-[0-9][0-9]");
+        if(!turma.getCpfProfessor().matches("[0-9][0-9][0-9].[0-9][0-9][0-9].[0-9][0-9][0-9]-[0-9][0-9]")){
+            return false;
+        }
+        
+        FactoryDAO factoryDAO = new FactoryDAO();
+        UsuarioDAO usuarioDAO = factoryDAO.criarUsuarioDAO();
+        if(usuarioDAO.getUsuario(turma.getCpfProfessor()) == null){
+            return false;
+        }
+        
+        return true;
     }
     
     public boolean validaTudo(){

@@ -1,6 +1,8 @@
 package Model.Validation;
 
 import Model.Logic.Disciplina;
+import Model.Persistence.DAOs.DisciplinaDAO;
+import Model.Persistence.FactoryDAO;
 
 /**
  * Classe utilizada para a validação de dados de uma disciplina
@@ -23,6 +25,13 @@ public class DisciplinaValidador {
     }
     
     public boolean validaCodigo(){
+        FactoryDAO factoryDAO = new FactoryDAO();
+        DisciplinaDAO disciplinaDAO = factoryDAO.criarDisciplinaDAO();
+        
+        if(disciplinaDAO.getDisciplina(disciplina.getCodigo()) != null){
+            return false;
+        } 
+        
         return true;
     }
     
@@ -39,6 +48,15 @@ public class DisciplinaValidador {
     }
     
     public boolean validaPreRequisitos(){
+        FactoryDAO factoryDAO = new FactoryDAO();
+        DisciplinaDAO disciplinaDAO = factoryDAO.criarDisciplinaDAO();
+        
+        for(String id : disciplina.getPreRequisitos()){
+            if(disciplinaDAO.getDisciplina(id) == null){
+                return false;
+            } 
+        }
+        
         return true;
     }
     
