@@ -12,7 +12,6 @@ public interface Estado{
      * Captura os comandos possíveis no estado
      * @author Rodrigo Zanella Ribeiro
      * @return Comandos que são possíveis no estado
-     * @param void
      */
     public HashMap<String,Comando> getComandos();
     
