@@ -3,8 +3,8 @@ package Model.Persistence.DAOs;
 import Model.Logic.Usuario;
 
 /**
- *
- * @author Zanella
+ * Interface para criar um DAO para usuário
+ * @author Rodrigo Zanella Ribeiro
  */
 public interface UsuarioDAO {
     public Usuario getUsuario(String name, String password);

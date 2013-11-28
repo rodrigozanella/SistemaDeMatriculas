@@ -1,15 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Model.Validation;
 
 import Model.Logic.Lance;
 
 /**
- *
- * @author Zanella
+ * Classe utilizada para a validação de dados de um lance
+ * @author Rodrigo Zanella Ribeiro
  */
+
 public class LanceValidador {
     private Lance lance;
     

@@ -7,7 +7,7 @@ import Model.Logic.HistoricoEscolarElemento;
 import java.util.Set;
 
 /**
- *
+ * Interface necessária para criar um DAO para um HistoricoEscolar
  * @author Rodrigo Zanella Ribeiro
  */
 public interface HistoricoDAO{

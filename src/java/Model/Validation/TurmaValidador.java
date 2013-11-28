@@ -6,10 +6,12 @@ package Model.Validation;
 
 import Model.Logic.Turma;
 
+
 /**
- *
- * @author Zanella
+ * Classe utilizada para a validação de dados de uma turma
+ * @author Rodrigo Zanella Ribeiro
  */
+
 public class TurmaValidador {
     private Turma turma;
     

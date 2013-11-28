@@ -1,15 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model.Validation;
 
 import Model.Logic.Professor;
 
 /**
- *
- * @author Zanella
+ * Classe utilizada para a validação de dados de um professor
+ * @author Rodrigo Zanella Ribeiro
  */
+
 public class ProfessorValidador {
     private Professor professor;
     

@@ -1,15 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Model.Validation;
 
 import Model.Logic.HistoricoEscolar;
 
 /**
- *
- * @author Zanella
+ * Classe utilizada para a validação de dados de um histórico escolar
+ * @author Rodrigo Zanella Ribeiro
  */
+
 public class HistoricoValidador {
     private HistoricoEscolar historico;
     

@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model.Validation;
 
 import Model.Logic.Administrador;
 
 /**
- *
- * @author Zanella
+ * Classe utilizada para a validação de dados do administrador
+ * @author Rodrigo Zanella Ribeiro
  */
 public class AdministradorValidador {
     private Administrador administrador;

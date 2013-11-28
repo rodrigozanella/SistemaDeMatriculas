@@ -18,7 +18,11 @@ import Model.Persistence.DAOs.AlunoDAO;
 import Model.Persistence.DAOs.LanceDAO;
 import Model.Persistence.JDBC.JDBCAlunoDAO;
 import Model.Persistence.JDBC.JDBCLanceDAO;
-
+/**
+ * Factory utilizada para a criação dos DAOs. Na versão atual, utiliza-se JDBC
+ * para acessar o BD
+ * @author Rodrigo Zanella Ribeiro
+ */
 public class FactoryDAO {
     public UsuarioDAO criarUsuarioDAO(){
         return new JDBCUsuarioDAO();

@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Model.Validation;
 
 import Model.Logic.Usuario;
@@ -10,6 +7,7 @@ import Model.Logic.Usuario;
  * Classe usada para validar um usuário
  * @author Rodrigo Zanella Ribeiro
  */
+
 public class UsuarioValidador {
     private Usuario usuario;
     

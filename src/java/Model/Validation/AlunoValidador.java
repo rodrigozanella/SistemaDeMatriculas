@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model.Validation;
 
 import Model.Logic.Aluno;
 
 /**
- *
- * @author Zanella
+ * Classe utilizada para a validação de dados de um aluno
+ * @author Rodrigo Zanella Ribeiro
  */
 public class AlunoValidador {
     private Aluno aluno;
