@@ -12,7 +12,10 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+/**
+ * Comando para cadastrar uma disciplina
+ * @author Tiago Covolan
+ */
 public class CadastrarDisciplinaComando implements Comando{
     @Override
     public void executar(HttpServletRequest request, HttpServletResponse response){

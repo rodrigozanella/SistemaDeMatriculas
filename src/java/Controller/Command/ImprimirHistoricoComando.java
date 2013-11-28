@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Comando para imprimir histórico escolar do aluno
+ * @author Rodrigo Zanella Ribeiro
+ */
 public class ImprimirHistoricoComando implements Comando {
      @Override
      public void executar(HttpServletRequest request, HttpServletResponse response){

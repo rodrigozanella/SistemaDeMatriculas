@@ -1,7 +1,10 @@
 
 package Model.Logic;
 
-
+/**
+ * Classe que representa uma turma no sistema
+ * @author Tiago Covolan
+ */
 public class Turma {
     private String codigoDisciplina;
     private int codigoUnico; //identificador único da turma

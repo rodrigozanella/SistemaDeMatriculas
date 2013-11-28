@@ -13,7 +13,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+/**
+ * Comando para visualizar turmas matriculadas e já cursadas por um aluno
+ * @author Rodrigo Zanella Ribeiro
+ */
 public class VisualizarTurmasComando implements Comando {
 
     @Override

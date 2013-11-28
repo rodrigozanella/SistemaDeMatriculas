@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * ResultadoEncomendaComando
  * Obtém os lances de um determinado usuário
+ * @author Tiago Covolan
  */
 public class ResultadoEncomendaComando implements Comando{
     @Override

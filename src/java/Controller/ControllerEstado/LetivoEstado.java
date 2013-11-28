@@ -19,7 +19,6 @@ import Controller.Command.VisualizarTurmasComando;
 import java.util.HashMap;
 
 /**
- * LetivoEstado
  * Representa o estado, quando o sistema está em estado letivo
  * @author Rodrigo Zanella Ribeiro
  */

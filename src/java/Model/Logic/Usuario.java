@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model.Logic;
 
 import java.util.Date;
 
 /**
- *
- * @author Tiago
+ * Classe que representa um usuário no sistema
+ * @author Tiago Covolan
  */
 public class Usuario {
     private String nome;

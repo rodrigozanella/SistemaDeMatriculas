@@ -1,15 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model.Logic;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
- * @author Tiago
+ * A classe que representa um professor
+ * @author Tiago Covolan
  */
 public class Professor extends Usuario{
     private String areaDeInteresse;

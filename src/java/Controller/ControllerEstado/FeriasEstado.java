@@ -19,7 +19,6 @@ import Controller.Command.VisualizarTurmasComando;
 import java.util.HashMap;
 
 /**
- * FeriasEstado
  * Representa o estado, quando o sistema está em estado de férias
  * @author Rodrigo Zanella Ribeiro
  */

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller.Command;
 
 import Model.Logic.Aluno;
@@ -20,8 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Zanella
+ * Comando para iniciar periodo de encomenda de matrículas, modificando o
+ * estado do sistema
+ * @author Rodrigo Zanella Ribeiro
  */
 public class IniciarPeriodoEncomendaComando implements Comando{
 

@@ -20,8 +20,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * IniciarPeriodoLetivoComando
- * Preenche as vagas das turmas disponíveis para o semestre atual.
+ * Inicia o periodo letivo no sistema
+ * @author Rodrigo Zanella Ribeiro
+ * @version 1.0
+ * Modificações:
+ * Adicionando funcionalidade de matricular alunos nas cadeiras
+ * @author Tiago Covolan
+ * @version 2.0
  */
 public class IniciarPeriodoLetivoComando implements Comando{
 

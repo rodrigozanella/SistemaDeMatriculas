@@ -1,13 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model.Logic;
 
 import java.util.Date;
 
 /**
- *
+ * Representa uma operação do administrador, que é qualquer ação que o
+ * administrador faz, que será gravada em um log
+ * @author Tiago Covolan
  */
 public class OperacaoAdm {
     

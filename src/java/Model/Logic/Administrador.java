@@ -1,15 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model.Logic;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
- *
- * @author Tiago
+ * Classe que representa um administrador no sistema
+ * @author Tiago Covolan
  */
 public class Administrador extends Usuario {        
     private ArrayList<OperacaoAdm> historicoDeOperacoes;

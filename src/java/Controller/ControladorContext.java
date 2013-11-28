@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import Controller.Command.Comando;
@@ -27,7 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * ControladorContex
  * Classe controladora que gerencia os estados de tipo de usuário e 
  * os estados do sistema, além de controlar as requisições dos usuários
  * @author Rodrigo Zanella Ribeiro
@@ -64,9 +59,7 @@ public class ControladorContext extends HttpServlet {
     }
     
     /**
-     * getSistemaEstado
-     * Captura o estado que o sistema esta
-     * @param null
+     * Captura o estado do sistema
      * @author Rodrigo Zanella Ribeiro
      */
     
@@ -88,7 +81,6 @@ public class ControladorContext extends HttpServlet {
     }
     
     /**
-     * getUsuarioEstado
      * Captura estado que representa o usuário do sistema
      * @author Rodrigo Zanella Ribeiro
      * @param request Servlet Request, necessário para ver se o usuário está logado
@@ -123,12 +115,10 @@ public class ControladorContext extends HttpServlet {
     }
     
     /**
-     * getComandosEstado
      * Calcula a intersecção entre os comandos do estado do sistema e do estado
      * do usuário
      * @author Rodrigo Zanella Ribeiro
      */
-    
     protected void getComandosEstado(){
         comandosInt = new HashMap<String,Comando>();
         
@@ -149,7 +139,6 @@ public class ControladorContext extends HttpServlet {
     }
     
     /**
-     * getComando
      * Seleciona um comando, referente à requisição do usuário
      * @param request Servlet Request, necessário para saber qual a requisição
      * do usuário

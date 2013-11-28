@@ -1,6 +1,10 @@
 
 package Model.Logic;
-
+/**
+ * Um elemento do histórico escolar, composto por uma turma, cursada por um aluno
+ * e o conceito que ele obteve ao cursa-la
+ * @author Rodrigo Zanella Ribeiro
+ */
 public class HistoricoEscolarElemento{
     private Turma turma;
     private char conceito;

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Disciplinas do INF.
+ * @author Tiago Covolan
  */
 public class Disciplina {
     private String nome;

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model.Logic;
 
 import Model.Persistence.DAOs.DisciplinaDAO;
@@ -16,8 +12,8 @@ import java.util.Set;
 
 
 /**
- *
- * @author Tiago
+ * Classe que representa um aluno no sistema
+ * @author Tiago Covolan
  */
 public class Aluno extends Usuario{
 

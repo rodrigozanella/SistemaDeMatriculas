@@ -19,7 +19,6 @@ import Controller.Command.VisualizarTurmasComando;
 import java.util.HashMap;
 
 /**
- * MatriculaEstado
  * Representa o estado, quando o sistema está em estado de matrícula
  * @author Rodrigo Zanella Ribeiro
  */

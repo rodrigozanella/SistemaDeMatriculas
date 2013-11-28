@@ -12,7 +12,6 @@ import Controller.Command.IniciarPeriodoLetivoComando;
 import Controller.Command.LogoffComando;
 
 /**
- * AdminEstado
  * Representa o estado, quando o usuário está logado como administrador
  * @author Rodrigo Zanella Ribeiro
  */

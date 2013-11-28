@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * LoginComando
  * Faz o login de algum usuário no sistema
  * @author Rodrigo Zanella Ribeiro
  */

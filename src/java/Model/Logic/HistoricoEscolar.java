@@ -1,14 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model.Logic;
 
 import java.util.ArrayList;
 
 /**
- *
- * @author Tiago
+ * Classe que representa um histórico escolar de um aluno
+ * @author Tiago Covolan
+ * @version 1.0
+ * Modificações:
+ * Refatoração da classe, criação de uma classe elemento para compor os itens de
+ * um histórico escolar
+ * @version 2.0
+ * @author Rodrigo Zanella Ribeiro
  */
 public class HistoricoEscolar {
     private ArrayList<HistoricoEscolarElemento> elementos;

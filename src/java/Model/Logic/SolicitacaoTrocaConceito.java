@@ -7,8 +7,9 @@ package Model.Logic;
 import java.util.Date;
 
 /**
- *
- * @author Tiago
+ * Representa uma solicitação de troca de conceito que o professor pode fazer
+ * para um aluno, requer autorização de um administrador
+ * @author Tiago Covolan
  */
 public class SolicitacaoTrocaConceito {
     private Date dataDeSolicitacao;

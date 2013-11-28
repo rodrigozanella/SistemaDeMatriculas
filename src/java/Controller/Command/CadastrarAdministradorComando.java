@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller.Command;
 
 import Model.Logic.Administrador;
@@ -19,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Zanella
+ * Comando para cadastrar um administrador
+ * @author Rodrigo Zanella Ribeiro
  */
 public class CadastrarAdministradorComando implements Comando{
 

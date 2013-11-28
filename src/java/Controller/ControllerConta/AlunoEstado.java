@@ -8,7 +8,6 @@ import Controller.Command.PossibilidadeMatriculaComando;
 import Controller.Command.ResultadoEncomendaComando;
 
 /**
- * AlunoEstado
  * Representa o estado, quando o usuário está logado como aluno
  * @author Rodrigo Zanella Ribeiro
  */

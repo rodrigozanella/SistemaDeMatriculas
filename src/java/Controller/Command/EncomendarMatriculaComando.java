@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * EncomendarMatriculaComando
  * Cria uma instância de um lance e o insere no BD.
+ * @author Tiago Covolan
  */
 public class EncomendarMatriculaComando implements Comando{
     @Override

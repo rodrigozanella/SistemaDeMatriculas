@@ -12,7 +12,10 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ * Comando para cadastrar uma turma
+ * @author Tiago Covolan
+ */
 public class CadastrarTurmaComando implements Comando{
     @Override
      public void executar(HttpServletRequest request, HttpServletResponse response){

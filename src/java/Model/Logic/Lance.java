@@ -1,7 +1,10 @@
 
 package Model.Logic;
 
-
+/**
+ * Classe que representa um lance de um aluno para cursar uma turma
+ * @author Tiago Covolan
+ */
 public class Lance {
     private int idTurma;
     private String cpfAluno;

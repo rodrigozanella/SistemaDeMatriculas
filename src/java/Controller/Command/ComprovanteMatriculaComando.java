@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * ComprovanteMatriculaComando
  * Obtém oa turmas nas quais o aluno está matriculado no semestre atual
+ * @author Tiago Covolan
  */
 public class ComprovanteMatriculaComando implements Comando{
     @Override

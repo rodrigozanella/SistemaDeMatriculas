@@ -6,7 +6,6 @@ import Controller.Command.LoginComando;
 import java.util.HashMap;
 
 /**
- * UsuarioEstado
  * Representa o estado, quando o usuário não está logado.
  * @author Rodrigo Zanella Ribeiro
  */

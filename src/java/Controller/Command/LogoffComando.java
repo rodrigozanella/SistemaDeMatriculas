@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Zanella
+ * Faz um logoff de um usuário
+ * @author Rodrigo Zanella Ribeiro
  */
 public class LogoffComando implements Comando{
 

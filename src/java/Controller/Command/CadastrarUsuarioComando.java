@@ -13,8 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Tiago
+ * Comando para cadastrar um usuário
+ * @author Tiago Covolan
+ * @version 1.0
+ * Modificações:
+ * @author Rodrigo Zanella Ribeiro
+ * Divisão do cadastro em etapas: Usuário + especificações (Aluno, Administrador,
+ * Professor)
+ * @version 2.0
  */
 public class CadastrarUsuarioComando implements Comando{
     @Override

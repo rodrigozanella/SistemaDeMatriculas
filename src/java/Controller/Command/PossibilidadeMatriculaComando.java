@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * PossibilidadeMatriculaComando
  * Gera as possibilidades de matrículas de um usuário
  * @author Rodrigo Zanella Ribeiro
  */
