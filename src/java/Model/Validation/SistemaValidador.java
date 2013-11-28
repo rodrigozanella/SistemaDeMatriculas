@@ -10,4 +10,11 @@ package Model.Validation;
  */
 public class SistemaValidador {
     
+    public boolean validaEstado(String estado){
+        return false;
+    }
+    
+    public boolean validaSemestre(String semestre){
+        return false;
+    }
 }

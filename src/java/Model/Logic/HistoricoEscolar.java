@@ -12,8 +12,6 @@ import java.util.ArrayList;
  */
 public class HistoricoEscolar {
     private ArrayList<HistoricoEscolarElemento> elementos;
-    private ArrayList<Turma> turmasAnteriores;
-    private ArrayList<Character> conceitosObtidos;
     
     public HistoricoEscolar(){
         elementos = new ArrayList<HistoricoEscolarElemento>();
