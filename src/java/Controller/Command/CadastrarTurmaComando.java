@@ -4,7 +4,7 @@ package Controller.Command;
 import Model.Logic.Turma;
 import Model.Persistence.FactoryDAO;
 import Model.Persistence.DAOs.TurmaDAO;
-import Model.Validation.Validador;
+import Model.Validation.TurmaValidador;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,8 +37,9 @@ public class CadastrarTurmaComando implements Comando{
 
             //valida a turma
             Turma novaTurma = new Turma(codigo, codigoDisciplina, horario, semestre, vagas, cpfProfessor);
-            Validador validador = new Validador();
-            if(validador.validaTurma(novaTurma)){
+            TurmaValidador turmaValidador = new TurmaValidador();
+            turmaValidador.setTurma(novaTurma);
+            if(turmaValidador.validaTudo()){
                  
                 //insere a turma no BD
                 turmaDAO.adicionaTurma(novaTurma);

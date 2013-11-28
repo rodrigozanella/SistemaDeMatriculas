@@ -5,7 +5,7 @@ import Model.Logic.Aluno;
 import Model.Logic.Lance;
 import Model.Logic.Turma;
 import Model.Persistence.DAOs.LanceDAO;
-import Model.Validation.Validador;
+import Model.Validation.LanceValidador;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -24,10 +24,10 @@ public class JDBCLanceDAO extends JDBCDAO implements LanceDAO{
         try{
             
             //verifica se o lance pode ser inserido no BD
-            Validador validador = new Validador();
-            if(!validador.validaLance(lance)) return false;
-            
-            if(validador.existeLance(lance)){
+            LanceValidador lanceValidador = new LanceValidador();
+            lanceValidador.setLance(lance);
+
+            if(lanceValidador.validaTudo()){
                 return this.atualizaLance(lance);
             }
             

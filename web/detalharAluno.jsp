@@ -29,7 +29,10 @@
         FactoryDAO factory = new FactoryDAO();
         UsuarioDAO usuarioDAO = factory.criarUsuarioDAO();
         Aluno novoAluno = (Aluno) usuarioDAO.getUsuario(cpfAluno);
-        
+        out.println("Nome : "+novoAluno.getNome());
+        out.println("Email : "+novoAluno.getEmail());
+        out.println("Semestre de ingresso : "+ novoAluno.getSemestreDeIngresso());
+        out.println("CPF : "+ novoAluno.getCpf());
         %>
     </body>
 </html>

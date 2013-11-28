@@ -4,7 +4,7 @@ package Controller.Command;
 import Model.Logic.Disciplina;
 import Model.Persistence.DAOs.DisciplinaDAO;
 import Model.Persistence.FactoryDAO;
-import Model.Validation.Validador;
+import Model.Validation.DisciplinaValidador;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -36,8 +36,9 @@ public class CadastrarDisciplinaComando implements Comando{
              
              //valida a disciplina
              Disciplina novaDisciplina = new Disciplina(codigo, nome, creditos, ehEletiva, creditosMnimos, requisitos);
-             Validador validador = new Validador();
-             if(validador.validaDisciplina(novaDisciplina)){
+             DisciplinaValidador disciplinaValidador = new DisciplinaValidador();
+             disciplinaValidador.setDisciplina(novaDisciplina);
+             if(disciplinaValidador.validaTudo()){
                  //insere a disciplina no BD
                  FactoryDAO factoryDAO = new FactoryDAO();
                  DisciplinaDAO disciplinaDAO = factoryDAO.criarDisciplinaDAO();
