@@ -47,6 +47,7 @@ public class IniciarPeriodoLetivoComando implements Comando{
                     for(Turma turma : turmasDisponiveis){
                         ArrayList<Lance> lances = new ArrayList<Lance>(lanceDAO.getLances(turma));
                         Collections.sort(lances, new Comparator() {  
+                            @Override
                             public int compare(Object o1, Object o2) {  
                                 Lance l1 = (Lance)o1;  
                                 Lance l2 = (Lance)o2;  

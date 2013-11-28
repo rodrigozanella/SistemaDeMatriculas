@@ -1,9 +1,7 @@
 package Controller.Command;
 
 import Model.Logic.Aluno;
-import Model.Logic.Lance;
 import Model.Logic.Turma;
-import Model.Persistence.DAOs.LanceDAO;
 import Model.Persistence.DAOs.SistemaDAO;
 import Model.Persistence.DAOs.TurmaDAO;
 import Model.Persistence.FactoryDAO;

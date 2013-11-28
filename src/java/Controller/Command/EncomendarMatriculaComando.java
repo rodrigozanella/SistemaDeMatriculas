@@ -2,15 +2,9 @@ package Controller.Command;
 
 import Model.Logic.Aluno;
 import Model.Logic.Lance;
-import Model.Logic.Turma;
 import Model.Persistence.DAOs.LanceDAO;
 import Model.Persistence.FactoryDAO;
-import Model.Persistence.DAOs.SistemaDAO;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;

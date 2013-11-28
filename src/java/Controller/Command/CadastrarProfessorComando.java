@@ -10,7 +10,6 @@ import Model.Persistence.DAOs.ProfessorDAO;
 import Model.Persistence.DAOs.UsuarioDAO;
 import Model.Persistence.FactoryDAO;
 import java.io.IOException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;

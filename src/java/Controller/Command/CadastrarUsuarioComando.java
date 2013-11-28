@@ -1,13 +1,7 @@
 
 package Controller.Command;
 
-import Model.Logic.Administrador;
-import Model.Logic.Aluno;
-import Model.Logic.Professor;
 import Model.Logic.Usuario;
-import Model.Persistence.FactoryDAO;
-import Model.Persistence.DAOs.UsuarioDAO;
-import Model.Validation.Validador;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
