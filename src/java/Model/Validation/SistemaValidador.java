@@ -11,10 +11,12 @@ package Model.Validation;
 public class SistemaValidador {
     
     public boolean validaEstado(String estado){
-        return false;
+        return estado.equalsIgnoreCase("matricula")||
+                estado.equalsIgnoreCase("letivo")||
+                estado.equalsIgnoreCase("ferias");       
     }
     
     public boolean validaSemestre(String semestre){
-        return false;
+        return semestre.matches("20[0-9][0-9]/(1|2)");
     }
 }

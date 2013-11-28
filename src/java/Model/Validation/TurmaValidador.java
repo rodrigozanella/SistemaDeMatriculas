@@ -22,31 +22,40 @@ public class TurmaValidador {
     }
     
     public boolean validaCodigoDisciplina(){
-        return false;
+        return true;
     }
     
     public boolean validaCodigoUnico(){
-        return false;
+        return true;
     }
     
     public boolean validaCodigo(){
-        return false;
+        return true;
     }
     
     public boolean validaSemestre(){
-        return false;
+        return turma.getSemestre().matches("20[0-9][0-9]/(1|2)");
     }
     
     public boolean validaNumeroDeVagas(){
-        return false;
+        return turma.getNumeroDeVagas() >= 0;
     }
     
     public boolean validaHorario(){
-        return false;
+        return turma.getHorario().matches("[0-9][0-9]:[0-9][0-9]");
     }
     
     public boolean validaCPFProfessor(){
-        return false;
+        return turma.getCpfProfessor().matches("[0-9][0-9][0-9].[0-9][0-9][0-9].[0-9][0-9][0-9]-[0-9][0-9]");
     }
     
+    public boolean validaTudo(){
+        return this.validaCPFProfessor() &&
+                this.validaCodigo() &&
+                this.validaCodigoDisciplina() &&
+                this.validaCodigoUnico() &&
+                this.validaHorario() &&
+                this.validaNumeroDeVagas() &&
+                this.validaSemestre();
+    }
 }

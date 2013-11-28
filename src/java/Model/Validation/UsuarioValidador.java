@@ -22,30 +22,42 @@ public class UsuarioValidador {
     }
     
     public boolean validaNome(){
-        return false;
+        return usuario.getNome().length() > 3;
     }
     
     public boolean validaDataNascimento(){
-        return false;
+        return true;
     }
     
     public boolean validaEmail(){
-        return false;
+        return usuario.getEmail().matches("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9]\\.)*([a-zA-Z0-9])*\\.");
     }
     
     public boolean validaCPF(){
-        return false;
+        return usuario.getCpf().matches("[0-9][0-9][0-9].[0-9][0-9][0-9].[0-9][0-9][0-9]-[0-9][0-9]");
     }
     
     public boolean validaUserName(){
-        return false;
+        return usuario.getNomeDeUsuario().length() > 3;
     }
     
     public boolean validaSenha(){
-        return false;
+        return usuario.getSenha().length() > 3;
     }
     
     public boolean validaRole(){
-        return false;
+        return usuario.getRole().equalsIgnoreCase("aluno")||
+                usuario.getRole().equalsIgnoreCase("administrador")||
+                usuario.getRole().equalsIgnoreCase("professor");
+    }
+    
+    public boolean validarTudo(){
+        return this.validaCPF() &&
+                this.validaDataNascimento() &&
+                this.validaEmail() &&
+                this.validaNome() &&
+                this.validaRole() &&
+                this.validaSenha() &&
+                this.validaUserName();
     }
 }
