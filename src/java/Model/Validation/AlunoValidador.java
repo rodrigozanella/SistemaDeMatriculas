@@ -22,34 +22,46 @@ public class AlunoValidador {
     }
     
     public boolean validaTipoIngresso(){
-        return false;
+        return true;
     }
     
     public boolean validaPontuacaoVestibular(){
-        return false;
+        return aluno.getPontuacaoVestibular()>=0 &&
+                aluno.getPontuacaoVestibular()<=100;
     }
     
     public boolean validaSemestreDeIngresso(){
-        return false;
+        return aluno.getSemestreDeIngresso().matches("20[0-9][0-9]/(1|2)");
     }
     
     public boolean validaNumeroDeMatricula(){
-        return false;
+        return aluno.getNumeroDeMatricula()>0;
     }
     
     public boolean validaPossibilidadesDeMatriculas(){
-        return false;
+        return true;
     }
     
     public boolean validaLances(){
-        return false;
+        return true;
     }
     
     public boolean validaTurmasMatriculadas(){
-        return false;
+        return true;
     }
     
     public boolean validaPontuacao(){
-        return false;
+        return aluno.getPontuacao()>0;
+    }
+    
+    public boolean validaTudo(){
+        return this.validaLances() &&
+                this.validaNumeroDeMatricula() &&
+                this.validaPontuacao() &&
+                this.validaPontuacaoVestibular() &&
+                this.validaPossibilidadesDeMatriculas() &&
+                this.validaSemestreDeIngresso() &&
+                this.validaTurmasMatriculadas() &&
+                this.validaTipoIngresso();
     }
 }

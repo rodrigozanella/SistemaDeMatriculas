@@ -22,18 +22,25 @@ public class LanceValidador {
     }
     
     public boolean validaIDTurma(){
-        return false;
+        return true;
     }
     
     public boolean validaCPFAluno(){
-        return false;
+        return lance.getCpfAluno().matches("[0-9][0-9][0-9].[0-9][0-9][0-9].[0-9][0-9][0-9]-[0-9][0-9]");
     }
     
     public boolean validaValor(){
-        return false;
+        return lance.getValor() >= 0;
     }
     
     public boolean validaSituacao(){
-        return false;
+        return true;
+    }
+    
+    public boolean validaTudo(){
+        return this.validaCPFAluno() &&
+                this.validaIDTurma() &&
+                this.validaSituacao() &&
+                this.validaValor();
     }
 }

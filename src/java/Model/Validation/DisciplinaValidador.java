@@ -22,26 +22,35 @@ public class DisciplinaValidador {
     }
     
     public boolean validaNome(){
-        return false;
+        return disciplina.getNome().length() > 0;
     }
     
     public boolean validaCodigo(){
-        return false;
+        return true;
     }
     
     public boolean validaNumeroDeCreditos(){
-        return false;
+        return disciplina.getNumeroDeCreditos() > 0;
     }
     
     public boolean validaEletiva(){
-        return false;
+        return true;
     }
     
     public boolean validaNumCreditosMinimos(){
-        return false;
+        return disciplina.getNumeroDeCreditosMinimos() >= 0;
     }
     
     public boolean validaPreRequisitos(){
-        return false;
+        return true;
+    }
+    
+    public boolean validaTudo(){
+        return this.validaCodigo() &&
+                this.validaEletiva() &&
+                this.validaNome() &&
+                this.validaNumCreditosMinimos() &&
+                this.validaNumeroDeCreditos() &&
+                this.validaPreRequisitos();
     }
 }
